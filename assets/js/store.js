@@ -45,16 +45,39 @@
   /* ---- product media ---------------------------------------------------- */
 
   /* One place decides photo vs illustration, so swapping in real photography
-     is a data change (`product.image`) and nothing else. */
-  function media(prod, sizes) {
+     is a data change (`product.image`) and nothing else. `metal` overrides the
+     product default so a cart line shows the finish that was actually chosen. */
+  function media(prod, sizes, metal) {
     if (prod.image) {
       return '<img src="' + esc(prod.image) + '" alt="' + esc(prod.name) + '" loading="lazy" ' +
              (sizes ? 'sizes="' + esc(sizes) + '" ' : '') + 'width="400" height="500">';
     }
-    return Art.svg(prod.form, prod.metal, prod.stone, prod.name);
+    return Art.svg(prod.form, metal || prod.metal, prod.stone, prod.name);
+  }
+
+  /* Metal is a real choice only where the piece is made of metal. A silk stole
+     has no finish to pick, so it is not offered one. */
+  var METAL_CATS = ['earrings', 'necklaces', 'rings', 'watches'];
+  function hasMetalChoice(prod) { return METAL_CATS.indexOf(prod.cat) > -1; }
+
+  /* The plating clause has to follow the selected finish, or the spec table
+     keeps saying "18k gold plated" under a silver selection. */
+  var FINISH = { gold: '18k gold plated', silver: 'rhodium finished', rose: '18k rose gold plated' };
+  function materialFor(prod, metal) {
+    if (!hasMetalChoice(prod) || metal === prod.metal) return prod.material;
+    return prod.material.replace(
+      /18k gold plated|rhodium finished|18k rose gold plated/,
+      FINISH[metal] || FINISH.gold);
   }
 
   /* ---- cart ------------------------------------------------------------- */
+
+  /* Legacy lines saved before finishes were carried have no `metal`; fall back
+     to the product default so an old cart still renders. */
+  function lineKey(item) {
+    var prod = D.byId(item.id);
+    return item.id + '|' + (item.metal || (prod ? prod.metal : 'gold'));
+  }
 
   var cart = {
     items: store.get('solah.cart', []),
@@ -74,25 +97,30 @@
       return this.items.reduce(function (a, i) { return a + i.qty; }, 0);
     },
 
-    add: function (id, qty) {
+    /* A line is identified by product AND finish: the same ring in gold and in
+       silver are two different things to ship, so they are two lines. */
+    add: function (id, qty, metal) {
+      var prod = D.byId(id);
+      var m = metal || (prod ? prod.metal : 'gold');
+      var key = id + '|' + m;
       var existing = null;
-      for (var i = 0; i < this.items.length; i++) if (this.items[i].id === id) existing = this.items[i];
+      for (var i = 0; i < this.items.length; i++) if (lineKey(this.items[i]) === key) existing = this.items[i];
       if (existing) existing.qty += (qty || 1);
-      else this.items.push({ id: id, qty: qty || 1 });
+      else this.items.push({ id: id, qty: qty || 1, metal: m });
       this.save();
     },
 
-    setQty: function (id, qty) {
+    setQty: function (key, qty) {
       this.items = this.items.filter(function (i) {
-        if (i.id !== id) return true;
+        if (lineKey(i) !== key) return true;
         i.qty = qty;
         return qty > 0;
       });
       this.save();
     },
 
-    remove: function (id) {
-      this.items = this.items.filter(function (i) { return i.id !== id; });
+    remove: function (key) {
+      this.items = this.items.filter(function (i) { return lineKey(i) !== key; });
       this.save();
     },
 
@@ -142,18 +170,23 @@
           '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-9.3A4.2 4.2 0 0 1 12 8a4.2 4.2 0 0 1 7 2.7C19 15.6 12 20 12 20Z"/></svg>' +
         '</button>' +
         '<div class="card__body">' +
-          '<span class="card__cat">' + esc(cat ? cat.name : prod.cat) + '</span>' +
           '<h3 class="card__name"><a href="product.html?id=' + prod.id + '">' + esc(prod.name) + '</a></h3>' +
           '<p class="card__price">' +
             '<span class="price">' + money(prod.price) + '</span>' +
             '<del>' + money(prod.mrp) + '</del>' +
             '<ins>' + prod.off + '% off</ins>' +
           '</p>' +
-          (prod.price >= D.FREE_SHIP_OVER
-            ? '<span class="card__ship">' +
-                '<svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:14px;height:14px"><path d="M4 7h11v10H4zM15 10h4l2 3v4h-6z"/><circle cx="7.5" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg>' +
-                'Free delivery</span>'
-            : '') +
+          /* Category reads as meta under the price, never as an eyebrow above
+             the name. The delivery line is always present so every card in a
+             row lands its button on the same baseline. */
+          '<p class="card__meta">' +
+            '<span>' + esc(cat ? cat.name : prod.cat) + '</span>' +
+            (prod.price >= D.FREE_SHIP_OVER
+              ? '<span class="card__ship">' +
+                  '<svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:13px;height:13px"><path d="M4 7h11v10H4zM15 10h4l2 3v4h-6z"/><circle cx="7.5" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg>' +
+                  'Free delivery</span>'
+              : '<span>+ ' + money(79) + ' delivery</span>') +
+          '</p>' +
           '<button class="btn btn--sm btn--block card__add" type="button" data-add="' + prod.id + '">Add to cart</button>' +
         '</div>' +
       '</article>';
@@ -267,7 +300,7 @@
         var sample = D.products.filter(function (p) { return p.cat === c.slug; })[0];
         return '<a href="shop.html?cat=' + c.slug + '" class="reveal">' +
           (sample ? Art.svg(sample.form, sample.metal, sample.stone, c.name) : '') +
-          '<strong>' + esc(c.name) + ' <span class="deva" style="color:var(--brass);font-size:.8em">' + esc(c.deva) + '</span></strong>' +
+          '<strong>' + esc(c.name) + ' <span class="deva" style="color:var(--brass-text);font-size:.8em">' + esc(c.deva) + '</span></strong>' +
           '<span>' + esc(c.blurb) + '</span></a>';
       }).join('');
     }
@@ -412,15 +445,20 @@
         ? media(prod)
         : Art.svg(prod.form, chosenMetal, prod.stone,
                   prod.name + ' in ' + Art.metals[chosenMetal].name);
-      $('#gal-thumbs').innerHTML = METAL_KEYS.map(function (k) {
-        return '<button type="button" data-view="' + k + '" aria-current="' + (k === chosenMetal) + '" ' +
-          'aria-label="View in ' + Art.metals[k].name + '">' +
-          Art.svg(prod.form, k, prod.stone, Art.metals[k].name) + '</button>';
-      }).join('');
+      if (hasMetalChoice(prod)) {
+        $('#gal-thumbs').innerHTML = METAL_KEYS.map(function (k) {
+          return '<button type="button" data-view="' + k + '" aria-current="' + (k === chosenMetal) + '" ' +
+            'aria-label="View in ' + Art.metals[k].name + '">' +
+            Art.svg(prod.form, k, prod.stone, Art.metals[k].name) + '</button>';
+        }).join('');
+      } else {
+        $('#gal-thumbs').hidden = true;
+      }
       $$('#swatches .swatch').forEach(function (s) {
         s.setAttribute('aria-pressed', String(s.dataset.metal === chosenMetal));
       });
       $('#metal-name').textContent = Art.metals[chosenMetal].name;
+      paintSpec();
     }
 
     $('#gal-thumbs').addEventListener('click', function (e) {
@@ -430,7 +468,6 @@
       paintGallery();
     });
 
-    $('#pdp-cat').textContent = cat ? cat.name : '';
     $('#pdp-crumb').textContent = prod.name;
     $('#pdp-name').textContent = prod.name;
     $('#pdp-price').innerHTML =
@@ -440,29 +477,36 @@
     $('#pdp-desc').textContent = prod.desc;
     $('#bb-price').textContent = money(prod.price);
 
-    $('#pdp-spec').innerHTML = [
-      ['Material', prod.material],
-      ['Stone', prod.stone_name],
-      ['Weight', prod.weight],
-      ['Warranty', prod.warranty],
-      ['Care', prod.care],
-      ['Country of origin', 'India']
-    ].map(function (r) {
-      return '<tr><th scope="row">' + esc(r[0]) + '</th><td>' + esc(r[1]) + '</td></tr>';
-    }).join('');
+    function paintSpec() {
+      $('#pdp-spec').innerHTML = [
+        ['Material', materialFor(prod, chosenMetal)],
+        ['Stone', prod.stone_name],
+        ['Weight', prod.weight],
+        ['Warranty', prod.warranty],
+        ['Care', prod.care],
+        ['Country of origin', 'India']
+      ].map(function (r) {
+        return '<tr><th scope="row">' + esc(r[0]) + '</th><td>' + esc(r[1]) + '</td></tr>';
+      }).join('');
+    }
 
-    /* metal swatches — the same state the gallery reads */
-    $('#swatches').innerHTML = METAL_KEYS.map(function (k) {
-      var m = Art.metals[k];
-      return '<button class="swatch" type="button" data-metal="' + k + '" aria-pressed="' + (k === chosenMetal) + '" ' +
-        'aria-label="' + m.name + '"><span style="background:linear-gradient(135deg,' + m.a + ',' + m.b + ' 55%,' + m.c + ')"></span></button>';
-    }).join('');
-    $('#swatches').addEventListener('click', function (e) {
-      var b = e.target.closest('[data-metal]');
-      if (!b) return;
-      chosenMetal = b.dataset.metal;
-      paintGallery();
-    });
+    /* metal swatches — the same state the gallery, spec table and cart read.
+       Offered only where the piece is actually made of metal. */
+    if (hasMetalChoice(prod)) {
+      $('#swatches').innerHTML = METAL_KEYS.map(function (k) {
+        var m = Art.metals[k];
+        return '<button class="swatch" type="button" data-metal="' + k + '" aria-pressed="' + (k === chosenMetal) + '" ' +
+          'aria-label="' + m.name + '"><span style="background:linear-gradient(135deg,' + m.a + ',' + m.b + ' 55%,' + m.c + ')"></span></button>';
+      }).join('');
+      $('#swatches').addEventListener('click', function (e) {
+        var b = e.target.closest('[data-metal]');
+        if (!b) return;
+        chosenMetal = b.dataset.metal;
+        paintGallery();
+      });
+    } else {
+      $('#metal-field').hidden = true;
+    }
 
     paintGallery();
 
@@ -480,12 +524,13 @@
 
     $$('[data-add-pdp]').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        cart.add(prod.id, qty);
-        toast(prod.name + ' × ' + qty + ' added to cart');
+        cart.add(prod.id, qty, chosenMetal);
+        toast(prod.name + (hasMetalChoice(prod) ? ' in ' + Art.metals[chosenMetal].name : '') +
+              ' × ' + qty + ' added to cart');
       });
     });
     $('#buy-now').addEventListener('click', function () {
-      cart.add(prod.id, qty);
+      cart.add(prod.id, qty, chosenMetal);
       global.location.href = 'cart.html';
     });
 
@@ -547,7 +592,7 @@
     function paint() {
       if (!cart.items.length) {
         root.innerHTML = '<div class="empty"><h3>Your cart is empty</h3>' +
-          '<p>Nothing here yet. Start with what people buy most.</p>' +
+          '<p>Nothing here yet. Have a look at what is in the store.</p>' +
           '<a class="btn" href="shop.html">Browse everything</a></div>';
         $('#cart-side').hidden = true;
         return;
@@ -557,21 +602,24 @@
       root.innerHTML = cart.items.map(function (it) {
         var p = D.byId(it.id);
         if (!p) return '';
+        var m = it.metal || p.metal;
+        var key = lineKey(it);
         return '<div class="line">' +
-          '<a class="line__media" href="product.html?id=' + p.id + '">' + media(p) + '</a>' +
+          '<a class="line__media" href="product.html?id=' + p.id + '">' + media(p, null, m) + '</a>' +
           '<div>' +
             '<h4><a href="product.html?id=' + p.id + '" style="text-decoration:none">' + esc(p.name) + '</a></h4>' +
-            '<p class="line__meta">' + esc(D.categoryOf(p.cat).name) + ' · ' + esc(Art.metals[p.metal].name) + '</p>' +
+            '<p class="line__meta">' + esc(D.categoryOf(p.cat).name) +
+              (hasMetalChoice(p) ? ' · ' + esc(Art.metals[m].name) : '') + '</p>' +
             '<p class="line__meta" style="margin-top:.35rem">' +
               (p.cod ? 'COD available' : 'Prepaid only') + '</p>' +
-            '<button class="line__remove" type="button" data-remove="' + p.id + '">Remove</button>' +
+            '<button class="line__remove" type="button" data-remove="' + esc(key) + '">Remove</button>' +
           '</div>' +
           '<div class="line__right">' +
             '<span class="price" style="font-weight:600">' + money(p.price * it.qty) + '</span>' +
             '<span class="qty">' +
-              '<button type="button" data-q="down" data-id="' + p.id + '" aria-label="Decrease quantity">−</button>' +
+              '<button type="button" data-q="down" data-key="' + esc(key) + '" aria-label="Decrease quantity">−</button>' +
               '<output class="num">' + it.qty + '</output>' +
-              '<button type="button" data-q="up" data-id="' + p.id + '" aria-label="Increase quantity">+</button>' +
+              '<button type="button" data-q="up" data-key="' + esc(key) + '" aria-label="Increase quantity">+</button>' +
             '</span>' +
           '</div>' +
         '</div>';
@@ -614,9 +662,9 @@
       var q = e.target.closest('[data-q]');
       if (q) {
         var item = null;
-        cart.items.forEach(function (i) { if (i.id === q.dataset.id) item = i; });
+        cart.items.forEach(function (i) { if (lineKey(i) === q.dataset.key) item = i; });
         if (!item) return;
-        cart.setQty(item.id, item.qty + (q.dataset.q === 'up' ? 1 : -1));
+        cart.setQty(q.dataset.key, item.qty + (q.dataset.q === 'up' ? 1 : -1));
         paint();
       }
     });

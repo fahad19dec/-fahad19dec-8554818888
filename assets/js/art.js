@@ -265,34 +265,42 @@
         '</g>';
     },
 
+    /* Cat-eye: the defining feature is the upswept OUTER corner. Left lens
+       sweeps up-left, right lens up-right; both drop to a soft inner curve. */
     'cateye': function (id) {
-      function lens(x, flip) {
-        var d = flip
-          ? 'M' + (x + 106) + ' 214 q-14 -18 -48 -14 -46 6 -54 40 -5 24 20 34 34 14 60 -8 24 -20 22 -52 z'
-          : 'M' + x + ' 214 q14 -18 48 -14 46 6 54 40 5 24 -20 34 -34 14 -60 -8 -24 -20 -22 -52 z';
+      function lens(x, dir) {
+        // dir -1 = left lens (tail on the left), +1 = right lens
+        var tipX = dir < 0 ? x - 8 : x + 116;
+        var d = dir < 0
+          ? 'M' + tipX + ' 202 q34 4 52 20 q22 20 12 42 q-10 22 -42 24 q-34 2 -50 -20 q-14 -20 4 -44 q10 -16 24 -22 z'
+          : 'M' + tipX + ' 202 q-34 4 -52 20 q-22 20 -12 42 q10 22 42 24 q34 2 50 -20 q14 -20 -4 -44 q-10 -16 -24 -22 z';
         return '<path d="' + d + '" fill="url(#' + id + 'f)" opacity=".92"/>' +
-          '<path d="' + d + '" fill="none" stroke="url(#' + id + 'm)" stroke-width="7"/>';
+          '<path d="' + d + '" fill="none" stroke="url(#' + id + 'm)" stroke-width="7" stroke-linejoin="round"/>';
       }
-      return '<g filter="url(#' + id + 'sh)">' + lens(90, false) + lens(204, true) +
-        '<path d="M192 236 q8 -8 16 0" fill="none" stroke="url(#' + id + 'm)" stroke-width="7" stroke-linecap="round"/>' +
-        '<path d="M92 216 L46 240" stroke="url(#' + id + 'm)" stroke-width="7" stroke-linecap="round"/>' +
-        '<path d="M308 216 L354 240" stroke="url(#' + id + 'm)" stroke-width="7" stroke-linecap="round"/>' +
+      return '<g filter="url(#' + id + 'sh)">' + lens(96, -1) + lens(188, 1) +
+        '<path d="M186 232 q14 -10 28 0" fill="none" stroke="url(#' + id + 'm)" stroke-width="7" stroke-linecap="round"/>' +
+        '<path d="M88 210 L44 232" stroke="url(#' + id + 'm)" stroke-width="7" stroke-linecap="round"/>' +
+        '<path d="M312 210 L356 232" stroke="url(#' + id + 'm)" stroke-width="7" stroke-linecap="round"/>' +
         '</g>';
     },
 
+    /* Aviator: teardrop lenses, a double brow bar and a saddle bridge — the
+       three things that make the shape read as an aviator at all. */
     'aviator': function (id) {
       function lens(x) {
-        return '<path d="M' + x + ' 216 h104 l-12 62 a30 30 0 0 1 -29 22 h-22 a30 30 0 0 1 -29 -22 z" ' +
-          'fill="url(#' + id + 'f)" opacity=".92"/>' +
-          '<path d="M' + (x + 4) + ' 226 h96 l-4 20 h-88 z" fill="#FFF" opacity=".32"/>' +
-          '<path d="M' + x + ' 216 h104 l-12 62 a30 30 0 0 1 -29 22 h-22 a30 30 0 0 1 -29 -22 z" ' +
-          'fill="none" stroke="url(#' + id + 'm)" stroke-width="6"/>';
+        var d = 'M' + x + ' 220 h100 q4 34 -14 60 q-14 20 -36 20 q-22 0 -34 -22 q-16 -28 -16 -58 z';
+        return '<path d="' + d + '" fill="url(#' + id + 'f)" opacity=".92"/>' +
+          '<path d="M' + (x + 6) + ' 230 h86 q1 12 -2 20 h-82 q-2 -10 -2 -20 z" fill="#FFF" opacity=".34"/>' +
+          '<path d="' + d + '" fill="none" stroke="url(#' + id + 'm)" stroke-width="6" stroke-linejoin="round"/>';
       }
-      return '<g filter="url(#' + id + 'sh)">' + lens(86) + lens(210) +
-        '<path d="M190 224 q10 8 20 0" fill="none" stroke="url(#' + id + 'm)" stroke-width="5"/>' +
-        '<path d="M86 218 L42 236" stroke="url(#' + id + 'm)" stroke-width="6" stroke-linecap="round"/>' +
-        '<path d="M314 218 L358 236" stroke="url(#' + id + 'm)" stroke-width="6" stroke-linecap="round"/>' +
-        '<path d="M150 216 h100" stroke="url(#' + id + 'm)" stroke-width="5" stroke-linecap="round"/>' +
+      return '<g filter="url(#' + id + 'sh)">' + lens(84) + lens(216) +
+        /* saddle bridge */
+        '<path d="M184 226 q16 -12 32 0" fill="none" stroke="url(#' + id + 'm)" stroke-width="5" stroke-linecap="round"/>' +
+        /* double brow bar */
+        '<path d="M84 220 h232" stroke="url(#' + id + 'm)" stroke-width="5" stroke-linecap="round"/>' +
+        '<path d="M148 208 h104" stroke="url(#' + id + 'm)" stroke-width="4" stroke-linecap="round"/>' +
+        '<path d="M84 222 L40 240" stroke="url(#' + id + 'm)" stroke-width="6" stroke-linecap="round"/>' +
+        '<path d="M316 222 L360 240" stroke="url(#' + id + 'm)" stroke-width="6" stroke-linecap="round"/>' +
         '</g>';
     },
 
@@ -367,13 +375,21 @@
 
     /* --- scarves --- */
 
-    'silk-square': function (id) {
+    /* A square scarf reads as a square: flat edges, a hand-rolled hem border
+       and a mitred corner motif, not a rounded blob. */
+    'silk-square': function (id, stone) {
       return '<g filter="url(#' + id + 'sh)">' +
-        '<path d="M112 150 h176 v176 q-88 44 -176 0 z" fill="url(#' + id + 'f)"/>' +
-        '<path d="M112 150 h176 v44 q-88 30 -176 0 z" fill="#FFF" opacity=".16"/>' +
-        '<rect x="134" y="172" width="132" height="118" rx="4" fill="none" stroke="#FFF" stroke-width="2.5" opacity=".4"/>' +
-        '<rect x="152" y="190" width="96" height="82" rx="3" fill="none" stroke="#FFF" stroke-width="1.5" opacity=".28"/>' +
-        '<path d="M112 326 q88 44 176 0 v22 q-88 44 -176 0 z" fill="url(#' + id + 'm)" opacity=".8"/>' +
+        '<rect x="106" y="156" width="188" height="188" fill="url(#' + id + 'f)"/>' +
+        '<rect x="106" y="156" width="188" height="52" fill="#FFF" opacity=".14"/>' +
+        /* hand-rolled hem */
+        '<rect x="106" y="156" width="188" height="188" fill="none" ' +
+          'stroke="' + shade(stone, -30) + '" stroke-width="7"/>' +
+        '<rect x="120" y="170" width="160" height="160" fill="none" stroke="#FFF" stroke-width="2" opacity=".42"/>' +
+        /* mitred corner motif */
+        '<path d="M120 170 L160 170 L120 210 z M280 170 L240 170 L280 210 z ' +
+          'M120 330 L160 330 L120 290 z M280 330 L240 330 L280 290 z" fill="#FFF" opacity=".2"/>' +
+        '<rect x="164" y="214" width="72" height="72" fill="none" stroke="#FFF" stroke-width="2.5" opacity=".38"/>' +
+        '<circle cx="200" cy="250" r="16" fill="#FFF" opacity=".22"/>' +
         '</g>';
     },
 
@@ -390,9 +406,25 @@
       return '<g filter="url(#' + id + 'sh)">' + s + '</g>';
     },
 
-    'dupatta': function (id) {
-      var s = '<path d="M104 148 q96 -22 192 0 v190 q-96 40 -192 0 z" fill="url(#' + id + 'f)" opacity=".93"/>' +
-        '<path d="M104 148 q96 -22 192 0 v38 q-96 32 -192 0 z" fill="#FFF" opacity=".18"/>';
+    /* "Printed Chiffon Dupatta" — so it carries an actual repeating print,
+       clipped to the drape, plus the stitched sequin edge. */
+    'dupatta': function (id, stone) {
+      var body = 'M104 148 q96 -22 192 0 v190 q-96 40 -192 0 z';
+      var s = '<clipPath id="' + id + 'c"><path d="' + body + '"/></clipPath>' +
+        '<path d="' + body + '" fill="url(#' + id + 'f)" opacity=".93"/>' +
+        '<g clip-path="url(#' + id + 'c)" opacity=".5">';
+      /* a butti print: small four-petal motifs on a staggered grid */
+      for (var r = 0; r < 6; r++) {
+        for (var c = 0; c < 6; c++) {
+          var x = 108 + c * 34 + (r % 2 ? 17 : 0);
+          var y = 172 + r * 30;
+          s += '<path d="M' + x + ' ' + (y - 7) + ' q7 7 0 14 q-7 -7 -14 0 q7 -7 0 -14 q7 7 14 0 z" ' +
+               'fill="#FFF" opacity=".55"/>' +
+               '<circle cx="' + x + '" cy="' + y + '" r="2" fill="' + shade(stone, -34) + '"/>';
+        }
+      }
+      s += '</g>' +
+        '<path d="M104 148 q96 -22 192 0 v34 q-96 30 -192 0 z" fill="#FFF" opacity=".16"/>';
       for (var k = 0; k < 11; k++) {
         s += '<circle cx="' + (112 + k * 18) + '" cy="' + (338 + (k % 2 ? 6 : 0)) + '" r="5" fill="url(#' + id + 'm)"/>';
       }

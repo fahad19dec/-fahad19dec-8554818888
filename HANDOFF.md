@@ -61,10 +61,20 @@ real specifications.
 
 The reviews module on the homepage ships as a deliberate, visible empty state.
 Fabricating reviews or ratings is prohibited under the Consumer Protection Act
-2019 and the BIS review standard (IS 19000:2022), and no invented testimonials,
-star ratings, review counts, press logos or trust badges appear anywhere in this
+2019 and the BIS review standard (IS 19000:2022). No invented testimonials, star
+ratings, review counts, press logos or trust badges appear anywhere in this
 build. Connect a real review provider (Judge.me, Loox, Yotpo) once you have
 customers.
+
+A finish review caught two claims that had slipped past this rule and they were
+removed: a `Bestseller` badge on one product, and empty-cart copy reading "start
+with what people buy most." Both asserted other customers' behaviour for a store
+that has had no customers. **Watch for this when you edit copy** — the tempting
+phrases are the ones that imply a sales history you do not have yet.
+
+The badges that remain are safe because none of them describes anyone else's
+behaviour: `Handmade` and `UV400` are product facts, `Under ₹500` is a price
+fact, and `Wedding edit` and `Layering pick` are your own editorial choices.
 
 ### 5. Legal pages and business identity
 

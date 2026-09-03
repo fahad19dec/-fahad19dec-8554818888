@@ -40,7 +40,7 @@
         weight: '4.2 g (pair)', warranty: '6-month plating warranty',
         desc: 'A faceted drop on a fine hook, cut so it catches light from across a room. Light enough for a full evening — the pair weighs about as much as a one-rupee coin.',
         care: 'Wipe with the enclosed cloth after wear. Keep away from perfume and water.',
-        finishWith: ['b2', 'r1'], badge: 'Bestseller' }),
+        finishWith: ['b2', 'r1'], badge: null }),
     p({ id: 'e2', cat: 'earrings', name: 'Everyday Huggie Hoops', price: 899, mrp: 1299,
         metal: 'gold', stone: '#C9A24B', occasion: ['everyday', 'work'],
         material: '925 sterling silver, 18k gold plated', stone_name: '—',

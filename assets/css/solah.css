@@ -22,7 +22,8 @@
   --emerald:      #14543F;   /* 8.9:1 with white */
   --emerald-deep: #0E3D2E;
   --emerald-wash: #EDF3F0;
-  --brass:        #A8823F;
+  --brass:        #A8823F;   /* decorative and large text only — 3.5:1 */
+  --brass-text:   #8A6A2E;   /* 5.0:1 on white; use for any small brass text */
   --brass-wash:   #F7F1E4;
   --rose:         #9C2B4E;   /* 7.3:1 with white — savings, limited stock */
   --rose-wash:    #FBEFF2;
@@ -125,6 +126,9 @@ body { caret-color: var(--emerald); }
 
 /* More space above a heading than below it. */
 .section-head { margin-bottom: 1.75rem; }
+/* An <h1> is required for the document outline on inner pages, but it should
+   read at section scale, not hero scale. */
+.page-title { font-size: clamp(1.85rem, 3.9vw, 3.1rem); letter-spacing: -.022em; }
 .section-head p { margin-top: .6rem; color: var(--ink-2); max-width: 56ch; }
 
 .row-between { display: flex; align-items: baseline; justify-content: space-between; gap: 1.25rem; flex-wrap: wrap; }
@@ -187,6 +191,45 @@ body { caret-color: var(--emerald); }
 
 .label { display: block; font-size: .78rem; font-weight: 600; letter-spacing: .05em;
          text-transform: uppercase; color: var(--ink-2); margin-bottom: .45rem; }
+
+/* Selects ship as raw platform chrome otherwise — the one control most builds
+   forget to draw. The chevron is an inline SVG data URI so there is no
+   pseudo-element to mis-position across engines. */
+select.field {
+  appearance: none; -webkit-appearance: none;
+  padding-right: 2.2rem; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%235F564E' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right .8rem center;
+}
+select.field::-ms-expand { display: none; }
+
+/* Checkboxes: drawn in both states, not just the checked fill. */
+.check input[type='checkbox'] {
+  appearance: none; -webkit-appearance: none;
+  width: 18px; height: 18px; flex: none; margin: 0;
+  border: 1px solid var(--line-2); border-radius: 2px;
+  background: var(--surface); cursor: pointer;
+  transition: border-color .18s var(--ease), background .18s var(--ease);
+}
+.check:hover input[type='checkbox'] { border-color: var(--ink-3); }
+.check input[type='checkbox']:checked {
+  background: var(--emerald) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='10' viewBox='0 0 12 10'%3E%3Cpath d='M1 5 4.5 8.5 11 1.5' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 11px 9px no-repeat;
+  border-color: var(--emerald);
+}
+
+/* Radios, for the same reason. */
+.pay input[type='radio'] {
+  appearance: none; -webkit-appearance: none;
+  width: 18px; height: 18px; flex: none; margin: .18rem 0 0;
+  border: 1px solid var(--line-2); border-radius: 50%;
+  background: var(--surface); cursor: pointer;
+  transition: border-color .18s var(--ease), box-shadow .18s var(--ease);
+}
+.pay input[type='radio']:checked {
+  border-color: var(--emerald);
+  box-shadow: inset 0 0 0 4px var(--surface), inset 0 0 0 10px var(--emerald);
+}
 
 .tag {
   display: inline-flex; align-items: center; gap: .35rem;
@@ -350,8 +393,10 @@ body { caret-color: var(--emerald); }
 /* ---- trust bar ----------------------------------------------------------- */
 
 .trust { background: var(--ground-warm); border-block: 1px solid var(--line); }
+/* Six items, so 6 / 3 / 2 columns all divide evenly and the strip never
+   leaves a bordered empty cell at any width. */
 .trust__grid {
-  display: grid; grid-template-columns: repeat(5, 1fr);
+  display: grid; grid-template-columns: repeat(6, 1fr);
   gap: 1px; background: var(--line);
 }
 .trust__grid > div {
@@ -385,7 +430,8 @@ body { caret-color: var(--emerald); }
   transition: all .26s var(--ease);
 }
 .tab:hover { border-color: var(--ink-3); color: var(--ink); }
-.tab[aria-selected='true'] { background: var(--ink); border-color: var(--ink); color: #FFF; }
+/* Selection is where the committed accent should assert itself. */
+.tab[aria-selected='true'] { background: var(--emerald); border-color: var(--emerald); color: #FFF; }
 
 /* ---- product card -------------------------------------------------------- */
 
@@ -394,7 +440,9 @@ body { caret-color: var(--emerald); }
   grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
 }
 
-.card { position: relative; display: flex; flex-direction: column; }
+/* Cards stretch to their grid row so every CTA in a row shares one baseline,
+   whatever the meta line above it says. */
+.card { position: relative; display: flex; flex-direction: column; height: 100%; }
 
 .card__media {
   position: relative; display: block;
@@ -419,20 +467,25 @@ body { caret-color: var(--emerald); }
 .card__wish[aria-pressed='true'] { color: var(--rose); border-color: var(--rose); }
 .card__wish[aria-pressed='true'] .i { fill: var(--rose); }
 
-.card__body { padding-top: .8rem; display: flex; flex-direction: column; gap: .3rem; }
+.card__body { padding-top: .8rem; display: flex; flex-direction: column; gap: .3rem; flex: 1; }
 .card__name { font-size: .95rem; font-weight: 500; letter-spacing: -.005em; }
 .card__name a { text-decoration: none; }
 .card__name a:hover { text-decoration: underline; }
-.card__cat { font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
 
 .card__price { display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap; margin-top: .15rem; }
 .card__price .price { font-size: 1.02rem; font-weight: 600; }
 .card__price del { font-size: .84rem; color: var(--ink-3); }
 .card__price ins { text-decoration: none; font-size: .78rem; font-weight: 600; color: var(--rose); }
 
-.card__ship { font-size: .74rem; color: var(--emerald); display: flex; align-items: center; gap: .3rem; }
+.card__meta {
+  display: flex; align-items: center; justify-content: space-between; gap: .5rem;
+  font-size: .74rem; color: var(--ink-3);
+}
+.card__ship { color: var(--emerald); display: inline-flex; align-items: center; gap: .3rem; }
 
-.card__add { margin-top: .6rem; }
+/* auto margin pushes every button to the bottom of its stretched card */
+.card__add { margin-top: auto; }
+.card__meta { margin-bottom: .35rem; }
 
 /* ---- filters ------------------------------------------------------------- */
 
@@ -586,16 +639,16 @@ body { caret-color: var(--emerald); }
 .summary .total { border-top: 1px solid var(--line); padding-top: .9rem; font-size: 1.1rem; font-weight: 600; }
 .summary .total dt { color: var(--ink); font-weight: 600; }
 
-.pay { display: grid; gap: .5rem; margin: 1rem 0; }
+/* Payment options are rows divided by rules, not cards inside the summary
+   card: the world forbids card-on-card nesting. */
+.pay { display: grid; margin: 1rem 0; border-block: 1px solid var(--line); }
 .pay label {
-  display: flex; align-items: flex-start; gap: .6rem; padding: .8rem;
-  border: 1px solid var(--line-2); border-radius: var(--radius); cursor: pointer;
-  transition: border-color .2s var(--ease), background .2s var(--ease);
+  display: flex; align-items: flex-start; gap: .6rem; padding: .8rem .2rem;
+  cursor: pointer; transition: background .2s var(--ease);
 }
-.pay label:hover { border-color: var(--ink-3); }
-.pay input { margin-top: .18rem; accent-color: var(--emerald); }
-.pay input:checked ~ .pay__txt { color: var(--ink); }
-.pay label:has(input:checked) { border-color: var(--emerald); background: var(--emerald-wash); }
+.pay label + label { border-top: 1px solid var(--line); }
+.pay label:hover { background: var(--ground); }
+.pay label:has(input:checked) .pay__txt strong { color: var(--emerald); }
 .pay__txt strong { display: block; font-size: .9rem; font-weight: 600; }
 .pay__txt span { font-size: .78rem; color: var(--ink-2); }
 
@@ -687,7 +740,7 @@ body { caret-color: var(--emerald); }
 
 /* ---- responsive ---------------------------------------------------------- */
 
-@media (max-width: 1080px) {
+@media (max-width: 1180px) {
   .footer__grid { grid-template-columns: 1fr 1fr; }
   .trust__grid { grid-template-columns: repeat(3, 1fr); }
   .cats { grid-template-columns: repeat(2, 1fr); }
@@ -704,6 +757,13 @@ body { caret-color: var(--emerald); }
   .news__grid { grid-template-columns: 1fr; }
   .hero__grid { grid-template-columns: 1fr; }
   .cluster { max-width: 460px; margin-inline: auto; }
+  /* At narrow widths the caption has to wrap rather than ellipsise: two of the
+     three plate names do not fit on one line at 390px. */
+  .cluster figcaption {
+    flex-direction: column; align-items: flex-start; gap: .1rem;
+    font-size: .63rem; padding: .45rem .55rem;
+  }
+  .cluster figcaption span:first-child { white-space: normal; overflow: visible; }
 }
 
 @media (max-width: 700px) {
