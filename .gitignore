@@ -1,1 +1,8 @@
 .streamlit/
+
+# Impeccable working files: review screenshots, hook cache, build state.
+# These are regenerated on demand and should not be versioned.
+.impeccable/review/
+.impeccable/hook.cache.json
+.impeccable/build/
+.impeccable/mocks/

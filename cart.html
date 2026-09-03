@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your cart — SOLAH</title>
+<meta name="description" content="Review your cart, choose cash on delivery or save 5% paying online, and check out.">
+<meta name="theme-color" content="#14543F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Mukta:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/solah.css">
+</head>
+<body>
+<!--
+THESIS: The store that sells the finish, not the item. The cart states every rupee before it is owed.
+OWN-WORLD: Warm paper ground (#FAF8F5), Bodoni Moda display against Archivo UI, deep emerald (#14543F)
+accent with brass detailing; hairline rules, 4:5 product frames, no card-on-card nesting.
+STORY: The visitor sees what is in the basket, how close free delivery is, what COD costs versus paying
+online, and a total with nothing hidden behind it.
+FIRST VIEWPORT: Free-delivery meter above the line items; sticky summary right with payment choice and
+an itemised total.
+FORM: Category standard (standing exit), chosen over the roll's assigned direction 4; seed key 6ec7f188.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="announce">
+  <div class="wrap">
+    <span>Free delivery over <strong class="num">₹999</strong> · Cash on delivery available · 7-day easy returns</span>
+  </div>
+</div>
+
+<header class="header">
+  <div class="wrap header__bar">
+    <a class="logo" href="index.html">
+      <span class="logo__mark">Solah</span>
+      <span class="logo__deva deva">सोलह</span>
+    </a>
+    <nav class="nav" aria-label="Categories">
+      <a href="shop.html?cat=earrings">Earrings</a>
+      <a href="shop.html?cat=necklaces">Necklaces</a>
+      <a href="shop.html?cat=rings">Rings</a>
+      <a href="shop.html?cat=bags">Bags</a>
+      <a href="shop.html?cat=sunglasses">Sunglasses</a>
+      <a href="shop.html?cat=watches">Watches</a>
+      <a href="shop.html">All</a>
+    </nav>
+    <div class="header__acts">
+      <a class="iconbtn" href="cart.html" aria-label="Cart" aria-current="page">
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h3l2.2 9.5a2 2 0 0 0 2 1.5h6.3a2 2 0 0 0 2-1.6L21 9H7"/><circle cx="10" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
+        <span class="cart-count" data-cart-count hidden>0</span>
+      </a>
+      <button class="iconbtn burger" type="button" data-drawer-open aria-expanded="false" aria-controls="drawer" aria-label="Menu">
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Menu">
+  <div class="drawer__head">
+    <span class="logo__mark" style="font-size:1.25rem">Solah</span>
+    <button class="iconbtn" type="button" data-drawer-close aria-label="Close menu">
+      <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="drawer__body">
+    <a href="shop.html?cat=earrings">Earrings</a>
+    <a href="shop.html?cat=necklaces">Necklaces</a>
+    <a href="shop.html?cat=rings">Rings</a>
+    <a href="shop.html?cat=bags">Bags</a>
+    <a href="shop.html?cat=sunglasses">Sunglasses</a>
+    <a href="shop.html?cat=watches">Watches</a>
+    <a href="shop.html?cat=hair">Hair</a>
+    <a href="shop.html?cat=scarves">Scarves</a>
+    <a href="shop.html">Everything</a>
+    <a href="cart.html">Cart</a>
+  </div>
+</aside>
+
+<main id="main" class="section section--page wrap">
+
+  <div class="section-head">
+    <h2>Your cart</h2>
+  </div>
+
+  <div class="cart">
+    <div>
+      <div class="ship-meter">
+        <p id="meter-msg">Add <strong class="num">₹999</strong> more for free delivery.</p>
+        <div class="ship-meter__track" role="progressbar" aria-label="Progress towards free delivery"
+             aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="ship-meter__fill" id="meter-fill"></div>
+        </div>
+      </div>
+
+      <div id="cart-lines"></div>
+
+      <p style="margin-top:1.5rem">
+        <a href="shop.html" style="font-size:.88rem">&larr; Continue shopping</a>
+      </p>
+    </div>
+
+    <aside class="summary" id="cart-side" hidden>
+      <h3>Order summary</h3>
+
+      <dl>
+        <dt>Subtotal</dt>          <dd class="num" id="t-sub">₹0</dd>
+        <dt>You save</dt>          <dd class="num" id="t-saved" style="color:var(--rose)">₹0</dd>
+        <dt>Delivery</dt>          <dd class="num" id="t-ship">Free</dd>
+      </dl>
+
+      <div class="pay">
+        <label>
+          <input type="radio" name="pay" id="pay-prepaid" checked>
+          <span class="pay__txt">
+            <strong>Pay online — save 5%</strong>
+            <span>UPI, cards, net banking or wallet.</span>
+          </span>
+        </label>
+        <label>
+          <input type="radio" name="pay" id="pay-cod">
+          <span class="pay__txt">
+            <strong>Cash on delivery</strong>
+            <span>Pay the courier. <span class="num">₹49</span> handling fee.</span>
+          </span>
+        </label>
+      </div>
+
+      <dl>
+        <div class="drow" id="t-preprow">
+          <dt>Online payment discount</dt><dd class="num" id="t-prepaid">₹0</dd>
+        </div>
+        <div class="drow" id="t-codrow" hidden>
+          <dt>COD handling</dt><dd class="num" id="t-cod">₹49</dd>
+        </div>
+      </dl>
+
+      <dl class="total">
+        <dt>Total</dt><dd class="num" id="t-total">₹0</dd>
+      </dl>
+      <p style="font-size:.78rem;color:var(--ink-2);margin-bottom:1rem">Inclusive of all taxes.</p>
+
+      <button class="btn btn--block" type="button" id="place">Place order</button>
+
+      <p class="placeholder-band" id="checkout-note" hidden style="margin-top:1rem">
+        <strong>Demo checkout.</strong> This is a static front end — no payment gateway is connected and
+        no order was placed. Wire Razorpay, PayU or Cashfree here before going live. See HANDOFF.md.
+      </p>
+
+      <div class="paylogos" style="margin-top:1rem" aria-label="Accepted payment methods">
+        <span>UPI</span><span>Visa</span><span>Mastercard</span><span>RuPay</span><span>COD</span>
+      </div>
+
+      <p style="font-size:.78rem;color:var(--ink-2);margin-top:1rem;display:flex;gap:.45rem;align-items:flex-start">
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:15px;height:15px;flex:none;margin-top:2px;color:var(--emerald)"><path d="M12 3l7 3v6c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        7-day returns on everything. Free pickup if it is not right.
+      </p>
+    </aside>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <div>
+      <a class="logo" href="index.html" style="margin-bottom:.9rem">
+        <span class="logo__mark">Solah</span>
+        <span class="logo__deva deva">सोलह</span>
+      </a>
+      <p class="prose" style="font-size:.88rem">Sixteen — from <em>solah shringar</em>, the sixteen adornments.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="shop.html?cat=earrings">Earrings</a></li>
+        <li><a href="shop.html?cat=necklaces">Necklaces</a></li>
+        <li><a href="shop.html?cat=bags">Bags</a></li>
+        <li><a href="shop.html?cat=watches">Watches</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">Track your order</a></li>
+        <li><a href="#">Returns &amp; exchange</a></li>
+        <li><a href="#">Shipping &amp; delivery</a></li>
+        <li><a href="#">Contact us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About SOLAH</a></li>
+        <li><a href="#">Terms of use</a></li>
+        <li><a href="#">Privacy policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer__bottom">
+    <span>© 2026 SOLAH. Placeholder brand — not a real business.</span>
+    <span>Made in India · Prices inclusive of GST</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite" data-open="false">
+  <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
+  <span id="toast-msg"></span>
+</div>
+
+<script src="assets/js/art.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/store.js"></script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product — SOLAH</title>
+<meta name="description" content="Materials, weight, warranty, delivery date and cash-on-delivery availability — stated plainly before you buy.">
+<meta name="theme-color" content="#14543F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Mukta:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/solah.css">
+</head>
+<body>
+<!--
+THESIS: The store that sells the finish, not the item — this page ends by showing what completes it.
+OWN-WORLD: Warm paper ground (#FAF8F5), Bodoni Moda display against Archivo UI, deep emerald (#14543F)
+accent with brass detailing; hairline rules, 4:5 product frames, no card-on-card nesting.
+STORY: A sceptical stranger checks material, weight, warranty, their own pincode and the return window,
+then buys — or adds the piece that completes it.
+FIRST VIEWPORT: Gallery left with metal thumbnails; right, name, price with saving, metal swatches,
+quantity, add-to-cart and buy-now, then the pincode check.
+FORM: Category standard (standing exit), chosen over the roll's assigned direction 4; seed key 6ec7f188.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="announce">
+  <div class="wrap">
+    <span>Free delivery over <strong class="num">₹999</strong> · Cash on delivery available · 7-day easy returns</span>
+  </div>
+</div>
+
+<header class="header">
+  <div class="wrap header__bar">
+    <a class="logo" href="index.html">
+      <span class="logo__mark">Solah</span>
+      <span class="logo__deva deva">सोलह</span>
+    </a>
+    <nav class="nav" aria-label="Categories">
+      <a href="shop.html?cat=earrings">Earrings</a>
+      <a href="shop.html?cat=necklaces">Necklaces</a>
+      <a href="shop.html?cat=rings">Rings</a>
+      <a href="shop.html?cat=bags">Bags</a>
+      <a href="shop.html?cat=sunglasses">Sunglasses</a>
+      <a href="shop.html?cat=watches">Watches</a>
+      <a href="shop.html">All</a>
+    </nav>
+    <div class="header__acts">
+      <a class="iconbtn" href="cart.html" aria-label="Cart">
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h3l2.2 9.5a2 2 0 0 0 2 1.5h6.3a2 2 0 0 0 2-1.6L21 9H7"/><circle cx="10" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
+        <span class="cart-count" data-cart-count hidden>0</span>
+      </a>
+      <button class="iconbtn burger" type="button" data-drawer-open aria-expanded="false" aria-controls="drawer" aria-label="Menu">
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Menu">
+  <div class="drawer__head">
+    <span class="logo__mark" style="font-size:1.25rem">Solah</span>
+    <button class="iconbtn" type="button" data-drawer-close aria-label="Close menu">
+      <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="drawer__body">
+    <a href="shop.html?cat=earrings">Earrings</a>
+    <a href="shop.html?cat=necklaces">Necklaces</a>
+    <a href="shop.html?cat=rings">Rings</a>
+    <a href="shop.html?cat=bags">Bags</a>
+    <a href="shop.html?cat=sunglasses">Sunglasses</a>
+    <a href="shop.html?cat=watches">Watches</a>
+    <a href="shop.html?cat=hair">Hair</a>
+    <a href="shop.html?cat=scarves">Scarves</a>
+    <a href="shop.html">Everything</a>
+    <a href="cart.html">Cart</a>
+  </div>
+</aside>
+
+<main id="main" class="section section--page wrap">
+
+  <nav aria-label="Breadcrumb" style="font-size:.78rem;color:var(--ink-2);margin-bottom:1.5rem">
+    <a href="index.html" style="color:inherit">Home</a> ·
+    <a href="shop.html" style="color:inherit">Shop</a> ·
+    <span id="pdp-crumb">Product</span>
+  </nav>
+
+  <div class="pdp" id="pdp">
+    <div class="gallery">
+      <div class="gallery__thumbs" id="gal-thumbs"></div>
+      <div class="gallery__main" id="gal-main"></div>
+    </div>
+
+    <div>
+      <div class="pdp__head">
+        <p class="pdp__cat" id="pdp-cat"></p>
+        <h1 id="pdp-name">Product</h1>
+        <div class="pdp__price" id="pdp-price"></div>
+        <p class="pdp__tax">Inclusive of all taxes. Free delivery over <span class="num">₹999</span>.</p>
+      </div>
+
+      <p class="prose" id="pdp-desc"></p>
+
+      <div style="margin-top:1.5rem">
+        <span class="label">Metal — <span id="metal-name" style="text-transform:none;letter-spacing:0">Gold</span></span>
+        <div class="swatches" id="swatches"></div>
+      </div>
+
+      <div class="pdp__acts">
+        <div class="buyrow">
+          <span class="qty" id="qty">
+            <button type="button" id="qty-down" data-step="down" aria-label="Decrease quantity">−</button>
+            <output class="num" id="qty-out" for="qty">1</output>
+            <button type="button" id="qty-up" data-step="up" aria-label="Increase quantity">+</button>
+          </span>
+          <button class="btn btn--ghost" type="button" data-add-pdp>Add to cart</button>
+        </div>
+        <button class="btn btn--block" type="button" id="buy-now">Buy now</button>
+      </div>
+
+      <form class="pincode" id="pin-form" novalidate>
+        <span class="label" style="margin-bottom:0">Check delivery &amp; cash on delivery</span>
+        <p style="font-size:.78rem;color:var(--ink-2);margin-top:.3rem">Enter your pincode to see the delivery date.</p>
+        <div class="pincode__row">
+          <input class="field" id="pin" name="pincode" type="text" inputmode="numeric" maxlength="6"
+                 placeholder="e.g. 110001" autocomplete="postal-code" aria-describedby="pin-out">
+          <button class="btn btn--sm" type="submit">Check</button>
+        </div>
+        <p class="pincode__out" id="pin-out" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="acc">
+        <details open>
+          <summary>Materials &amp; specifications</summary>
+          <div class="acc__body">
+            <table class="spec"><tbody id="pdp-spec"></tbody></table>
+          </div>
+        </details>
+        <details>
+          <summary>Delivery &amp; returns</summary>
+          <div class="acc__body">
+            <p>Dispatched within 24 working hours. Delivery in 2–6 days depending on your pincode.
+               Free over <span class="num">₹999</span>, otherwise <span class="num">₹79</span>.</p>
+            <p style="margin-top:.7rem">Return or exchange within 7 days of delivery, provided the piece is
+               unworn and in its original packaging. Pickup is arranged for you at no cost.</p>
+            <p style="margin-top:.7rem;color:var(--ink-3)">Earrings can only be returned if the seal is
+               unbroken, for hygiene reasons.</p>
+          </div>
+        </details>
+        <details>
+          <summary>How to care for it</summary>
+          <div class="acc__body">
+            <p>Put jewellery on last, after perfume and lotion, and take it off first. Store each piece in
+               its own pouch so nothing rubs. Wipe with the enclosed cloth after wear — that alone doubles
+               how long plating lasts.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="padding-bottom:0">
+    <div class="section-head">
+      <h2>Complete the finish</h2>
+      <p>Chosen to be worn with this piece, not just to fill a row.</p>
+    </div>
+    <div class="grid" id="finish-grid"></div>
+  </section>
+
+</main>
+
+<div class="buybar">
+  <div>
+    <span class="price num" id="bb-price">—</span>
+    <small>Inclusive of taxes</small>
+  </div>
+  <button class="btn btn--block" type="button" data-add-pdp style="flex:1">Add to cart</button>
+</div>
+
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <div>
+      <a class="logo" href="index.html" style="margin-bottom:.9rem">
+        <span class="logo__mark">Solah</span>
+        <span class="logo__deva deva">सोलह</span>
+      </a>
+      <p class="prose" style="font-size:.88rem">Sixteen — from <em>solah shringar</em>, the sixteen adornments.</p>
+      <div class="paylogos" aria-label="Accepted payment methods">
+        <span>UPI</span><span>Visa</span><span>Mastercard</span><span>RuPay</span><span>Net banking</span><span>COD</span>
+      </div>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="shop.html?cat=earrings">Earrings</a></li>
+        <li><a href="shop.html?cat=necklaces">Necklaces</a></li>
+        <li><a href="shop.html?cat=bags">Bags</a></li>
+        <li><a href="shop.html?cat=watches">Watches</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">Track your order</a></li>
+        <li><a href="#">Returns &amp; exchange</a></li>
+        <li><a href="#">Shipping &amp; delivery</a></li>
+        <li><a href="#">Contact us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About SOLAH</a></li>
+        <li><a href="#">Terms of use</a></li>
+        <li><a href="#">Privacy policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer__bottom">
+    <span>© 2026 SOLAH. Placeholder brand — not a real business.</span>
+    <span>Made in India · Prices inclusive of GST</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite" data-open="false">
+  <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
+  <span id="toast-msg"></span>
+</div>
+
+<script src="assets/js/art.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/store.js"></script>
+</body>
+</html>

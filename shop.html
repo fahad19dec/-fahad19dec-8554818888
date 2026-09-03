@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop all — SOLAH</title>
+<meta name="description" content="Browse every SOLAH piece: earrings, necklaces, rings, bags, sunglasses, watches, hair and scarves. Filter by category, occasion and price.">
+<meta name="theme-color" content="#14543F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Mukta:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/solah.css">
+</head>
+<body>
+<!--
+THESIS: The store that sells the finish, not the item. Refuses the marketplace grid of unrelated departments.
+OWN-WORLD: Warm paper ground (#FAF8F5), Bodoni Moda display against Archivo UI, deep emerald (#14543F)
+accent with brass detailing; hairline rules, 4:5 product frames, no card-on-card nesting.
+STORY: The visitor narrows by category, occasion and price, and every tile answers price, saving and
+delivery before it is tapped.
+FIRST VIEWPORT: Title and count over a hairline rule; persistent filter rail left, product grid right.
+FORM: Category standard (standing exit), chosen over the roll's assigned direction 4; seed key 6ec7f188.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="announce">
+  <div class="wrap">
+    <span>Free delivery over <strong class="num">₹999</strong> · Cash on delivery available · 7-day easy returns</span>
+  </div>
+</div>
+
+<header class="header">
+  <div class="wrap header__bar">
+    <a class="logo" href="index.html">
+      <span class="logo__mark">Solah</span>
+      <span class="logo__deva deva">सोलह</span>
+    </a>
+    <nav class="nav" aria-label="Categories">
+      <a href="shop.html?cat=earrings">Earrings</a>
+      <a href="shop.html?cat=necklaces">Necklaces</a>
+      <a href="shop.html?cat=rings">Rings</a>
+      <a href="shop.html?cat=bags">Bags</a>
+      <a href="shop.html?cat=sunglasses">Sunglasses</a>
+      <a href="shop.html?cat=watches">Watches</a>
+      <a href="shop.html" aria-current="page">All</a>
+    </nav>
+    <div class="header__acts">
+      <a class="iconbtn" href="cart.html" aria-label="Cart">
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h3l2.2 9.5a2 2 0 0 0 2 1.5h6.3a2 2 0 0 0 2-1.6L21 9H7"/><circle cx="10" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
+        <span class="cart-count" data-cart-count hidden>0</span>
+      </a>
+      <button class="iconbtn burger" type="button" data-drawer-open aria-expanded="false" aria-controls="drawer" aria-label="Menu">
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Menu">
+  <div class="drawer__head">
+    <span class="logo__mark" style="font-size:1.25rem">Solah</span>
+    <button class="iconbtn" type="button" data-drawer-close aria-label="Close menu">
+      <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="drawer__body">
+    <a href="shop.html?cat=earrings">Earrings</a>
+    <a href="shop.html?cat=necklaces">Necklaces</a>
+    <a href="shop.html?cat=rings">Rings</a>
+    <a href="shop.html?cat=bags">Bags</a>
+    <a href="shop.html?cat=sunglasses">Sunglasses</a>
+    <a href="shop.html?cat=watches">Watches</a>
+    <a href="shop.html?cat=hair">Hair</a>
+    <a href="shop.html?cat=scarves">Scarves</a>
+    <a href="shop.html">Everything</a>
+    <a href="cart.html">Cart</a>
+  </div>
+</aside>
+
+<main id="main" class="section section--page wrap">
+
+  <div class="section-head">
+    <h2 id="shop-title">Everything</h2>
+    <p id="shop-blurb">Every piece in the store. Filter it down to what you are actually shopping for.</p>
+  </div>
+
+  <div class="shop">
+    <form class="filters" id="filters" aria-label="Filter products">
+      <fieldset>
+        <legend>Category</legend>
+        <div id="f-cat"></div>
+      </fieldset>
+      <fieldset>
+        <legend>Occasion</legend>
+        <div id="f-occ"></div>
+      </fieldset>
+      <fieldset>
+        <legend>Price</legend>
+        <div id="f-price"></div>
+      </fieldset>
+      <button class="btn btn--ghost btn--sm btn--block" type="button" data-clear-filters>Clear all filters</button>
+    </form>
+
+    <div>
+      <div class="shop__bar">
+        <span class="shop__count num" id="shop-count">—</span>
+        <label style="display:flex;align-items:center;gap:.5rem;font-size:.88rem">
+          <span style="color:var(--ink-2)">Sort</span>
+          <select class="field" id="sort" style="min-height:40px;padding:.4rem .6rem;width:auto">
+            <option value="featured">Featured</option>
+            <option value="low">Price: low to high</option>
+            <option value="high">Price: high to low</option>
+            <option value="off">Biggest saving</option>
+          </select>
+        </label>
+      </div>
+      <div class="grid" id="shop-grid"></div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <div>
+      <a class="logo" href="index.html" style="margin-bottom:.9rem">
+        <span class="logo__mark">Solah</span>
+        <span class="logo__deva deva">सोलह</span>
+      </a>
+      <p class="prose" style="font-size:.88rem">Sixteen — from <em>solah shringar</em>, the sixteen adornments.</p>
+      <div class="paylogos" aria-label="Accepted payment methods">
+        <span>UPI</span><span>Visa</span><span>Mastercard</span><span>RuPay</span><span>Net banking</span><span>COD</span>
+      </div>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="shop.html?cat=earrings">Earrings</a></li>
+        <li><a href="shop.html?cat=necklaces">Necklaces</a></li>
+        <li><a href="shop.html?cat=bags">Bags</a></li>
+        <li><a href="shop.html?cat=watches">Watches</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">Track your order</a></li>
+        <li><a href="#">Returns &amp; exchange</a></li>
+        <li><a href="#">Shipping &amp; delivery</a></li>
+        <li><a href="#">Contact us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About SOLAH</a></li>
+        <li><a href="#">Terms of use</a></li>
+        <li><a href="#">Privacy policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer__bottom">
+    <span>© 2026 SOLAH. Placeholder brand — not a real business.</span>
+    <span>Made in India · Prices inclusive of GST</span>
+  </div>
+</footer>
+
+<a class="wa" href="#" aria-label="Chat with us on WhatsApp">
+  <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 0 1-11.9 7L4 20l1.1-4A8 8 0 1 1 20 12z"/><path d="M9 10c0 3 2 5 5 5"/></svg>
+  Chat with us
+</a>
+
+<div class="toast" id="toast" role="status" aria-live="polite" data-open="false">
+  <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
+  <span id="toast-msg"></span>
+</div>
+
+<script src="assets/js/art.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/store.js"></script>
+</body>
+</html>
