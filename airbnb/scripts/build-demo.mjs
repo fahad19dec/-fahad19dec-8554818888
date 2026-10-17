@@ -36,10 +36,10 @@ js = js.replace(/"\/assets\/([^"]+?\.(ttf|otf|png|jpg))"/g, (match, file, ext) =
 });
 js = js.replace(/<\/script/gi, "<\\/script");
 
-// The router reads the path, so the page starts at /home wherever it's hosted.
-// Photos load from beside the page, wherever that is.
+// The router reads the path, so the page starts at /home wherever it's hosted,
+// or at /admin when the link ends in #admin. Photos load from beside the page.
 const boot = `window.__ROAM_BASE__ = new URL(".", location.href).href;
-try { history.replaceState(null, "", "/home"); } catch (e) {}`;
+try { history.replaceState(null, "", location.hash === "#admin" ? "/admin" : "/home"); } catch (e) {}`;
 
 const page = `<title>Roam</title>
 <style>
