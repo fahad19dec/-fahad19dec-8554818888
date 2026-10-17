@@ -1,0 +1,3368 @@
+{
+  "hosts": [
+    {
+      "bio": "I grew up in Lisbon and host apartments and cottages along the Portuguese coast.",
+      "hostingSince": "2017-02-01",
+      "isSuperhost": true,
+      "languages": [
+        "Portuguese",
+        "English",
+        "French"
+      ],
+      "name": "Ana Souza",
+      "responseTime": "withinHour",
+      "slug": "ana-souza"
+    },
+    {
+      "bio": "Architect hosting city apartments in New York, Chicago, Paris and Copenhagen. Fast wifi and a real desk in every one.",
+      "hostingSince": "2017-05-01",
+      "isSuperhost": true,
+      "languages": [
+        "English",
+        "French"
+      ],
+      "name": "Daniel Brooks",
+      "responseTime": "withinHour",
+      "slug": "daniel-brooks"
+    },
+    {
+      "bio": "I build saunas and run two lake cabins. Ask me about ice fishing in winter and canoe routes in summer.",
+      "hostingSince": "2019-11-01",
+      "isSuperhost": false,
+      "languages": [
+        "English",
+        "Swedish"
+      ],
+      "name": "Erik Lindqvist",
+      "responseTime": "withinFewHours",
+      "slug": "erik-lindqvist"
+    },
+    {
+      "bio": "My family has hosted guests in the Dolomites and Tuscany for three generations. I am happy to book restaurants and guides.",
+      "hostingSince": "2015-03-01",
+      "isSuperhost": true,
+      "languages": [
+        "Italian",
+        "English",
+        "German"
+      ],
+      "name": "Giulia Moretti",
+      "responseTime": "withinHour",
+      "slug": "giulia-moretti"
+    },
+    {
+      "bio": "Beach houses on the Atlantic and Gulf coasts. Families and dogs are welcome at most of my places.",
+      "hostingSince": "2013-06-01",
+      "isSuperhost": true,
+      "languages": [
+        "English"
+      ],
+      "name": "Jess Carter",
+      "responseTime": "withinHour",
+      "slug": "jess-carter"
+    },
+    {
+      "bio": "Surfer and host in Hawaii and Australia. I leave boards and local tips at every place.",
+      "hostingSince": "2020-04-01",
+      "isSuperhost": false,
+      "languages": [
+        "English",
+        "Japanese"
+      ],
+      "name": "Kai Nakamura",
+      "responseTime": "withinFewHours",
+      "slug": "kai-nakamura"
+    },
+    {
+      "bio": "Desert homes in Palm Springs and Scottsdale, plus one apartment in Tokyo where I lived for six years.",
+      "hostingSince": "2021-01-01",
+      "isSuperhost": false,
+      "languages": [
+        "English",
+        "Korean",
+        "Japanese"
+      ],
+      "name": "Lena Park",
+      "responseTime": "withinFewHours",
+      "slug": "lena-park"
+    },
+    {
+      "bio": "I restore old mountain cabins around Southern California and keep them simple: good beds, real firewood, and a hot tub that is always clean.",
+      "hostingSince": "2016-05-01",
+      "isSuperhost": true,
+      "languages": [
+        "English",
+        "Spanish"
+      ],
+      "name": "Maya Alvarez",
+      "responseTime": "withinHour",
+      "slug": "maya-alvarez"
+    },
+    {
+      "bio": "Villas in the Cyclades. I meet every guest at the port and can arrange boat days.",
+      "hostingSince": "2015-07-01",
+      "isSuperhost": true,
+      "languages": [
+        "Greek",
+        "English"
+      ],
+      "name": "Nikos Papadakis",
+      "responseTime": "withinFewHours",
+      "slug": "nikos-papadakis"
+    },
+    {
+      "bio": "I host in Mexico City, Tulum and Bocas del Toro, and I love sending guests to my favorite taquerias.",
+      "hostingSince": "2016-10-01",
+      "isSuperhost": true,
+      "languages": [
+        "Spanish",
+        "English"
+      ],
+      "name": "Sofia Reyes",
+      "responseTime": "withinHour",
+      "slug": "sofia-reyes"
+    },
+    {
+      "bio": "Retired forester. I look after two cabins in the Pacific Northwest and can tell you which trails are muddy this week.",
+      "hostingSince": "2014-09-01",
+      "isSuperhost": true,
+      "languages": [
+        "English"
+      ],
+      "name": "Tom Whitaker",
+      "responseTime": "withinFewHours",
+      "slug": "tom-whitaker"
+    },
+    {
+      "bio": "I manage garden villas in Bali with a small local team who cook breakfast every morning.",
+      "hostingSince": "2018-08-01",
+      "isSuperhost": false,
+      "languages": [
+        "Indonesian",
+        "English"
+      ],
+      "name": "Wayan Putra",
+      "responseTime": "withinDay",
+      "slug": "wayan-putra"
+    }
+  ],
+  "policies": [
+    {
+      "body": [
+        {
+          "_key": "0b216e17f366",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "26cca5f2cf24",
+              "_type": "span",
+              "marks": [],
+              "text": "Check-in and check-out times are listed in each stay’s house rules."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "3fcd3dbeaeb3",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "1e9bd65191d7",
+              "_type": "span",
+              "marks": [],
+              "text": "Your host sends check-in instructions through Roam 48 hours before check-in."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "24343603e0fa",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "2546f933a860",
+              "_type": "span",
+              "marks": [],
+              "text": "Early check-in and late check-out depend on the host and are not guaranteed. Ask your host through Roam."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "5001dedd04b8",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "3f2e8850b5d4",
+              "_type": "span",
+              "marks": [],
+              "text": "Before you leave, take out the trash, start the dishwasher if there is one, and lock the door. You don’t need to strip the beds unless the house rules ask you to."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "8e7df7c1ddcc",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "ac91ec92d3b3",
+              "_type": "span",
+              "marks": [],
+              "text": "Quiet hours, if a stay has them, are listed in its house rules."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        }
+      ],
+      "kind": "checkIn",
+      "slug": "check-in-and-check-out",
+      "summary": "Check-in and check-out times are set in each stay’s house rules.",
+      "title": "Check-in and check-out"
+    },
+    {
+      "body": [
+        {
+          "_key": "ed7340be3356",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "26cca5f2cf24",
+              "_type": "span",
+              "marks": [],
+              "text": "If your stay has a serious problem that your host can’t fix, Roam will refund you or help you find a similar place."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "52408870f749",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "1e9bd65191d7",
+              "_type": "span",
+              "marks": [],
+              "text": "Serious problems include: the host can’t give you access, the stay isn’t clean or safe, a listed amenity such as the hot tub or pool doesn’t work, or the stay is meaningfully different from its listing."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "fdb487d8ce87",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "2546f933a860",
+              "_type": "span",
+              "marks": [],
+              "text": "Report the problem to Roam within 72 hours of finding it. Photos help us resolve it quickly."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "6d17fcc87348",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "3f2e8850b5d4",
+              "_type": "span",
+              "marks": [],
+              "text": "The refund covers nights affected by the problem and can include the full stay if you can’t stay."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        }
+      ],
+      "kind": "guestRefund",
+      "slug": "guest-refund",
+      "summary": "If a stay isn’t as described and your host can’t fix it, Roam refunds you.",
+      "title": "Guest refund policy"
+    },
+    {
+      "body": [
+        {
+          "_key": "f0aae04fbd69",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "26cca5f2cf24",
+              "_type": "span",
+              "marks": [],
+              "text": "Cancel at least 24 hours before check-in time and you get a full refund of the nightly rate, cleaning fee and Roam service fee."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "52e9cad35b4a",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "1e9bd65191d7",
+              "_type": "span",
+              "marks": [],
+              "text": "If you cancel less than 24 hours before check-in, the first night is not refunded. All remaining nights and the cleaning fee are refunded."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "d431bdd4552e",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "2546f933a860",
+              "_type": "span",
+              "marks": [],
+              "text": "If you cancel after check-in, nights you have not stayed yet are refunded if you cancel at least 24 hours before they begin."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "35ca52ee63ed",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "3f2e8850b5d4",
+              "_type": "span",
+              "marks": [],
+              "text": "Check-in time is the time listed in the stay’s house rules, in the stay’s local time zone."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        }
+      ],
+      "kind": "cancellation",
+      "slug": "flexible-cancellation",
+      "summary": "Full refund if you cancel at least 24 hours before check-in.",
+      "title": "Flexible cancellation"
+    },
+    {
+      "body": [
+        {
+          "_key": "0734fdb8e566",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "26cca5f2cf24",
+              "_type": "span",
+              "marks": [],
+              "text": "When you pay"
+            }
+          ],
+          "markDefs": [],
+          "style": "h3"
+        },
+        {
+          "_key": "1421f995b213",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "1e9bd65191d7",
+              "_type": "span",
+              "marks": [],
+              "text": "You pay the full price of your stay when you book. For stays that begin more than 30 days away, you can choose to pay half when you book and the rest 14 days before check-in."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "404bfc831235",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "2546f933a860",
+              "_type": "span",
+              "marks": [],
+              "text": "What the price includes"
+            }
+          ],
+          "markDefs": [],
+          "style": "h3"
+        },
+        {
+          "_key": "0ae037e46898",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "3f2e8850b5d4",
+              "_type": "span",
+              "marks": [],
+              "text": "The total price is the nightly rate for each night, the stay’s cleaning fee, any pet fee, and the Roam service fee. You see the total before you confirm."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "cabe6dcdb308",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "ac91ec92d3b3",
+              "_type": "span",
+              "marks": [],
+              "text": "The Roam service fee is 12% of the nightly rate total. Local taxes are added where the law requires them and are shown before you confirm."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "1d89ee4d43f3",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "3150f77d3964",
+              "_type": "span",
+              "marks": [],
+              "text": "Weekly discounts apply automatically to stays of 7 nights or more and are taken off the nightly rate total."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "58c5b0261cd7",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "2ee28b5bcff2",
+              "_type": "span",
+              "marks": [],
+              "text": "Currency"
+            }
+          ],
+          "markDefs": [],
+          "style": "h3"
+        },
+        {
+          "_key": "dade9ccfaeac",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "5aa0df881381",
+              "_type": "span",
+              "marks": [],
+              "text": "All prices on Roam are in US dollars. Your bank may charge a fee if your card is in another currency."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "d556a91f2993",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "d14e9a92861d",
+              "_type": "span",
+              "marks": [],
+              "text": "Minimum stay"
+            }
+          ],
+          "markDefs": [],
+          "style": "h3"
+        },
+        {
+          "_key": "6adcc83e03a4",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "a5dd7255d93c",
+              "_type": "span",
+              "marks": [],
+              "text": "Each stay sets its own minimum number of nights. You can’t book fewer nights than the minimum."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        }
+      ],
+      "kind": "payment",
+      "slug": "booking-and-payment",
+      "summary": "You pay in full when you book. Prices are in US dollars.",
+      "title": "Booking and payment"
+    },
+    {
+      "body": [
+        {
+          "_key": "9ad73c9b6566",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "26cca5f2cf24",
+              "_type": "span",
+              "marks": [],
+              "text": "Roam does not take a security deposit when you book."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "60f775925904",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "1e9bd65191d7",
+              "_type": "span",
+              "marks": [],
+              "text": "If something is damaged during your stay, tell your host through Roam within 24 hours. Accidents happen, and reporting them quickly keeps costs down."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "b7786458a559",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "2546f933a860",
+              "_type": "span",
+              "marks": [],
+              "text": "Hosts can ask for payment for damage within 14 days of check-out. Roam reviews every request and shares the photos and receipts with you before you are charged."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "b17292d0655d",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "3f2e8850b5d4",
+              "_type": "span",
+              "marks": [],
+              "text": "Normal wear, such as a worn towel or a scuffed floor, is never charged."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        }
+      ],
+      "kind": "damage",
+      "slug": "damage-and-security-deposit",
+      "summary": "No deposit is taken up front. Report damage within 24 hours.",
+      "title": "Damage and security deposit"
+    },
+    {
+      "body": [
+        {
+          "_key": "e65377596c1d",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "26cca5f2cf24",
+              "_type": "span",
+              "marks": [],
+              "text": "Cancel at least 5 days before check-in time and you get a full refund of the nightly rate, cleaning fee and Roam service fee."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "504877ed9d54",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "1e9bd65191d7",
+              "_type": "span",
+              "marks": [],
+              "text": "If you cancel less than 5 days before check-in, you get a 50% refund of the nightly rate for every night. The cleaning fee is refunded in full. The Roam service fee is not refunded."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "5e72d4721eb2",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "2546f933a860",
+              "_type": "span",
+              "marks": [],
+              "text": "If you cancel after check-in, you get a 50% refund of the nightly rate for nights you have not stayed yet."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "35ca52ee63ed",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "3f2e8850b5d4",
+              "_type": "span",
+              "marks": [],
+              "text": "Check-in time is the time listed in the stay’s house rules, in the stay’s local time zone."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        }
+      ],
+      "kind": "cancellation",
+      "slug": "moderate-cancellation",
+      "summary": "Full refund if you cancel at least 5 days before check-in.",
+      "title": "Moderate cancellation"
+    },
+    {
+      "body": [
+        {
+          "_key": "396e6e0140df",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "26cca5f2cf24",
+              "_type": "span",
+              "marks": [],
+              "text": "You get a full refund if you cancel within 48 hours of booking and check-in is at least 14 days away."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "5a2d2c20dba4",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "1e9bd65191d7",
+              "_type": "span",
+              "marks": [],
+              "text": "If you cancel at least 7 days before check-in, you get a 50% refund of the nightly rate. The cleaning fee is refunded in full. The Roam service fee is not refunded."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "0301f7df727a",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "2546f933a860",
+              "_type": "span",
+              "marks": [],
+              "text": "If you cancel less than 7 days before check-in, the nightly rate and the Roam service fee are not refunded. The cleaning fee is refunded in full."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "35ca52ee63ed",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "3f2e8850b5d4",
+              "_type": "span",
+              "marks": [],
+              "text": "Check-in time is the time listed in the stay’s house rules, in the stay’s local time zone."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        }
+      ],
+      "kind": "cancellation",
+      "slug": "strict-cancellation",
+      "summary": "Full refund within 48 hours of booking if check-in is at least 14 days away.",
+      "title": "Strict cancellation"
+    },
+    {
+      "body": [
+        {
+          "_key": "91c916439495",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "26cca5f2cf24",
+              "_type": "span",
+              "marks": [],
+              "text": "You can bring pets only to stays whose house rules say pets are allowed. The house rules also list the maximum number of pets and any pet fee."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "95c30f40839d",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "1e9bd65191d7",
+              "_type": "span",
+              "marks": [],
+              "text": "The pet fee is charged once per stay, not per night."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "2fa330d14e8b",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "2546f933a860",
+              "_type": "span",
+              "marks": [],
+              "text": "Service animals are always welcome, at every stay, and are never charged a pet fee. They don’t count toward a stay’s pet limit."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "d7e7a223113b",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "3f2e8850b5d4",
+              "_type": "span",
+              "marks": [],
+              "text": "You are responsible for cleaning up after your pet and for any damage your pet causes."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "011d2d5b0f05",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "ac91ec92d3b3",
+              "_type": "span",
+              "marks": [],
+              "text": "Don’t leave pets alone at a stay unless they are crated."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        }
+      ],
+      "kind": "pets",
+      "slug": "pets",
+      "summary": "Pets are allowed only at stays whose house rules allow them.",
+      "title": "Pets"
+    }
+  ],
+  "stays": [
+    {
+      "id": "stay_001",
+      "amenities": [
+        "hotTub",
+        "oceanView",
+        "wifi",
+        "ac",
+        "kitchen"
+      ],
+      "bathrooms": 2,
+      "bedrooms": 2,
+      "beds": 2,
+      "cancellationPolicySlug": "strict-cancellation",
+      "city": "Oia",
+      "cleaningFee": 120,
+      "country": "Greece",
+      "createdAt": "2026-10-08T10:34:36Z",
+      "description": "This romantic white villa is built into the caldera cliff in Oia. Its arched terrace faces the caldera and offers sunset views. Relax in the heated outdoor hot tub on the terrace. The villa is reached by 40 steps down from the main path, and luggage porters can be booked through Nikos Papadakis.",
+      "facts": [
+        "White villa built into the caldera cliff",
+        "Terrace with arches facing the caldera",
+        "Heated outdoor hot tub on the terrace",
+        "Sunset views over the caldera from the terrace",
+        "Reached by 40 steps down from the main path",
+        "Luggage porters can be booked through the host"
+      ],
+      "highlights": [
+        "White caldera cliff villa",
+        "Arched terrace",
+        "Heated outdoor hot tub",
+        "Sunset views over the caldera"
+      ],
+      "hostSlug": "nikos-papadakis",
+      "houseRules": {
+        "checkInTime": "14:00",
+        "checkOutTime": "11:00",
+        "partiesAllowed": false,
+        "petsAllowed": false,
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 36.4618,
+        "lng": 25.3753
+      },
+      "maxGuests": 4,
+      "minNights": 3,
+      "photos": [
+        {
+          "alt": "White terrace with arches looking out over the caldera",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/23cb4c419026167b0862d8696979f23b973b35e4-2000x1500.jpg"
+        },
+        {
+          "alt": "Living room with a timber ceiling and white arched walls",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/1fd5f32b07e56d542d4fd53c718fb4a3802baa6a-2000x1333.jpg"
+        },
+        {
+          "alt": "Bedroom with a blue wall and a rattan pendant",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/1f4910ab1ba86723e3f4eb39ff84442b54a85bf9-2000x1125.jpg"
+        },
+        {
+          "alt": "Kitchen with a teal island and bar stools",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/f2f24b15d7796774e87174da57c5785c94251840-2000x1600.jpg"
+        },
+        {
+          "alt": "Stone-tiled bathroom with a walk-in shower",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/bed9356112380e497cf5e07a5432a6830e17d691-2000x1333.jpg"
+        }
+      ],
+      "pricePerNight": 690,
+      "rating": 4.95,
+      "region": "Santorini",
+      "reviewCount": 87,
+      "slug": "santorini-caldera-villa",
+      "summary": "A quiet caldera villa with a terrace, hot tub and sunset views",
+      "title": "Santorini Caldera Villa",
+      "type": "villa",
+      "updatedAt": "2026-10-08T10:48:24Z",
+      "vibes": [
+        "romantic",
+        "views",
+        "luxury",
+        "quiet"
+      ]
+    },
+    {
+      "id": "stay_002",
+      "amenities": [
+        "beachAccess",
+        "wifi",
+        "ac",
+        "kitchen",
+        "washer",
+        "parking"
+      ],
+      "bathrooms": 1,
+      "bedrooms": 1,
+      "beds": 2,
+      "cancellationPolicySlug": "strict-cancellation",
+      "city": "Paia",
+      "cleaningFee": 110,
+      "country": "United States",
+      "createdAt": "2026-10-08T10:32:43Z",
+      "description": "This quiet stone cottage has a tin roof and sits on a lawn under tall palms. Relax on the lanai with two lounge chairs. Beach chairs, an umbrella and a cooler are provided for guests. Baldwin Beach is a 5-minute walk away, and Paia town is a 5-minute drive.",
+      "facts": [
+        "Stone cottage with a tin roof on a lawn under tall palms",
+        "Lanai with two lounge chairs",
+        "Beach chairs, umbrella and cooler for guests",
+        "5-minute walk to Baldwin Beach",
+        "5-minute drive to Paia town"
+      ],
+      "highlights": [
+        "Lawn under tall palms",
+        "Lanai with two lounge chairs",
+        "Beach gear for guests",
+        "5-minute walk to Baldwin Beach"
+      ],
+      "hostSlug": "kai-nakamura",
+      "houseRules": {
+        "checkInTime": "15:00",
+        "checkOutTime": "11:00",
+        "partiesAllowed": false,
+        "petsAllowed": false,
+        "quietHoursFrom": "21:00",
+        "quietHoursTo": "07:00",
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 20.9128,
+        "lng": -156.38
+      },
+      "maxGuests": 3,
+      "minNights": 3,
+      "photos": [
+        {
+          "alt": "Stone cottage with a tin roof on a lawn under tall palms",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/1764ec6dcef1d9537b39264c59d6863bb7d9c9c6-2000x1229.jpg"
+        },
+        {
+          "alt": "White kitchen island open to the dining room",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/58cc7c8dbe2b6140283be32df93c784e50dd3fd7-2000x1333.jpg"
+        },
+        {
+          "alt": "Bathroom with a blue vanity and a glass shower",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/afa4156e1433ff97f8aadbfef16940bd974c12c0-2000x1325.jpg"
+        }
+      ],
+      "pricePerNight": 340,
+      "rating": 4.95,
+      "region": "HI",
+      "reviewCount": 58,
+      "slug": "maui-stone-cottage",
+      "summary": "A peaceful stone cottage near Baldwin Beach",
+      "title": "Maui Stone Cottage",
+      "type": "beach",
+      "updatedAt": "2026-10-08T10:47:30Z",
+      "vibes": [
+        "peaceful",
+        "romantic",
+        "quiet",
+        "nature"
+      ]
+    },
+    {
+      "id": "stay_003",
+      "amenities": [
+        "wifi",
+        "workspace",
+        "kitchen"
+      ],
+      "bathrooms": 1,
+      "bedrooms": 0,
+      "beds": 1,
+      "cancellationPolicySlug": "flexible-cancellation",
+      "city": "Mexico City",
+      "cleaningFee": 30,
+      "country": "Mexico",
+      "createdAt": "2026-10-08T10:35:37Z",
+      "description": "This quiet studio is full of plants and books. A desk by the window offers a dedicated workspace. The sleeping area faces the back of the building, away from the street. A specialty coffee shop is on the same block.",
+      "facts": [
+        "Studio full of plants and books",
+        "On a tree-lined street in Roma Norte",
+        "Desk by the window",
+        "Specialty coffee shop on the same block",
+        "Sleeping area faces the back of the building, away from the street"
+      ],
+      "highlights": [
+        "Plants and books",
+        "Desk by the window",
+        "Tree-lined street",
+        "Coffee shop on the same block"
+      ],
+      "hostSlug": "sofia-reyes",
+      "houseRules": {
+        "checkInTime": "15:00",
+        "checkOutTime": "11:00",
+        "partiesAllowed": false,
+        "petsAllowed": false,
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 19.418,
+        "lng": -99.1617
+      },
+      "maxGuests": 2,
+      "minNights": 2,
+      "neighborhood": "Roma Norte",
+      "photos": [
+        {
+          "alt": "Living room full of plants with a gray sofa and bookshelves",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/7f673dc5aa9c64372ac4adb5113c04ce1b264dd2-2000x1488.jpg"
+        },
+        {
+          "alt": "Bedroom with a round mirror and a window onto greenery",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/8c3be6b412b045271c73c4056bed84c0eb69fd63-2000x1331.jpg"
+        },
+        {
+          "alt": "Kitchen with wood cabinets and a glass dining table",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/61b6f7f7687a4cf71e0d3258857a14eb09137865-2000x1333.jpg"
+        },
+        {
+          "alt": "Concrete bathroom with a pebble-shaped mirror",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/2bbf438d4f71469c81dc4d0457d33fe03a54358a-2000x1700.jpg"
+        }
+      ],
+      "pricePerNight": 95,
+      "rating": 4.9,
+      "reviewCount": 402,
+      "slug": "plant-filled-studio",
+      "summary": "Cozy, plant-filled studio on a tree-lined Roma Norte street",
+      "title": "Plant-Filled Studio",
+      "type": "city",
+      "updatedAt": "2026-10-08T10:53:05Z",
+      "vibes": [
+        "cozy",
+        "walkable",
+        "quiet"
+      ],
+      "weeklyDiscountPercent": 20
+    },
+    {
+      "id": "stay_004",
+      "amenities": [
+        "hotTub",
+        "fireplace",
+        "firePit",
+        "wifi",
+        "kitchen",
+        "parking"
+      ],
+      "bathrooms": 2,
+      "bedrooms": 3,
+      "beds": 4,
+      "cancellationPolicySlug": "moderate-cancellation",
+      "city": "Lake Arrowhead",
+      "cleaningFee": 95,
+      "country": "United States",
+      "createdAt": "2026-10-08T10:28:03Z",
+      "description": "Set on a quiet dead-end street, this cozy cabin offers a peaceful stay. Relax in the cedar hot tub on the back deck, facing the pines. Gather by the wood-burning stone fireplace or around the yard’s fire pit. Large windows line the forest side of the living room.",
+      "facts": [
+        "Cedar hot tub on the back deck, facing the pines",
+        "Wood-burning stone fireplace in the living room, with firewood provided",
+        "Fire pit with Adirondack chairs in the yard",
+        "Large windows on the forest side of the living room",
+        "5-minute drive to Lake Arrowhead Village",
+        "Street is a quiet dead end with no through traffic"
+      ],
+      "highlights": [
+        "Cedar hot tub facing the pines",
+        "Firewood provided",
+        "Fire pit with Adirondack chairs",
+        "5-minute drive to the Village"
+      ],
+      "hostSlug": "maya-alvarez",
+      "houseRules": {
+        "checkInTime": "15:00",
+        "checkOutTime": "11:00",
+        "maxPets": 2,
+        "partiesAllowed": false,
+        "petFee": 50,
+        "petsAllowed": true,
+        "quietHoursFrom": "22:00",
+        "quietHoursTo": "08:00",
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 34.2461,
+        "lng": -117.1714
+      },
+      "maxGuests": 6,
+      "minNights": 2,
+      "neighborhood": "Cedar Glen",
+      "photos": [
+        {
+          "alt": "Dark wooden cabin on a grassy slope at sunset with pines behind it",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/98c9429882b70568478ba564fd6ca06e5a02ce1e-2000x1333.jpg"
+        },
+        {
+          "alt": "Wood-paneled living room with a stone fireplace and leather sofas",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/00b8915c619f5f21975c25e1c7a6dd5b365ddb63-2000x1333.jpg"
+        },
+        {
+          "alt": "Pine-paneled attic bedroom with an arched window and a desk",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/fc8faf46f42de0cafa6c62c64c2a152125bb2979-2000x1333.jpg"
+        },
+        {
+          "alt": "Kitchen with a wooden island, stools and hanging copper pans",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/a39b2eda1e4ee665ffe6e31208b6a8fe25d22017-2000x1333.jpg"
+        },
+        {
+          "alt": "Bathroom with a wooden double vanity and a tub",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/b2b8adf0d73b69d5274fd87ef9502865f4e7ac0f-2000x1333.jpg"
+        }
+      ],
+      "pricePerNight": 289,
+      "rating": 4.9,
+      "region": "CA",
+      "reviewCount": 214,
+      "slug": "modern-cabin-with-hot-tub",
+      "summary": "Quiet modern cabin with a cedar hot tub facing the pines",
+      "title": "Modern Cabin with Hot Tub",
+      "type": "cabin",
+      "updatedAt": "2026-10-08T10:46:02Z",
+      "vibes": [
+        "quiet",
+        "cozy",
+        "modern",
+        "views",
+        "peaceful"
+      ],
+      "weeklyDiscountPercent": 10
+    },
+    {
+      "id": "stay_005",
+      "amenities": [
+        "oceanView",
+        "beachAccess",
+        "fireplace",
+        "wifi",
+        "kitchen",
+        "washer",
+        "parking"
+      ],
+      "bathrooms": 2,
+      "bedrooms": 2,
+      "beds": 3,
+      "cancellationPolicySlug": "moderate-cancellation",
+      "city": "Cannon Beach",
+      "cleaningFee": 120,
+      "country": "United States",
+      "createdAt": "2026-10-08T10:31:35Z",
+      "description": "This gray shingled cottage sits on a grassy bank above the beach. Take in the view of Haystack Rock from the living room, where a gas fireplace adds a cozy touch. Wooden stairs lead from the yard down to the sand. Dogs are welcome, and downtown Cannon Beach is a 10-minute walk along the beach.",
+      "facts": [
+        "Gray shingled cottage on a grassy bank above the beach",
+        "View of Haystack Rock from the living room",
+        "Wooden stairs from the yard down to the sand",
+        "Gas fireplace in the living room",
+        "Dogs are allowed on the beach year-round",
+        "10-minute walk along the beach to downtown Cannon Beach"
+      ],
+      "highlights": [
+        "Haystack Rock view",
+        "Wooden stairs to the sand",
+        "Gas fireplace",
+        "Dogs allowed year-round"
+      ],
+      "hostSlug": "jess-carter",
+      "houseRules": {
+        "checkInTime": "16:00",
+        "checkOutTime": "11:00",
+        "maxPets": 2,
+        "partiesAllowed": false,
+        "petFee": 75,
+        "petsAllowed": true,
+        "quietHoursFrom": "22:00",
+        "quietHoursTo": "08:00",
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 45.8918,
+        "lng": -123.9615
+      },
+      "maxGuests": 5,
+      "minNights": 2,
+      "photos": [
+        {
+          "alt": "Gray shingled houses on a grassy bank above a sandy beach",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/79a0752aab2772f38da773b5b8f3bd722750d23a-2000x1333.jpg"
+        },
+        {
+          "alt": "Living room with a round wooden coffee table",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/38bc7def45b1e7cac2583a10b07a1cc05b9a6b91-2000x1125.jpg"
+        },
+        {
+          "alt": "Twin beds with anchor pillows and a balcony",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/44cac69f55cbffdbc52095a2df97479dd1ab1007-2000x1334.jpg"
+        },
+        {
+          "alt": "White kitchen with a gas range and hood",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/73986c675fbeb05c0bd0470bf269ed78cf0d5ae1-2000x1333.jpg"
+        },
+        {
+          "alt": "White bathroom with a dark wood vanity",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/6575fd24a5045a5b948e0ec5d85432bb0a1b3e74-2000x1333.jpg"
+        }
+      ],
+      "pricePerNight": 295,
+      "rating": 4.9,
+      "region": "OR",
+      "reviewCount": 181,
+      "slug": "haystack-view-beach-cottage",
+      "summary": "Cozy beach cottage with a view of Haystack Rock",
+      "title": "Haystack View Beach Cottage",
+      "type": "beach",
+      "updatedAt": "2026-10-08T10:47:05Z",
+      "vibes": [
+        "cozy",
+        "views",
+        "quiet",
+        "romantic"
+      ],
+      "weeklyDiscountPercent": 10
+    },
+    {
+      "id": "stay_006",
+      "amenities": [
+        "lakeView",
+        "mountainView",
+        "wifi",
+        "kitchen",
+        "fireplace"
+      ],
+      "bathrooms": 1,
+      "bedrooms": 1,
+      "beds": 1,
+      "cancellationPolicySlug": "strict-cancellation",
+      "city": "Lago di Braies",
+      "cleaningFee": 80,
+      "country": "Italy",
+      "createdAt": "2026-10-08T10:28:39Z",
+      "description": "This restored timber boathouse stands on stilts over the lake. Calm mornings bring reflections of the Dolomite peaks across the water. Take out the rowboat from the private dock or follow the walking path that starts at the door. In the evening, settle in by the small wood-burning fireplace.",
+      "facts": [
+        "Restored timber boathouse on stilts over the lake",
+        "Rowboat tied at the private dock for guests to use",
+        "Peaks of the Dolomites reflect in the lake on calm mornings",
+        "Small wood-burning fireplace",
+        "Walking path around the lake starts at the door",
+        "Day visitors leave the lake by early evening"
+      ],
+      "highlights": [
+        "Boathouse on stilts",
+        "Rowboat at the private dock",
+        "Dolomite peaks reflected",
+        "Path starts at the door"
+      ],
+      "hostSlug": "giulia-moretti",
+      "houseRules": {
+        "checkInTime": "16:00",
+        "checkOutTime": "10:00",
+        "partiesAllowed": false,
+        "petsAllowed": false,
+        "quietHoursFrom": "22:00",
+        "quietHoursTo": "07:00",
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 46.6943,
+        "lng": 12.0857
+      },
+      "maxGuests": 2,
+      "minNights": 3,
+      "photos": [
+        {
+          "alt": "Timber boathouse on a calm green lake below rocky mountains",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/01743057dc9045a5e6d4cd9855c17b06af99b33b-2000x1333.jpg"
+        },
+        {
+          "alt": "Bright living room with a white sofa, bookcase and carved cabinet",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/4c35f945ec9cb4381b15d207d2710d9672f1dae2-2000x1333.jpg"
+        },
+        {
+          "alt": "Bedroom with a carved mirror dresser and a patterned quilt",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/949fca887cbe0e79d5e6c84211f8cc781ff424b7-2000x1462.jpg"
+        },
+        {
+          "alt": "Kitchen sink under a window looking into the trees",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/23a526f25ea21b8fcb1aa3cf8a1343d765e2fb51-2000x1333.jpg"
+        }
+      ],
+      "pricePerNight": 410,
+      "rating": 4.9,
+      "region": "South Tyrol",
+      "reviewCount": 98,
+      "slug": "dolomites-lake-boathouse",
+      "summary": "A peaceful timber boathouse on Lago di Braies",
+      "title": "Dolomites Lake Boathouse",
+      "type": "cabin",
+      "updatedAt": "2026-10-08T10:46:58Z",
+      "vibes": [
+        "romantic",
+        "views",
+        "peaceful",
+        "quiet",
+        "rustic"
+      ]
+    },
+    {
+      "id": "stay_007",
+      "amenities": [
+        "pool",
+        "oceanView",
+        "wifi",
+        "ac",
+        "kitchen",
+        "washer",
+        "parking",
+        "workspace"
+      ],
+      "bathrooms": 5,
+      "bedrooms": 5,
+      "beds": 6,
+      "cancellationPolicySlug": "strict-cancellation",
+      "city": "Marbella",
+      "cleaningFee": 300,
+      "country": "Spain",
+      "createdAt": "2026-10-08T10:33:02Z",
+      "description": "This modern villa in Sierra Blanca sleeps 10 guests across 5 bedrooms. Floor-to-ceiling glass spans the living room, while the lawn runs down to a heated pool. Every bedroom has Mediterranean Sea views, and a private chef can be booked through Giulia Moretti. An office with a desk and monitor provides a dedicated workspace.",
+      "facts": [
+        "Floor-to-ceiling glass across the living room",
+        "Lawn that runs down to a heated pool",
+        "Mediterranean Sea views from every bedroom",
+        "A private chef can be booked through the host",
+        "Office with a desk and monitor",
+        "10-minute drive to central Marbella"
+      ],
+      "highlights": [
+        "Heated pool beside the lawn",
+        "Sea views from every bedroom",
+        "Floor-to-ceiling living room glass",
+        "Private chef available to book"
+      ],
+      "hostSlug": "giulia-moretti",
+      "houseRules": {
+        "checkInTime": "16:00",
+        "checkOutTime": "11:00",
+        "partiesAllowed": false,
+        "petsAllowed": false,
+        "quietHoursFrom": "23:00",
+        "quietHoursTo": "09:00",
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 36.525,
+        "lng": -4.901
+      },
+      "maxGuests": 10,
+      "minNights": 4,
+      "neighborhood": "Sierra Blanca",
+      "photos": [
+        {
+          "alt": "Modern villa with large windows above a lawn and pool",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/372fad46b0ea3ab3ec566ce8cb93d50b1e8de035-2000x1500.jpg"
+        },
+        {
+          "alt": "Living room with a marble fireplace wall and pale sofas",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/d0c39e7dffbac1e2b8dcf66270259c57fcde2b59-2000x1333.jpg"
+        },
+        {
+          "alt": "Bed with a tufted headboard and a bench at its foot",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/cf48e8199dad2d932655ed6bc2a42c746e471629-2000x1333.jpg"
+        },
+        {
+          "alt": "Kitchen with a long white island open to the living room",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/e1a6e698ba2c04b5febf65494b37b889887eddde-2000x1333.jpg"
+        },
+        {
+          "alt": "Dark gray bathroom with a glass shower and a backlit mirror",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/6c630be1e4ef9380281b503e2cf0835e489d4b96-2000x1316.jpg"
+        }
+      ],
+      "pricePerNight": 780,
+      "rating": 4.9,
+      "region": "Andalusia",
+      "reviewCount": 74,
+      "slug": "hillside-villa-with-pool",
+      "summary": "Modern family villa with a heated pool and Mediterranean views",
+      "title": "Hillside Villa with Pool",
+      "type": "villa",
+      "updatedAt": "2026-10-08T10:47:12Z",
+      "vibes": [
+        "luxury",
+        "modern",
+        "views",
+        "family"
+      ],
+      "weeklyDiscountPercent": 10
+    },
+    {
+      "id": "stay_008",
+      "amenities": [
+        "pool",
+        "oceanView",
+        "wifi",
+        "ac",
+        "kitchen",
+        "parking"
+      ],
+      "bathrooms": 4,
+      "bedrooms": 4,
+      "beds": 4,
+      "cancellationPolicySlug": "strict-cancellation",
+      "city": "Mykonos",
+      "cleaningFee": 250,
+      "country": "Greece",
+      "createdAt": "2026-10-08T10:33:39Z",
+      "description": "This white cubist villa sits above the Aegean in Mykonos. It sleeps eight guests across four bedrooms, with four beds and four bathrooms. Enjoy the infinity pool and a west-facing sunset terrace over the sea. Nikos meets guests at the port on arrival.",
+      "facts": [
+        "White cubist villa above the Aegean",
+        "Infinity pool with a striped tile floor",
+        "Sunset terrace facing west over the sea",
+        "5-minute drive to Little Venice",
+        "Host meets guests at the port on arrival"
+      ],
+      "highlights": [
+        "Striped-tile infinity pool",
+        "West-facing sunset terrace",
+        "5-minute drive to Little Venice",
+        "Host meets guests at the port"
+      ],
+      "hostSlug": "nikos-papadakis",
+      "houseRules": {
+        "checkInTime": "15:00",
+        "checkOutTime": "11:00",
+        "partiesAllowed": false,
+        "petsAllowed": false,
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 37.4467,
+        "lng": 25.3289
+      },
+      "maxGuests": 8,
+      "minNights": 4,
+      "photos": [
+        {
+          "alt": "White cubist villa with a striped pool in front",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/f48e25696bc6e426ea1addbbcca0027ff8866d9e-2000x1333.jpg"
+        },
+        {
+          "alt": "Bright open plan room with a glass staircase and dining table",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/189096381e34055f64aff7c065c3a553130cb0e9-2000x1341.jpg"
+        },
+        {
+          "alt": "White bedroom with a padded headboard wall",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/674babfc49f577db9a9e6ad5b6eb12d3c122d004-2000x1333.jpg"
+        },
+        {
+          "alt": "White kitchen with marble floors and a gold-trimmed island",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/6021745a1302b9dcb2644427c2bb3aabf5a9adbf-2000x1125.jpg"
+        },
+        {
+          "alt": "Marble bathroom with twin round gold mirrors",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/21a720ccfbbc1e834646ab7388e2c0c48f735e82-2000x1361.jpg"
+        }
+      ],
+      "pricePerNight": 850,
+      "rating": 4.9,
+      "region": "Cyclades",
+      "reviewCount": 61,
+      "slug": "infinity-pool-villa",
+      "summary": "Modern Mykonos villa with an infinity pool and ocean views",
+      "title": "Infinity Pool Villa",
+      "type": "villa",
+      "updatedAt": "2026-10-08T10:47:17Z",
+      "vibes": [
+        "luxury",
+        "modern",
+        "views",
+        "lively"
+      ]
+    },
+    {
+      "id": "stay_009",
+      "amenities": [
+        "wifi",
+        "kitchen",
+        "washer",
+        "workspace"
+      ],
+      "bathrooms": 1,
+      "bedrooms": 1,
+      "beds": 1,
+      "cancellationPolicySlug": "moderate-cancellation",
+      "city": "Paris",
+      "cleaningFee": 70,
+      "country": "France",
+      "createdAt": "2026-10-08T10:35:54Z",
+      "description": "Stay on the top floor of a Haussmann building in walkable Le Marais. Windows open over the rooftops to the Eiffel Tower. A small elevator reaches the sixth floor. The apartment includes Wifi, a kitchen, washer, and workspace.",
+      "facts": [
+        "Top-floor apartment in a Haussmann building",
+        "Windows open over the rooftops to the Eiffel Tower",
+        "Small elevator to the sixth floor",
+        "5-minute walk to Place des Vosges",
+        "3-minute walk to Saint-Paul metro station"
+      ],
+      "highlights": [
+        "Eiffel Tower views",
+        "5-minute walk to Place des Vosges",
+        "3-minute walk to Saint-Paul metro",
+        "Small elevator to the sixth floor"
+      ],
+      "hostSlug": "daniel-brooks",
+      "houseRules": {
+        "additionalRules": [
+          "Sixth floor with a small elevator for two people"
+        ],
+        "checkInTime": "16:00",
+        "checkOutTime": "11:00",
+        "partiesAllowed": false,
+        "petsAllowed": false,
+        "quietHoursFrom": "22:00",
+        "quietHoursTo": "08:00",
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 48.859,
+        "lng": 2.3622
+      },
+      "maxGuests": 2,
+      "minNights": 3,
+      "neighborhood": "Le Marais",
+      "photos": [
+        {
+          "alt": "Open window looking over Paris rooftops to the Eiffel Tower",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/f502297f8f3adb6042a29403c4bc4f9259768ce4-2000x1125.jpg"
+        },
+        {
+          "alt": "Living room with a gray sofa and red dining chairs",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/2535330618e931a2478e034ade38212cdac182f8-2000x1333.jpg"
+        },
+        {
+          "alt": "Bedroom with warm lighting and framed prints",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/f575737ab1e90862dcac1c26ea0ce1263c6dd73f-2000x1331.jpg"
+        },
+        {
+          "alt": "Kitchen with a checkered backsplash and black counters",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/a9eec865eae1c32bfad4a6c47d038ad5bfc52ab6-2000x1333.jpg"
+        },
+        {
+          "alt": "Marble bathroom with a round basin and wall light",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/c5f4cbfdcfc9c259abb862afd8fec7b571c25dbf-2000x1125.jpg"
+        }
+      ],
+      "pricePerNight": 240,
+      "rating": 4.85,
+      "reviewCount": 209,
+      "slug": "paris-rooftop-apartment",
+      "summary": "Romantic top-floor apartment with Paris rooftop views",
+      "title": "Paris Rooftop Apartment",
+      "type": "city",
+      "updatedAt": "2026-10-08T10:48:00Z",
+      "vibes": [
+        "romantic",
+        "views",
+        "walkable"
+      ]
+    },
+    {
+      "id": "stay_010",
+      "amenities": [
+        "pool",
+        "fireplace",
+        "bbq",
+        "wifi",
+        "kitchen",
+        "washer",
+        "parking"
+      ],
+      "bathrooms": 3,
+      "bedrooms": 4,
+      "beds": 5,
+      "cancellationPolicySlug": "strict-cancellation",
+      "city": "Montepulciano",
+      "cleaningFee": 200,
+      "country": "Italy",
+      "createdAt": "2026-10-08T10:34:19Z",
+      "description": "This restored brick farmhouse offers a rustic stay in Montepulciano. Gather around the long dining table on the shaded terrace. The garden pool sits among cypress trees, while the terrace overlooks an olive grove and vineyard. A wood-burning fireplace brings warmth to the kitchen.",
+      "facts": [
+        "Restored brick farmhouse with an outside staircase",
+        "Shaded terrace with a long dining table",
+        "Pool among cypress trees in the garden",
+        "Wood-burning fireplace in the kitchen",
+        "Olive grove and vineyard views from the terrace",
+        "10-minute drive to the hill town of Montepulciano"
+      ],
+      "highlights": [
+        "Pool among cypress trees",
+        "Shaded dining terrace",
+        "Olive grove and vineyard views",
+        "Wood-burning kitchen fireplace"
+      ],
+      "hostSlug": "giulia-moretti",
+      "houseRules": {
+        "checkInTime": "16:00",
+        "checkOutTime": "10:00",
+        "partiesAllowed": false,
+        "petsAllowed": false,
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 43.0921,
+        "lng": 11.7806
+      },
+      "maxGuests": 8,
+      "minNights": 5,
+      "photos": [
+        {
+          "alt": "Brick farmhouse with an outside staircase and a shaded terrace",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/c00a2ef30b05eaccca3b555a03a77c4dd1a26c80-2000x1333.jpg"
+        },
+        {
+          "alt": "Living room with an orange leather sofa and an arched doorway",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/f674099fc582246a6264abc2313578d2c7e26631-2000x1333.jpg"
+        },
+        {
+          "alt": "Bedroom with French doors and a wooden dresser",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/082da0ef19ccd61fde49067b3718add223cab782-2000x1333.jpg"
+        },
+        {
+          "alt": "Kitchen with a granite island and gray cabinets",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/de9e455b9dfe4c9eb59404ee1ccb76638319d6bd-2000x1333.jpg"
+        },
+        {
+          "alt": "Bathroom with a clawfoot tub behind glass and a gilded mirror",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/430994231e692f2cd7df3e019e691a03d465f5d2-2000x1333.jpg"
+        }
+      ],
+      "pricePerNight": 480,
+      "rating": 4.85,
+      "region": "Tuscany",
+      "reviewCount": 112,
+      "slug": "tuscan-brick-farmhouse",
+      "summary": "Rustic Tuscan farmhouse with a pool and vineyard views",
+      "title": "Tuscan Brick Farmhouse",
+      "type": "villa",
+      "updatedAt": "2026-10-08T10:49:08Z",
+      "vibes": [
+        "rustic",
+        "family",
+        "romantic",
+        "views"
+      ],
+      "weeklyDiscountPercent": 15
+    },
+    {
+      "id": "stay_011",
+      "amenities": [
+        "oceanView",
+        "beachAccess",
+        "bbq",
+        "wifi",
+        "kitchen",
+        "parking"
+      ],
+      "bathrooms": 1,
+      "bedrooms": 2,
+      "beds": 2,
+      "cancellationPolicySlug": "moderate-cancellation",
+      "city": "Aljezur",
+      "cleaningFee": 55,
+      "country": "Portugal",
+      "createdAt": "2026-10-08T10:32:10Z",
+      "description": "This green and white fisherman’s cottage sits on a dune above the Atlantic. A sandy path leads from the gate down to the beach. Enjoy ocean sunsets from the terrace and cook on the charcoal grill. The cottage is a peaceful, romantic stay in Aljezur.",
+      "facts": [
+        "Green and white fisherman’s cottage on a dune above the Atlantic",
+        "Sandy path from the gate down to the beach",
+        "Charcoal grill on the terrace",
+        "Sunsets over the ocean from the terrace",
+        "Surf schools at the beach below in summer",
+        "10-minute drive to the village of Aljezur"
+      ],
+      "highlights": [
+        "Sandy path to the beach",
+        "Ocean sunsets from the terrace",
+        "Charcoal grill on the terrace",
+        "Surf schools in summer"
+      ],
+      "hostSlug": "ana-souza",
+      "houseRules": {
+        "checkInTime": "16:00",
+        "checkOutTime": "11:00",
+        "partiesAllowed": false,
+        "petsAllowed": false,
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 37.3197,
+        "lng": -8.8562
+      },
+      "maxGuests": 4,
+      "minNights": 3,
+      "photos": [
+        {
+          "alt": "Green and white cottage on a dune above the Atlantic",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/7684ec9d185ff81cb54e56e5c4264c46541737d8-2000x1333.jpg"
+        },
+        {
+          "alt": "Corner windows looking out at the sea at sunset",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/f8e23781777412e1dfe74df25b24ab2709be46ab-2000x1333.jpg"
+        },
+        {
+          "alt": "Bedroom with yellow walls and an arched doorway",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/b858efa7b94282d8d5dcefccb332c65f4dc6af9b-2000x1500.jpg"
+        },
+        {
+          "alt": "White kitchen island with three metal stools",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/71909d9c6c810df4330021f77ed6c90d4f7d5601-2000x1333.jpg"
+        },
+        {
+          "alt": "Small white bathroom with a vanity",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/666513bdce6d5ef410d47e56bcd4b4c417e48c01-2000x1333.jpg"
+        }
+      ],
+      "pricePerNight": 175,
+      "rating": 4.85,
+      "region": "Algarve",
+      "reviewCount": 73,
+      "slug": "algarve-dune-cottage",
+      "summary": "A quiet fisherman’s cottage on a dune above the Atlantic",
+      "title": "Algarve Dune Cottage",
+      "type": "beach",
+      "updatedAt": "2026-10-08T10:46:22Z",
+      "vibes": [
+        "quiet",
+        "views",
+        "peaceful",
+        "romantic"
+      ],
+      "weeklyDiscountPercent": 15
+    },
+    {
+      "id": "stay_012",
+      "amenities": [
+        "sauna",
+        "lakeView",
+        "firePit",
+        "wifi",
+        "kitchen",
+        "parking"
+      ],
+      "bathrooms": 1,
+      "bedrooms": 2,
+      "beds": 3,
+      "cancellationPolicySlug": "moderate-cancellation",
+      "city": "Ely",
+      "cleaningFee": 80,
+      "country": "United States",
+      "createdAt": "2026-10-08T10:29:59Z",
+      "description": "Settle into a secluded, rustic cabin on Burntside Lake. Enjoy the wood-fired sauna on the dock and peaceful time by the water. Two canoes and paddles are available for guests. In summer, loons can often be heard on the lake.",
+      "facts": [
+        "Red cabin on the shore of Burntside Lake",
+        "Wood-fired sauna on the dock, a few steps from the water",
+        "Two canoes and paddles for guests",
+        "Fire pit on the lakeshore",
+        "Loons can often be heard on the lake in summer",
+        "15-minute drive to the town of Ely"
+      ],
+      "highlights": [
+        "Wood-fired sauna on the dock",
+        "Two canoes and paddles",
+        "Lakeshore fire pit",
+        "15-minute drive to Ely"
+      ],
+      "hostSlug": "erik-lindqvist",
+      "houseRules": {
+        "checkInTime": "16:00",
+        "checkOutTime": "11:00",
+        "partiesAllowed": false,
+        "petsAllowed": false,
+        "quietHoursFrom": "22:00",
+        "quietHoursTo": "07:00",
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 47.9283,
+        "lng": -91.9456
+      },
+      "maxGuests": 4,
+      "minNights": 3,
+      "neighborhood": "Burntside Lake",
+      "photos": [
+        {
+          "alt": "Red cabin with a small dock on a misty lake edged by forest",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/2d249fde5f90225e78ad436a9adbfe53ed6cad92-2000x1335.jpg"
+        },
+        {
+          "alt": "Bright living room with a leather sofa and tall windows",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/4e000775bb9b7e517c41ba8760af67203dae89f1-2000x1333.jpg"
+        },
+        {
+          "alt": "White paneled bedroom with a made bed and a plant",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/a9295e0939c102ea3010734c4249ca8cc39ee4d9-2000x1500.jpg"
+        },
+        {
+          "alt": "Wood cabinet kitchen with a sink under a window",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/5bb8ac87e68326ea138deeee0105e93acb2d651b-2000x1333.jpg"
+        }
+      ],
+      "pricePerNight": 210,
+      "rating": 4.85,
+      "region": "MN",
+      "reviewCount": 64,
+      "slug": "lakeside-sauna-cabin",
+      "summary": "Quiet red cabin on the shore of Burntside Lake",
+      "title": "Lakeside Sauna Cabin",
+      "type": "cabin",
+      "updatedAt": "2026-10-08T10:47:23Z",
+      "vibes": [
+        "quiet",
+        "secluded",
+        "peaceful",
+        "rustic",
+        "nature"
+      ],
+      "weeklyDiscountPercent": 10
+    },
+    {
+      "id": "stay_013",
+      "amenities": [
+        "wifi",
+        "kitchen",
+        "washer",
+        "workspace"
+      ],
+      "bathrooms": 1,
+      "bedrooms": 2,
+      "beds": 2,
+      "cancellationPolicySlug": "flexible-cancellation",
+      "city": "Lisbon",
+      "cleaningFee": 45,
+      "country": "Portugal",
+      "createdAt": "2026-10-08T10:35:24Z",
+      "description": "This cozy two-bedroom flat sits on the third floor, reached by stairs. Juliet balconies overlook a tiled street, with Fado bars on the surrounding streets. Tram 28 stops around the corner, and the Miradouro de Santa Luzia viewpoint is a 5-minute walk away. Wifi, a kitchen, washer, and workspace are included, and up to one pet is allowed.",
+      "facts": [
+        "Two-bedroom flat with Juliet balconies over a tiled street",
+        "Third floor, reached by stairs",
+        "Tram 28 stops around the corner",
+        "5-minute walk to the Miradouro de Santa Luzia viewpoint",
+        "Fado bars on the surrounding streets"
+      ],
+      "highlights": [
+        "Juliet balconies over tiled street",
+        "Tram 28 around the corner",
+        "5-minute walk to the viewpoint",
+        "Fado bars on surrounding streets"
+      ],
+      "hostSlug": "ana-souza",
+      "houseRules": {
+        "additionalRules": [
+          "Third-floor walk-up with no elevator"
+        ],
+        "checkInTime": "15:00",
+        "checkOutTime": "11:00",
+        "maxPets": 1,
+        "partiesAllowed": false,
+        "petFee": 30,
+        "petsAllowed": true,
+        "quietHoursFrom": "22:00",
+        "quietHoursTo": "08:00",
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 38.7115,
+        "lng": -9.1301
+      },
+      "maxGuests": 4,
+      "minNights": 2,
+      "neighborhood": "Alfama",
+      "photos": [
+        {
+          "alt": "Sunny apartment with a small kitchen, red armchair and tall windows",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/86970cc7bec6debfa5074dfcfc866fe822926341-2000x1334.jpg"
+        },
+        {
+          "alt": "Bedroom with tall French windows",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/768d9ea368b5bedfac028ae208e5fbc9b524c3a6-2000x1333.jpg"
+        },
+        {
+          "alt": "Compact white kitchen with a gas range",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/a39ba964133b9425f8285c1db797b2349182e46b-2000x1331.jpg"
+        },
+        {
+          "alt": "Small bathroom with a pedestal sink and a tub",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/c146383abf8dec0ce09e81868c5df218e2a9bf52-2000x1333.jpg"
+        }
+      ],
+      "pricePerNight": 120,
+      "rating": 4.8,
+      "reviewCount": 276,
+      "slug": "sunny-alfama-apartment",
+      "summary": "Cozy two-bedroom flat in lively, walkable Alfama",
+      "title": "Sunny Alfama Apartment",
+      "type": "city",
+      "updatedAt": "2026-10-08T10:48:54Z",
+      "vibes": [
+        "walkable",
+        "cozy",
+        "lively"
+      ],
+      "weeklyDiscountPercent": 15
+    },
+    {
+      "id": "stay_014",
+      "amenities": [
+        "hotTub",
+        "fireplace",
+        "wifi",
+        "kitchen"
+      ],
+      "bathrooms": 1,
+      "bedrooms": 1,
+      "beds": 2,
+      "cancellationPolicySlug": "moderate-cancellation",
+      "city": "Guerneville",
+      "cleaningFee": 70,
+      "country": "United States",
+      "createdAt": "2026-10-08T10:29:42Z",
+      "description": "This quiet, one-room log cabin sits in an old redwood grove. Soak in the hot tub on the covered front porch. A wood stove with a stone chimney adds rustic warmth, while the loft daybed sleeps one more guest. The Russian River and Russian River Valley wineries are a short drive away.",
+      "facts": [
+        "One-room log cabin in an old redwood grove",
+        "Hot tub on the covered front porch",
+        "Wood stove with a stone chimney",
+        "Daybed in the loft that sleeps one more guest",
+        "10-minute drive to the Russian River",
+        "20-minute drive to wineries in the Russian River Valley"
+      ],
+      "highlights": [
+        "Hot tub on the covered porch",
+        "Wood stove with stone chimney",
+        "Daybed in the loft",
+        "Old redwood grove setting"
+      ],
+      "hostSlug": "maya-alvarez",
+      "houseRules": {
+        "checkInTime": "15:00",
+        "checkOutTime": "11:00",
+        "partiesAllowed": false,
+        "petsAllowed": false,
+        "quietHoursFrom": "21:00",
+        "quietHoursTo": "08:00",
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 38.5019,
+        "lng": -122.9961
+      },
+      "maxGuests": 3,
+      "minNights": 2,
+      "photos": [
+        {
+          "alt": "Small log cabin with a stone chimney in a forest clearing",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/d1d597ec0f39ad847510ef3ebbf01bc6b41ec8a3-2000x1333.jpg"
+        },
+        {
+          "alt": "Living room from the loft with a gray sofa and wood stove",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/eb3eff8461fcc1633639490758d38ed193284026-2000x1333.jpg"
+        },
+        {
+          "alt": "Warm-lit bed against a wood wall",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/73f54385a09d21a85624bff35a3c08b3eca72b13-2000x1333.jpg"
+        },
+        {
+          "alt": "Old cast-iron stove in a white wood kitchen",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/73de2031e039aed4f82ac3bd673036040a9f7f73-2000x1634.jpg"
+        },
+        {
+          "alt": "Bathroom with stone sinks on a wooden vanity and a freestanding tub",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/c70fdc72aaf3e4b736ed3fb6a1ede2038672229e-2000x1334.jpg"
+        }
+      ],
+      "pricePerNight": 175,
+      "rating": 4.8,
+      "region": "CA",
+      "reviewCount": 241,
+      "slug": "redwood-log-cabin",
+      "summary": "Secluded log cabin in an old redwood grove",
+      "title": "Redwood Log Cabin",
+      "type": "cabin",
+      "updatedAt": "2026-10-08T10:48:16Z",
+      "vibes": [
+        "secluded",
+        "romantic",
+        "quiet",
+        "rustic",
+        "peaceful"
+      ]
+    },
+    {
+      "id": "stay_015",
+      "amenities": [
+        "pool",
+        "wifi",
+        "ac",
+        "kitchen"
+      ],
+      "bathrooms": 3,
+      "bedrooms": 3,
+      "beds": 3,
+      "cancellationPolicySlug": "moderate-cancellation",
+      "city": "Seminyak",
+      "cleaningFee": 40,
+      "country": "Indonesia",
+      "createdAt": "2026-10-08T10:33:22Z",
+      "description": "This quiet, romantic villa has three pavilions set around a long reflecting pool. Frangipani trees grow in the walled garden. Breakfast is cooked and served on your terrace each morning. Each bedroom pavilion has its own bathroom.",
+      "facts": [
+        "Three pavilions set around a long reflecting pool",
+        "Frangipani trees in the walled garden",
+        "Breakfast is cooked and served on your terrace each morning",
+        "Each bedroom pavilion has its own bathroom",
+        "10-minute drive to the beach clubs of Seminyak"
+      ],
+      "highlights": [
+        "Long reflecting pool",
+        "Frangipani trees",
+        "Breakfast on your terrace",
+        "10-minute drive to beach clubs"
+      ],
+      "hostSlug": "wayan-putra",
+      "houseRules": {
+        "checkInTime": "14:00",
+        "checkOutTime": "12:00",
+        "partiesAllowed": false,
+        "petsAllowed": false,
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": -8.6913,
+        "lng": 115.1682
+      },
+      "maxGuests": 6,
+      "minNights": 3,
+      "photos": [
+        {
+          "alt": "Long reflecting pool between garden pavilions and palm trees",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/2017639bef89b9b9ad02a6417b7d3e96eca2e96f-2000x1333.jpg"
+        },
+        {
+          "alt": "Open lounge with teak floors and woven chairs",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/a221a0ef09d4e433d9ae2b8ea5c03a22aa2cf245-2000x1333.jpg"
+        },
+        {
+          "alt": "Bed with a navy throw between wooden slat panels",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/148a560faa88599888583c89b3c9ca67457a21d5-2000x1500.jpg"
+        },
+        {
+          "alt": "Kitchen with fluted cabinets and green stools",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/e229ce9c53861948b8d7469f631c83e13f01ba82-2000x1765.jpg"
+        },
+        {
+          "alt": "Freestanding stone tub beside a palm",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/3ac88b54d4e3cf163670eb3d11e94593331659c4-2000x1333.jpg"
+        }
+      ],
+      "pricePerNight": 260,
+      "rating": 4.8,
+      "region": "Bali",
+      "reviewCount": 189,
+      "slug": "tropical-garden-villa",
+      "summary": "Peaceful villa with three pavilions around a reflecting pool",
+      "title": "Tropical Garden Villa",
+      "type": "villa",
+      "updatedAt": "2026-10-08T10:49:00Z",
+      "vibes": [
+        "peaceful",
+        "romantic",
+        "luxury",
+        "quiet"
+      ],
+      "weeklyDiscountPercent": 20
+    },
+    {
+      "id": "stay_016",
+      "amenities": [
+        "hotTub",
+        "firePit",
+        "wifi",
+        "kitchen",
+        "parking"
+      ],
+      "bathrooms": 1,
+      "bedrooms": 2,
+      "beds": 2,
+      "cancellationPolicySlug": "flexible-cancellation",
+      "city": "Big Bear Lake",
+      "cleaningFee": 75,
+      "country": "United States",
+      "createdAt": "2026-10-08T10:28:24Z",
+      "description": "This small, rustic A-frame offers a quiet stay among tall pines. Unwind in the two-person hot tub on the side deck or the rope hammock out front. A loft bed sits under a skylight. Dogs are welcome, with a fenced side yard.",
+      "facts": [
+        "Small A-frame among tall pines",
+        "Rope hammock strung between two pines out front",
+        "Two-person hot tub on the side deck",
+        "Loft bed under a skylight",
+        "Trailhead for the Pine Knot Trail at the end of the street",
+        "Dog-friendly, with a fenced side yard"
+      ],
+      "highlights": [
+        "Two-person hot tub",
+        "Loft bed under a skylight",
+        "Pine Knot Trail nearby",
+        "Fenced side yard for dogs"
+      ],
+      "hostSlug": "maya-alvarez",
+      "houseRules": {
+        "checkInTime": "15:00",
+        "checkOutTime": "11:00",
+        "maxPets": 2,
+        "partiesAllowed": false,
+        "petFee": 40,
+        "petsAllowed": true,
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 34.2357,
+        "lng": -116.8784
+      },
+      "maxGuests": 4,
+      "minNights": 2,
+      "neighborhood": "Moonridge",
+      "photos": [
+        {
+          "alt": "Small A-frame cabin among tall pines with a rope hammock out front",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/298cdaf45ee5831dd8a4c50595d0445b86ff37e3-2000x1333.jpg"
+        },
+        {
+          "alt": "Cozy living room with a red sofa and a mountain tapestry",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/90d7100f88cec1cf00411c5e39254f9fdf755c4e-2000x1500.jpg"
+        },
+        {
+          "alt": "Bed with gray pillows under a curved paneled wall",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/6d2fa2f4814a189fcab26b91734812f51c2f8eec-2000x1333.jpg"
+        },
+        {
+          "alt": "Small kitchen with wood cabinets and open shelves",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/f1c89273b786a6c3b3616d0c3badd1877a131699-2000x1334.jpg"
+        },
+        {
+          "alt": "Clawfoot tub beside gray wood paneling",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/5dc4e248e05205a1d10e81e901016fd3ca03598d-2000x1334.jpg"
+        }
+      ],
+      "pricePerNight": 189,
+      "rating": 4.8,
+      "region": "CA",
+      "reviewCount": 167,
+      "slug": "pine-forest-a-frame",
+      "summary": "Cozy, secluded A-frame among tall pines",
+      "title": "Pine Forest A-Frame",
+      "type": "cabin",
+      "updatedAt": "2026-10-08T10:48:05Z",
+      "vibes": [
+        "cozy",
+        "secluded",
+        "rustic",
+        "romantic",
+        "quiet"
+      ]
+    },
+    {
+      "id": "stay_017",
+      "amenities": [
+        "beachAccess",
+        "oceanView",
+        "wifi",
+        "ac",
+        "kitchen"
+      ],
+      "bathrooms": 1,
+      "bedrooms": 2,
+      "beds": 2,
+      "cancellationPolicySlug": "moderate-cancellation",
+      "city": "Bocas del Toro",
+      "cleaningFee": 60,
+      "country": "Panama",
+      "createdAt": "2026-10-08T10:30:37Z",
+      "description": "This secluded thatched bungalow sits on stilts above the sea in Isla Carenero. Steps from the deck lead straight into the water, and snorkel gear is provided. Relax in two hammocks on the covered deck and take in the ocean view. The stay includes beach access, Wifi, air conditioning, and a kitchen.",
+      "facts": [
+        "Thatched bungalow on stilts above the sea",
+        "Steps from the deck lead straight into the water",
+        "Two hammocks on the covered deck",
+        "Snorkel gear provided",
+        "5-minute water taxi ride to Bocas Town"
+      ],
+      "highlights": [
+        "Steps lead into the water",
+        "Two hammocks on covered deck",
+        "Snorkel gear provided",
+        "5-minute water taxi to town"
+      ],
+      "hostSlug": "sofia-reyes",
+      "houseRules": {
+        "checkInTime": "14:00",
+        "checkOutTime": "11:00",
+        "partiesAllowed": false,
+        "petsAllowed": false,
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 9.3407,
+        "lng": -82.2393
+      },
+      "maxGuests": 4,
+      "minNights": 3,
+      "neighborhood": "Isla Carenero",
+      "photos": [
+        {
+          "alt": "Thatched bungalow on stilts over clear turquoise water",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/86bec4e7d0a61386e2dd26661086495fdeec7f0d-2000x1333.jpg"
+        },
+        {
+          "alt": "Wide windows looking straight out to the sea",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/b7bf094b35c9aba34823a02202817891dab34c79-2000x1500.jpg"
+        },
+        {
+          "alt": "Bed beside floor-to-ceiling windows over the water",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/9027d3c9e3b50913248ba5c926b9ec1ed6af9900-2000x1333.jpg"
+        },
+        {
+          "alt": "White corner kitchen with a range and a fridge",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/1a338cf1be99aeedb50986c5d5e13efbfcb14ee5-2000x1333.jpg"
+        },
+        {
+          "alt": "Bathroom with an arched mirror and patterned tiles",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/e3a2bee0af22abca0e8548568c23a2575d93f18b-2000x1523.jpg"
+        }
+      ],
+      "pricePerNight": 265,
+      "rating": 4.8,
+      "reviewCount": 156,
+      "slug": "overwater-beach-bungalow",
+      "summary": "A peaceful thatched bungalow above the sea",
+      "title": "Overwater Beach Bungalow",
+      "type": "beach",
+      "updatedAt": "2026-10-08T10:47:48Z",
+      "vibes": [
+        "peaceful",
+        "romantic",
+        "views",
+        "secluded"
+      ]
+    },
+    {
+      "id": "stay_018",
+      "amenities": [
+        "wifi",
+        "ac",
+        "kitchen",
+        "washer",
+        "workspace"
+      ],
+      "bathrooms": 1,
+      "bedrooms": 1,
+      "beds": 2,
+      "cancellationPolicySlug": "moderate-cancellation",
+      "city": "Tokyo",
+      "cleaningFee": 50,
+      "country": "Japan",
+      "createdAt": "2026-10-08T10:36:08Z",
+      "description": "This south-facing apartment has a sunlit main room and sliding balcony doors. A futon on tatami accommodates a third guest. Pocket wifi can be taken around the city. Vintage shops and cafés are around Shimokitazawa station, a 6-minute walk away.",
+      "facts": [
+        "South-facing apartment with a balcony",
+        "Sunlit main room with sliding balcony doors",
+        "Futon on tatami for a third guest",
+        "Pocket wifi to take around the city",
+        "6-minute walk to Shimokitazawa station",
+        "Vintage shops and cafés around the station"
+      ],
+      "highlights": [
+        "South-facing balcony",
+        "Futon on tatami",
+        "Pocket wifi for the city",
+        "Vintage shops and cafés nearby"
+      ],
+      "hostSlug": "lena-park",
+      "houseRules": {
+        "additionalRules": [
+          "Shoes off inside",
+          "Sort trash by the building’s recycling rules"
+        ],
+        "checkInTime": "15:00",
+        "checkOutTime": "10:00",
+        "partiesAllowed": false,
+        "petsAllowed": false,
+        "quietHoursFrom": "22:00",
+        "quietHoursTo": "08:00",
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 35.6618,
+        "lng": 139.668
+      },
+      "maxGuests": 3,
+      "minNights": 2,
+      "neighborhood": "Shimokitazawa",
+      "photos": [
+        {
+          "alt": "Sunlit empty room with a folding chair by a balcony door",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/489cb9b3bd712bdab60772d4ed8834aa2df26ada-2000x1333.jpg"
+        },
+        {
+          "alt": "White bedroom with a window onto trees",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/d3926e6e3dfbae6af905d5c49c86b7d41eea0c29-2000x1333.jpg"
+        },
+        {
+          "alt": "White kitchen with a sink by the window",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/971d5f61f6479dbeaef973378964b21a3be9271a-2000x1333.jpg"
+        },
+        {
+          "alt": "White bathroom with two basins and a tall window",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/aa94916a124b3a614833166d72ac87ec90cb8577-2000x1335.jpg"
+        }
+      ],
+      "pricePerNight": 135,
+      "rating": 4.8,
+      "reviewCount": 154,
+      "slug": "sunlit-shimokitazawa-apartment",
+      "summary": "Quiet, sunlit apartment with a balcony in Shimokitazawa",
+      "title": "Sunlit Shimokitazawa Apartment",
+      "type": "city",
+      "updatedAt": "2026-10-08T10:48:48Z",
+      "vibes": [
+        "walkable",
+        "quiet",
+        "minimal"
+      ],
+      "weeklyDiscountPercent": 10
+    },
+    {
+      "id": "stay_019",
+      "amenities": [
+        "wifi",
+        "kitchen",
+        "washer",
+        "workspace"
+      ],
+      "bathrooms": 1,
+      "bedrooms": 2,
+      "beds": 3,
+      "cancellationPolicySlug": "moderate-cancellation",
+      "city": "Copenhagen",
+      "cleaningFee": 90,
+      "country": "Denmark",
+      "createdAt": "2026-10-08T10:36:43Z",
+      "description": "Stay in a brick building on a canal in Christianshavn. The apartment has a balcony overlooking the canal and two city bikes for guests. A harbor swimming spot and Christianshavn metro station are each a 5-minute walk away.",
+      "facts": [
+        "Apartment in a brick building on a canal",
+        "Balcony overlooking the canal",
+        "Two city bikes for guests",
+        "Harbor swimming spot a 5-minute walk away",
+        "5-minute walk to Christianshavn metro station"
+      ],
+      "highlights": [
+        "Balcony overlooking the canal",
+        "Two city bikes for guests",
+        "Harbor swimming spot nearby",
+        "5-minute walk to the metro"
+      ],
+      "hostSlug": "daniel-brooks",
+      "houseRules": {
+        "checkInTime": "16:00",
+        "checkOutTime": "11:00",
+        "partiesAllowed": false,
+        "petsAllowed": false,
+        "quietHoursFrom": "22:00",
+        "quietHoursTo": "07:00",
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 55.6726,
+        "lng": 12.5911
+      },
+      "maxGuests": 4,
+      "minNights": 3,
+      "neighborhood": "Christianshavn",
+      "photos": [
+        {
+          "alt": "Brick apartment buildings along a Copenhagen canal",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/dcf42a270b9d367ebd2ffeb0e2a0d0fbe8843ca9-2000x1410.jpg"
+        },
+        {
+          "alt": "Living room with a yellow sofa and a balcony door",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/06fd70bb339433e09e03b9414c602598924be68d-2000x1333.jpg"
+        },
+        {
+          "alt": "Bedroom with a teak bed frame and a balcony door",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/3150afa99c63555ca271a113d8e224f5cad43f72-2000x1333.jpg"
+        },
+        {
+          "alt": "Kitchen with gray cabinets along one wall and doors to a balcony",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/f4f85a84264fe59cebf83f367070b921f91efcea-2000x1333.jpg"
+        },
+        {
+          "alt": "Bathroom with a stone-tiled wall and a tub",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/aef968a681edb849c4c7479bdba7ce816ea5c2b3-2000x1921.jpg"
+        }
+      ],
+      "pricePerNight": 260,
+      "rating": 4.8,
+      "reviewCount": 91,
+      "slug": "copenhagen-canal-apartment",
+      "summary": "A cozy, modern canal apartment in walkable Christianshavn",
+      "title": "Copenhagen Canal Apartment",
+      "type": "city",
+      "updatedAt": "2026-10-08T10:46:45Z",
+      "vibes": [
+        "walkable",
+        "modern",
+        "cozy",
+        "design"
+      ],
+      "weeklyDiscountPercent": 10
+    },
+    {
+      "id": "stay_020",
+      "amenities": [
+        "hotTub",
+        "fireplace",
+        "mountainView",
+        "bbq",
+        "wifi",
+        "kitchen",
+        "washer",
+        "parking"
+      ],
+      "bathrooms": 2,
+      "bedrooms": 2,
+      "beds": 3,
+      "cancellationPolicySlug": "flexible-cancellation",
+      "city": "Gatlinburg",
+      "cleaningFee": 90,
+      "country": "United States",
+      "createdAt": "2026-10-08T10:30:14Z",
+      "description": "This rustic log cabin sits in a grassy clearing with a creek along the property. Relax in the back-porch hot tub with views of the Smoky Mountains. Inside, the living room has a gas fireplace. Pets are allowed, up to two.",
+      "facts": [
+        "Log cabin with a front porch in a grassy clearing",
+        "Creek runs along the edge of the property",
+        "Hot tub on the back porch with views of the Smoky Mountains",
+        "Gas fireplace in the living room",
+        "Gas grill on the porch",
+        "10-minute drive to the Sugarlands entrance of Great Smoky Mountains National Park"
+      ],
+      "highlights": [
+        "Creek along the property",
+        "Hot tub with mountain views",
+        "Gas fireplace",
+        "10-minute drive to Sugarlands"
+      ],
+      "hostSlug": "jess-carter",
+      "houseRules": {
+        "checkInTime": "15:00",
+        "checkOutTime": "11:00",
+        "maxPets": 2,
+        "partiesAllowed": false,
+        "petFee": 60,
+        "petsAllowed": true,
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 35.7143,
+        "lng": -83.5102
+      },
+      "maxGuests": 6,
+      "minNights": 2,
+      "photos": [
+        {
+          "alt": "Log cabin with a porch in a green clearing under tall trees",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/00959ba3b0fdf343f8e35b9bdc28678817e777e7-2000x1333.jpg"
+        },
+        {
+          "alt": "Open living and dining room seen from above",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/27d92f63ca4e5bff572e686df3943bfb302ba88a-2000x1333.jpg"
+        },
+        {
+          "alt": "Bathroom with a freestanding tub and a stool by the window",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/644c9fcfb05c5202d98bf7e68ed6df392eaf9b88-2000x1334.jpg"
+        }
+      ],
+      "pricePerNight": 165,
+      "rating": 4.75,
+      "region": "TN",
+      "reviewCount": 312,
+      "slug": "smoky-mountain-creek-cabin",
+      "summary": "Cozy log cabin with a creek and Smoky Mountain views",
+      "title": "Smoky Mountain Creek Cabin",
+      "type": "cabin",
+      "updatedAt": "2026-10-08T10:48:36Z",
+      "vibes": [
+        "cozy",
+        "family",
+        "rustic",
+        "nature"
+      ],
+      "weeklyDiscountPercent": 10
+    },
+    {
+      "id": "stay_021",
+      "amenities": [
+        "wifi",
+        "workspace",
+        "kitchen",
+        "washer",
+        "ac",
+        "parking"
+      ],
+      "bathrooms": 2,
+      "bedrooms": 2,
+      "beds": 2,
+      "cancellationPolicySlug": "flexible-cancellation",
+      "city": "Chicago",
+      "cleaningFee": 100,
+      "country": "United States",
+      "createdAt": "2026-10-08T10:36:25Z",
+      "description": "This corner loft sits on the eighth floor in Chicago’s lively, walkable West Loop. Step onto the balcony for views of the downtown skyline. A desk and monitor in the second bedroom offer a dedicated workspace. One reserved spot is available in the building garage.",
+      "facts": [
+        "Corner loft on the eighth floor",
+        "Balcony with views of the downtown Chicago skyline",
+        "One reserved spot in the building garage",
+        "Desk with a monitor in the second bedroom",
+        "5-minute walk to the restaurants of Randolph Street",
+        "10-minute walk to the Morgan CTA station"
+      ],
+      "highlights": [
+        "Downtown skyline views",
+        "Reserved garage spot",
+        "Desk with a monitor",
+        "Walk to Randolph Street dining"
+      ],
+      "hostSlug": "daniel-brooks",
+      "houseRules": {
+        "checkInTime": "15:00",
+        "checkOutTime": "11:00",
+        "partiesAllowed": false,
+        "petsAllowed": false,
+        "quietHoursFrom": "22:00",
+        "quietHoursTo": "07:00",
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 41.8846,
+        "lng": -87.6476
+      },
+      "maxGuests": 4,
+      "minNights": 2,
+      "neighborhood": "West Loop",
+      "photos": [
+        {
+          "alt": "Balcony view across low brick buildings to the Chicago skyline",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/8fc72318f46bfc773c18331fb465dd538ba49ebf-2000x1124.jpg"
+        },
+        {
+          "alt": "Sunny living room with a beige sofa and a balcony",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/1a7ff3da405a872520c2a063c323fc8456970538-2000x1333.jpg"
+        },
+        {
+          "alt": "White bedroom with navy pillows and a closet",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/58c35128b90cdb5105dd3810bf60f35e4c9d7124-2000x1333.jpg"
+        },
+        {
+          "alt": "Kitchen with gray cabinets and a small island",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/3ad3541cd5f0eedcff2b7de51a51e7804bd2363e-2000x1333.jpg"
+        },
+        {
+          "alt": "Bathroom with a freestanding tub and a wood wall",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/443bd6f37004efb05dc3ef89711bd98852b67eab-2000x1700.jpg"
+        }
+      ],
+      "pricePerNight": 225,
+      "rating": 4.75,
+      "region": "IL",
+      "reviewCount": 133,
+      "slug": "west-loop-skyline-loft",
+      "summary": "Modern West Loop loft with downtown skyline views",
+      "title": "West Loop Skyline Loft",
+      "type": "city",
+      "updatedAt": "2026-10-08T10:49:15Z",
+      "vibes": [
+        "modern",
+        "views",
+        "lively",
+        "walkable"
+      ],
+      "weeklyDiscountPercent": 10
+    },
+    {
+      "id": "stay_022",
+      "amenities": [
+        "wifi",
+        "workspace",
+        "kitchen",
+        "washer",
+        "ac"
+      ],
+      "bathrooms": 1,
+      "bedrooms": 1,
+      "beds": 2,
+      "cancellationPolicySlug": "moderate-cancellation",
+      "city": "Brooklyn",
+      "cleaningFee": 80,
+      "country": "United States",
+      "createdAt": "2026-10-08T10:35:11Z",
+      "description": "Tall windows fill this Williamsburg loft with sunlight. Herringbone wood floors add warmth, while a full-size desk and ergonomic chair provide a dedicated workspace. A sofa bed in the living room accommodates a third guest. Bedford Avenue cafés, restaurants, and the L train are a short walk away.",
+      "facts": [
+        "Sunny loft with tall windows",
+        "Herringbone wood floors",
+        "Full-size desk with an ergonomic chair",
+        "Sofa bed in the living room for a third guest",
+        "2-block walk to the Bedford Avenue L train",
+        "Cafés and restaurants on Bedford Avenue"
+      ],
+      "highlights": [
+        "Sunny loft with tall windows",
+        "Herringbone wood floors",
+        "Full-size desk and ergonomic chair",
+        "Two blocks to the L train"
+      ],
+      "hostSlug": "daniel-brooks",
+      "houseRules": {
+        "checkInTime": "15:00",
+        "checkOutTime": "11:00",
+        "partiesAllowed": false,
+        "petsAllowed": false,
+        "quietHoursFrom": "22:00",
+        "quietHoursTo": "08:00",
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 40.7181,
+        "lng": -73.9571
+      },
+      "maxGuests": 3,
+      "minNights": 2,
+      "neighborhood": "Williamsburg",
+      "photos": [
+        {
+          "alt": "Bright living room with a blue sofa, tall windows and herringbone floors",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/c6d86335f5a487a285c5b9e681d98fa54abbd932-2000x1335.jpg"
+        },
+        {
+          "alt": "Living room with a desk by the window and a dark sofa",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/4dd0b0ee74acd99c6647be796df210ce641c9f6b-2000x1333.jpg"
+        },
+        {
+          "alt": "Bedroom with plant prints and a yellow throw",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/6b847f874310d94d2ad89d706914fe0976206ee1-2000x1333.jpg"
+        },
+        {
+          "alt": "White kitchen with black pendants and bar stools",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/762639a655868ec2aff517167f2338f319aa77ff-2000x1328.jpg"
+        },
+        {
+          "alt": "Black-tiled bathroom with a floating vanity",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/d232533ea027207936b8291e41dc45db58d13e41-2000x1963.jpg"
+        }
+      ],
+      "pricePerNight": 199,
+      "rating": 4.7,
+      "region": "NY",
+      "reviewCount": 318,
+      "slug": "bright-brooklyn-loft",
+      "summary": "Sunny modern loft in lively Williamsburg",
+      "title": "Bright Brooklyn Loft",
+      "type": "city",
+      "updatedAt": "2026-10-08T10:46:34Z",
+      "vibes": [
+        "walkable",
+        "lively",
+        "modern"
+      ],
+      "weeklyDiscountPercent": 10
+    },
+    {
+      "id": "stay_023",
+      "amenities": [
+        "pool",
+        "beachAccess",
+        "wifi",
+        "ac",
+        "kitchen",
+        "washer",
+        "parking"
+      ],
+      "bathrooms": 4,
+      "bedrooms": 5,
+      "beds": 6,
+      "cancellationPolicySlug": "strict-cancellation",
+      "city": "Key West",
+      "cleaningFee": 250,
+      "country": "United States",
+      "createdAt": "2026-10-08T10:30:57Z",
+      "description": "This two-story conch house has wraparound porches on both floors. A private pool is surrounded by palms. The beach and Duval Street are each a two-block walk away. Off-street parking is available for two cars.",
+      "facts": [
+        "Two-story conch house with wraparound porches on both floors",
+        "Private pool surrounded by palms",
+        "Two-block walk to the beach",
+        "Two-block walk to Duval Street",
+        "Off-street parking for two cars"
+      ],
+      "highlights": [
+        "Wraparound porches",
+        "Private palm-lined pool",
+        "Two-block walk to the beach",
+        "Parking for two cars"
+      ],
+      "hostSlug": "jess-carter",
+      "houseRules": {
+        "checkInTime": "15:00",
+        "checkOutTime": "11:00",
+        "maxPets": 2,
+        "partiesAllowed": false,
+        "petFee": 100,
+        "petsAllowed": true,
+        "quietHoursFrom": "22:00",
+        "quietHoursTo": "08:00",
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 24.5551,
+        "lng": -81.78
+      },
+      "maxGuests": 10,
+      "minNights": 3,
+      "neighborhood": "Old Town",
+      "photos": [
+        {
+          "alt": "White two-story house with porches behind a pool and palms",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/da601fb202f303ae297b2665ab89848496ebb264-2000x1333.jpg"
+        },
+        {
+          "alt": "White living room with a sofa and French doors",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/8ce1a223880ac1578023076cb122a02d17a6ad62-2000x1200.jpg"
+        },
+        {
+          "alt": "Bedroom with a floral quilt and white shutters",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/bab5d5358e51b11b47039d0e4173bc86c28d99db-2000x1333.jpg"
+        },
+        {
+          "alt": "White kitchen with a marble island and stools",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/a396ec7947eea3ac379834403c569cae842b634f-2000x1333.jpg"
+        },
+        {
+          "alt": "Bathroom with a blue vanity and a tiled tub",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/1e6a57b5a98bedcdbe73ad36602b2eadedcbaa79-2000x1536.jpg"
+        }
+      ],
+      "pricePerNight": 520,
+      "rating": 4.7,
+      "region": "FL",
+      "reviewCount": 203,
+      "slug": "palm-lined-beach-house",
+      "summary": "A lively Old Town beach house with a private pool",
+      "title": "Palm-Lined Beach House",
+      "type": "beach",
+      "updatedAt": "2026-10-08T10:47:54Z",
+      "vibes": [
+        "family",
+        "lively",
+        "walkable"
+      ],
+      "weeklyDiscountPercent": 10
+    },
+    {
+      "id": "stay_024",
+      "amenities": [
+        "beachAccess",
+        "wifi",
+        "kitchen"
+      ],
+      "bathrooms": 1,
+      "bedrooms": 1,
+      "beds": 1,
+      "cancellationPolicySlug": "flexible-cancellation",
+      "city": "Byron Bay",
+      "cleaningFee": 45,
+      "country": "Australia",
+      "createdAt": "2026-10-08T10:32:29Z",
+      "description": "This white beach shack in Wategos has a porch under the palms. A short walk through the palms leads to the beach. Three surfboards and two wetsuits are available for guests, with an outdoor shower for rinsing off sand. The Cape Byron Lighthouse track is a 10-minute walk away.",
+      "facts": [
+        "White beach shack with a porch under palms",
+        "Three surfboards and two wetsuits for guests",
+        "Outdoor shower for rinsing off sand",
+        "Short walk through the palms to the beach",
+        "10-minute walk to Cape Byron Lighthouse track"
+      ],
+      "highlights": [
+        "Porch under the palms",
+        "Short walk to the beach",
+        "Surfboards and wetsuits",
+        "Outdoor shower"
+      ],
+      "hostSlug": "kai-nakamura",
+      "houseRules": {
+        "checkInTime": "14:00",
+        "checkOutTime": "10:00",
+        "partiesAllowed": false,
+        "petsAllowed": false,
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": -28.638,
+        "lng": 153.629
+      },
+      "maxGuests": 2,
+      "minNights": 2,
+      "neighborhood": "Wategos",
+      "photos": [
+        {
+          "alt": "White beach shack with a porch and a row of surfboards under palms",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/2a3f63c02081401a808ad7d05e81cc2544533655-2000x1122.jpg"
+        },
+        {
+          "alt": "Rattan bench with cushions between potted palms",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/c099d407f029518af069bd1098236a46d4970a90-2000x1125.jpg"
+        },
+        {
+          "alt": "Bedroom with paddles on the wall and two beds",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/8f8e179cce52f6915e7f428bb21f8b4a69add93e-2000x1125.jpg"
+        },
+        {
+          "alt": "White kitchen with a checked kettle on the stove",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/b16d1d15c50db85c8bbebf377140a34ce28372d9-2000x1333.jpg"
+        },
+        {
+          "alt": "White bathroom with a freestanding tub and a plant",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/0007560d4839e5edfbcc5bb8d2bcb0b98b6aa721-2000x1335.jpg"
+        }
+      ],
+      "pricePerNight": 160,
+      "rating": 4.7,
+      "region": "NSW",
+      "reviewCount": 142,
+      "slug": "byron-bay-surf-shack",
+      "summary": "A laid-back beach shack for two under the palms",
+      "title": "Byron Bay Surf Shack",
+      "type": "beach",
+      "updatedAt": "2026-10-08T10:46:40Z",
+      "vibes": [
+        "laid-back",
+        "romantic",
+        "nature"
+      ]
+    },
+    {
+      "id": "stay_025",
+      "amenities": [
+        "pool",
+        "hotTub",
+        "mountainView",
+        "wifi",
+        "ac",
+        "kitchen",
+        "parking"
+      ],
+      "bathrooms": 3,
+      "bedrooms": 3,
+      "beds": 3,
+      "cancellationPolicySlug": "moderate-cancellation",
+      "city": "Palm Springs",
+      "cleaningFee": 175,
+      "country": "United States",
+      "createdAt": "2026-10-08T10:33:57Z",
+      "description": "This low white mid-century house offers a modern, quiet stay in Vista Las Palmas. Relax in the saltwater pool and attached spa. Take in San Jacinto Mountain views from the pool loungers. Dogs can roam in the walled yard.",
+      "facts": [
+        "Low white mid-century house",
+        "Saltwater pool with an attached spa",
+        "San Jacinto Mountain views from the pool loungers",
+        "Walled yard where dogs can roam",
+        "5-minute drive to downtown Palm Springs"
+      ],
+      "highlights": [
+        "Saltwater pool and attached spa",
+        "San Jacinto Mountain views",
+        "Walled yard for dogs",
+        "5-minute drive to downtown"
+      ],
+      "hostSlug": "lena-park",
+      "houseRules": {
+        "additionalRules": [
+          "City permit limits stays to 8 guests during the day, including visitors"
+        ],
+        "checkInTime": "16:00",
+        "checkOutTime": "11:00",
+        "maxPets": 2,
+        "partiesAllowed": false,
+        "petFee": 100,
+        "petsAllowed": true,
+        "quietHoursFrom": "22:00",
+        "quietHoursTo": "08:00",
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 33.8399,
+        "lng": -116.552
+      },
+      "maxGuests": 6,
+      "minNights": 2,
+      "neighborhood": "Vista Las Palmas",
+      "photos": [
+        {
+          "alt": "Low white modern house with a pool and palms",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/29301133bbf5802851d27eea9f071d63901b6aac-2000x1333.jpg"
+        },
+        {
+          "alt": "Living room with an orange sofa and doors to a terrace",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/b91326ccba88b9d8e15e7a28387bbf44743f4e6f-2000x1334.jpg"
+        },
+        {
+          "alt": "Large bedroom with a platform bed and desert views",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/201cae14ce8a085cabcc08f8a5c63a5eabed655c-2000x1333.jpg"
+        },
+        {
+          "alt": "Dark kitchen with a stone counter and tall windows",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/6e90cd527a3ded6585b584900554421dccb55638-2000x1333.jpg"
+        },
+        {
+          "alt": "Bathroom with a tub, wood slats and a backlit mirror",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/afcb6a7ac12bb6ac759706f4c8046babe187eed3-2000x1500.jpg"
+        }
+      ],
+      "pricePerNight": 395,
+      "rating": 4.7,
+      "region": "CA",
+      "reviewCount": 142,
+      "slug": "desert-modern-villa",
+      "summary": "Quiet modern villa with a saltwater pool and mountain views",
+      "title": "Desert Modern Villa",
+      "type": "villa",
+      "updatedAt": "2026-10-08T10:46:52Z",
+      "vibes": [
+        "modern",
+        "quiet",
+        "luxury"
+      ],
+      "weeklyDiscountPercent": 10
+    },
+    {
+      "id": "stay_026",
+      "amenities": [
+        "hotTub",
+        "sauna",
+        "fireplace",
+        "lakeView",
+        "wifi",
+        "kitchen",
+        "washer",
+        "parking"
+      ],
+      "bathrooms": 2.5,
+      "bedrooms": 4,
+      "beds": 5,
+      "cancellationPolicySlug": "moderate-cancellation",
+      "city": "Fernie",
+      "cleaningFee": 150,
+      "country": "Canada",
+      "createdAt": "2026-10-08T10:29:00Z",
+      "description": "This rustic log chalet sits on the shore of a small lake that freezes in winter. Gather by the stone fireplace in the main room or unwind in the wood-fired sauna. The lakeside deck has an outdoor hot tub, and the bunk room has two sets of bunks for kids. Fernie Alpine Resort is a 15-minute drive away.",
+      "facts": [
+        "Log chalet on the shore of a small lake that freezes in winter",
+        "Wood-fired sauna in a cabin by the water",
+        "Outdoor hot tub on the lakeside deck",
+        "Stone fireplace in the main room",
+        "Bunk room with two sets of bunks for kids",
+        "15-minute drive to Fernie Alpine Resort"
+      ],
+      "highlights": [
+        "Outdoor lakeside hot tub",
+        "Wood-fired waterfront sauna",
+        "Stone fireplace in main room",
+        "Two sets of bunks for kids"
+      ],
+      "hostSlug": "tom-whitaker",
+      "houseRules": {
+        "checkInTime": "16:00",
+        "checkOutTime": "10:00",
+        "maxPets": 1,
+        "partiesAllowed": false,
+        "petFee": 75,
+        "petsAllowed": true,
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 49.504,
+        "lng": -115.0631
+      },
+      "maxGuests": 8,
+      "minNights": 3,
+      "photos": [
+        {
+          "alt": "Lit log chalet in snowy pines reflected in a half-frozen lake",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/9cce6bef657287469d9a0c54f3a23a8e60418266-2000x3000.jpg"
+        },
+        {
+          "alt": "Log cabin living room with a stone fireplace and armchairs",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/12e0709c64e0a8474403e9760c16f9d0b58a1e86-2000x1331.jpg"
+        },
+        {
+          "alt": "Narrow room with white bunk beds",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/2b1b96b8d514196be0831cd02ed16a65f61cd41e-2000x1500.jpg"
+        },
+        {
+          "alt": "Log-walled kitchen with a breakfast bar",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/e643291635f72e793d075ef60c6df40cce60a1a9-2000x1124.jpg"
+        },
+        {
+          "alt": "Bathroom with a tub under a window and dark wood vanities",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/b844fbd9049848236c5a795c672ba63e67b6f00c-2000x1325.jpg"
+        }
+      ],
+      "pricePerNight": 340,
+      "rating": 4.7,
+      "region": "BC",
+      "reviewCount": 132,
+      "slug": "snowy-lakeside-chalet",
+      "summary": "Cozy log chalet on a small lake in Fernie",
+      "title": "Snowy Lakeside Chalet",
+      "type": "cabin",
+      "updatedAt": "2026-10-08T10:48:43Z",
+      "vibes": [
+        "cozy",
+        "family",
+        "views",
+        "rustic"
+      ],
+      "weeklyDiscountPercent": 15
+    },
+    {
+      "id": "stay_027",
+      "amenities": [
+        "hotTub",
+        "oceanView",
+        "beachAccess",
+        "bbq",
+        "wifi",
+        "ac",
+        "kitchen",
+        "washer",
+        "parking",
+        "evCharger"
+      ],
+      "bathrooms": 5,
+      "bedrooms": 6,
+      "beds": 8,
+      "cancellationPolicySlug": "strict-cancellation",
+      "city": "Nags Head",
+      "cleaningFee": 300,
+      "country": "United States",
+      "createdAt": "2026-10-08T10:31:53Z",
+      "description": "This pale blue three-story house sits above the dunes in Nags Head. A boardwalk leads over the dunes to the beach. Enjoy ocean views from the main living floor and a hot tub on the top-floor deck. Six bedrooms include two bunk rooms.",
+      "facts": [
+        "Pale blue three-story house above the dunes",
+        "Boardwalk over the dunes to the beach",
+        "Hot tub on the top-floor deck",
+        "Ocean views from the main living floor",
+        "Gas grill on the ground-floor deck",
+        "Six bedrooms, including two bunk rooms"
+      ],
+      "highlights": [
+        "Boardwalk to the beach",
+        "Top-floor deck hot tub",
+        "Main-floor ocean views",
+        "Ground-floor deck gas grill"
+      ],
+      "hostSlug": "jess-carter",
+      "houseRules": {
+        "checkInTime": "16:00",
+        "checkOutTime": "10:00",
+        "maxPets": 2,
+        "partiesAllowed": false,
+        "petFee": 150,
+        "petsAllowed": true,
+        "quietHoursFrom": "22:00",
+        "quietHoursTo": "08:00",
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 35.9574,
+        "lng": -75.6241
+      },
+      "maxGuests": 12,
+      "minNights": 4,
+      "photos": [
+        {
+          "alt": "Pale blue beach house with balconies above the dunes",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/e04d4dbcb962d74ba702cd169e9df8cd0ec52a43-2000x1325.jpg"
+        },
+        {
+          "alt": "Living room with a balcony overlooking the water",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/249e08dffa47f41946ebd6661722f81ef0de3441-2000x1333.jpg"
+        },
+        {
+          "alt": "Bedroom with a teal wall and a balcony door",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/ee403842be0baf287b140f3eef923eb2ed8b1ff2-2000x1333.jpg"
+        },
+        {
+          "alt": "Open white kitchen with sliding doors to the garden",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/00cb05846edeead5394a9e6d0dd16b953d880f2a-2000x1333.jpg"
+        },
+        {
+          "alt": "White bathroom with a glass shower and twin mirrors",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/8c275be1c524365523a5410e7cc5fb4c60d4d0cf-2000x1331.jpg"
+        }
+      ],
+      "pricePerNight": 610,
+      "rating": 4.65,
+      "region": "NC",
+      "reviewCount": 97,
+      "slug": "outer-banks-dune-house",
+      "summary": "A lively family beach stay above the dunes",
+      "title": "Outer Banks Dune House",
+      "type": "beach",
+      "updatedAt": "2026-10-08T10:47:43Z",
+      "vibes": [
+        "family",
+        "views",
+        "lively"
+      ],
+      "weeklyDiscountPercent": 15
+    },
+    {
+      "id": "stay_028",
+      "amenities": [
+        "pool",
+        "beachAccess",
+        "oceanView",
+        "wifi",
+        "ac",
+        "kitchen"
+      ],
+      "bathrooms": 2,
+      "bedrooms": 3,
+      "beds": 3,
+      "cancellationPolicySlug": "flexible-cancellation",
+      "city": "Tulum",
+      "cleaningFee": 70,
+      "country": "Mexico",
+      "createdAt": "2026-10-08T10:31:17Z",
+      "description": "This lively casita sits in a palm garden in Tulum’s Zona Hotelera. A garden path leads to a white-sand beach, and the shared pool has sun umbrellas. The stay sleeps six guests across three bedrooms, with ocean views and beach access. Pets are allowed, up to one.",
+      "facts": [
+        "Casita in a palm garden",
+        "Shared pool with sun umbrellas, used by four casitas",
+        "Path from the garden to a white-sand beach",
+        "Three bikes for guests",
+        "10-minute bike ride to the nearest cenote",
+        "15-minute bike ride to the taquerias of Tulum town"
+      ],
+      "highlights": [
+        "Shared pool with sun umbrellas",
+        "Garden path to white-sand beach",
+        "Three bikes for guests",
+        "Ocean view"
+      ],
+      "hostSlug": "sofia-reyes",
+      "houseRules": {
+        "checkInTime": "15:00",
+        "checkOutTime": "11:00",
+        "maxPets": 1,
+        "partiesAllowed": false,
+        "petFee": 50,
+        "petsAllowed": true,
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 20.191,
+        "lng": -87.4542
+      },
+      "maxGuests": 6,
+      "minNights": 2,
+      "neighborhood": "Zona Hotelera",
+      "photos": [
+        {
+          "alt": "Pool lined with palms and sun umbrellas",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/43c59b4d74857aa22822d21e7f0056ae61fe712e-2000x1333.jpg"
+        },
+        {
+          "alt": "Open living room with a wood ceiling and indoor palms",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/e02f7ef090d9fea504de23b5f7305953815a4153-2000x857.jpg"
+        },
+        {
+          "alt": "Bedroom with oars on the wall and an ensuite door",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/c60f4944ae5d2feec6f6baebfeb07665d376ce46-2000x1333.jpg"
+        },
+        {
+          "alt": "White kitchen with bar stools and a concrete ceiling",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/64535e13b1f873656b762cbfe783466e0bb74bf5-2000x1335.jpg"
+        },
+        {
+          "alt": "White bathroom with a round mirror and a plant",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/d8db11751d4012b222289e8548c99cab91eb81b5-2000x1334.jpg"
+        }
+      ],
+      "pricePerNight": 230,
+      "rating": 4.6,
+      "region": "Quintana Roo",
+      "reviewCount": 119,
+      "slug": "beachfront-casita-with-pool",
+      "summary": "Beachfront casita in a palm garden with a shared pool",
+      "title": "Beachfront Casita with Pool",
+      "type": "beach",
+      "updatedAt": "2026-10-08T10:46:28Z",
+      "vibes": [
+        "lively",
+        "family",
+        "views"
+      ]
+    },
+    {
+      "id": "stay_029",
+      "amenities": [
+        "fireplace",
+        "wifi",
+        "kitchen",
+        "workspace",
+        "parking"
+      ],
+      "bathrooms": 1,
+      "bedrooms": 2,
+      "beds": 2,
+      "cancellationPolicySlug": "flexible-cancellation",
+      "city": "Skykomish",
+      "cleaningFee": 60,
+      "country": "United States",
+      "createdAt": "2026-10-08T10:29:19Z",
+      "description": "Settle into a rustic, cozy cedar cabin in Skykomish. A green cast-iron wood stove warms the main room, and a reading nook offers a bookshelf. Work at the desk by the window with fast wifi. No other houses are visible from the cabin.",
+      "facts": [
+        "Cedar cabin in a Cascade conifer forest",
+        "Green cast-iron wood stove in the main room",
+        "Reading nook with a bookshelf",
+        "Desk by the window with fast wifi",
+        "No other houses visible from the cabin",
+        "Trail to the Skykomish River at the end of the driveway"
+      ],
+      "highlights": [
+        "Trail to the Skykomish River",
+        "Pets allowed, up to 2",
+        "Reading nook with bookshelf",
+        "Kitchen and parking"
+      ],
+      "hostSlug": "tom-whitaker",
+      "houseRules": {
+        "checkInTime": "15:00",
+        "checkOutTime": "11:00",
+        "maxPets": 2,
+        "partiesAllowed": false,
+        "petFee": 30,
+        "petsAllowed": true,
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 47.7093,
+        "lng": -121.3601
+      },
+      "maxGuests": 4,
+      "minNights": 2,
+      "photos": [
+        {
+          "alt": "Cedar cabin in a misty conifer forest",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/563a678748b640e9c4d68841c8f294dec6e5cb31-2000x1334.jpg"
+        },
+        {
+          "alt": "Barnwood room with a green wood stove and an open door to the woods",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/45feaa5f9360456646e594d2d54542a61767e74b-2000x1334.jpg"
+        },
+        {
+          "alt": "Bed against a plank wall under a wide window",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/e59fb5c9da12a438cf7d08ea8dd2875ec59eff39-2000x1333.jpg"
+        },
+        {
+          "alt": "Rustic kitchen with a checked tablecloth and small windows",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/84ee21ea1bc58d1313a9d9899f0ea17b1eb5522a-2000x1333.jpg"
+        }
+      ],
+      "pricePerNight": 145,
+      "rating": 4.6,
+      "region": "WA",
+      "reviewCount": 88,
+      "slug": "misty-forest-cabin",
+      "summary": "A secluded cedar cabin in a quiet Cascade conifer forest",
+      "title": "Misty Forest Cabin",
+      "type": "cabin",
+      "updatedAt": "2026-10-08T10:47:36Z",
+      "vibes": [
+        "secluded",
+        "quiet",
+        "rustic",
+        "cozy"
+      ],
+      "weeklyDiscountPercent": 20
+    },
+    {
+      "id": "stay_030",
+      "amenities": [
+        "pool",
+        "hotTub",
+        "firePit",
+        "bbq",
+        "mountainView",
+        "wifi",
+        "ac",
+        "kitchen",
+        "washer",
+        "parking",
+        "evCharger"
+      ],
+      "bathrooms": 3.5,
+      "bedrooms": 4,
+      "beds": 6,
+      "cancellationPolicySlug": "moderate-cancellation",
+      "city": "Scottsdale",
+      "cleaningFee": 225,
+      "country": "United States",
+      "createdAt": "2026-10-08T10:34:54Z",
+      "description": "This modern North Scottsdale villa sleeps 10 guests in 4 bedrooms. Relax by the pool or in the hot tub, both set beside the open desert. The back patio has McDowell Mountain views, a gas fire pit, and a built-in gas grill. Pets are allowed, up to 2.",
+      "facts": [
+        "Pool with four lounge chairs facing open desert",
+        "Hot tub next to the pool",
+        "Gas fire pit on the back patio",
+        "McDowell Mountain views from the patio",
+        "Built-in gas grill on the patio",
+        "20-minute drive to Old Town Scottsdale"
+      ],
+      "highlights": [
+        "Pool facing open desert",
+        "Hot tub next to the pool",
+        "McDowell Mountain views",
+        "20-minute drive to Old Town"
+      ],
+      "hostSlug": "lena-park",
+      "houseRules": {
+        "checkInTime": "16:00",
+        "checkOutTime": "11:00",
+        "maxPets": 2,
+        "partiesAllowed": false,
+        "petFee": 125,
+        "petsAllowed": true,
+        "quietHoursFrom": "22:00",
+        "quietHoursTo": "07:00",
+        "smokingAllowed": false
+      },
+      "location": {
+        "lat": 33.7712,
+        "lng": -111.923
+      },
+      "maxGuests": 10,
+      "minNights": 3,
+      "neighborhood": "North Scottsdale",
+      "photos": [
+        {
+          "alt": "Pool with four lounge chairs facing open desert",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/fd46e4b42486d2db240faf416b4ad7eeb9dfcb71-2000x1125.jpg"
+        },
+        {
+          "alt": "Lounge with a dark sofa and a dining table under rattan lamps",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/2858500173832967c435a980c73e3a5e9856d2e9-2000x1333.jpg"
+        },
+        {
+          "alt": "Minimal bedroom with a walk-in closet",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/7dca1670242f385e3cd5db76c1b958092569d030-2000x1000.jpg"
+        },
+        {
+          "alt": "Kitchen with a big island under geometric pendant lights",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/f7f21cf15eda75978b6e0dfb0e25185ed51390f0-2000x1333.jpg"
+        },
+        {
+          "alt": "White bathroom with a glass shower and a dark vanity",
+          "url": "https://cdn.sanity.io/images/0z83ssmn/production/d7c83a95391838dea23a8bf67b08409d0125080d-2000x1333.jpg"
+        }
+      ],
+      "pricePerNight": 450,
+      "rating": 4.6,
+      "region": "AZ",
+      "reviewCount": 76,
+      "slug": "scottsdale-desert-pool-villa",
+      "summary": "Modern family villa with a pool and mountain views",
+      "title": "Scottsdale Desert Pool Villa",
+      "type": "villa",
+      "updatedAt": "2026-10-08T10:48:31Z",
+      "vibes": [
+        "family",
+        "modern",
+        "views"
+      ],
+      "weeklyDiscountPercent": 10
+    }
+  ]
+}
