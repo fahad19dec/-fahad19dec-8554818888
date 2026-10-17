@@ -3,6 +3,7 @@ import { View } from "react-native";
 
 import { Alert, Button, Icon, Text, TextField } from "@/components/ui";
 import { adminErrorMessage, signIn } from "@/lib/admin";
+import { isDemo } from "@/lib/api";
 
 // The admin's password, checked by POST /api/admin/login.
 export function SignInForm() {
@@ -35,6 +36,11 @@ export function SignInForm() {
         <Text variant="body" tone="muted">
           Sign in to add, edit and remove listings.
         </Text>
+        {isDemo && (
+          <Text variant="label" tone="accent" selectable>
+            Demo password: roam-demo. Changes are saved in this browser only.
+          </Text>
+        )}
       </View>
       {error && <Alert tone="danger" message={error} onDismiss={() => setError(null)} />}
       <TextField

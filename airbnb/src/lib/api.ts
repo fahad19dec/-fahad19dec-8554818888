@@ -4,6 +4,14 @@
 
 const base = (process.env.EXPO_PUBLIC_API_URL ?? "").replace(/\/+$/, "");
 
+/** The browser-only demo build answers /api requests in the page (src/lib/demo/server.ts). */
+export const isDemo = process.env.EXPO_PUBLIC_DEMO === "1";
+const send: typeof fetch = isDemo
+  ? // A require inside the branch, so builds without the demo can drop it.
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    (input, init) => require("./demo/server").demoFetch(String(input), init)
+  : (input, init) => fetch(input, init);
+
 export class ApiError extends Error {
   constructor(
     public status: number,
@@ -26,7 +34,7 @@ export async function api<T>(
   const { token, json, headers, ...rest } = init;
   let res: Response;
   try {
-    res = await fetch(`${base}${path}`, {
+    res = await send(`${base}${path}`, {
       ...rest,
       headers: {
         ...(json !== undefined ? { "Content-Type": "application/json" } : {}),

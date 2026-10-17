@@ -4,7 +4,7 @@ import { AMENITIES, CANCELLATION_TIERS, PROPERTY_TYPES, VIBES } from "@/lib/sear
 import type { HostRecord, StayRecord } from "@/lib/stays";
 
 import { HttpError } from "./http";
-import { newId, type Db } from "./store";
+import type { Db } from "./store";
 
 // Server only. What the admin form sends to create or update a stay. Every
 // field is checked here, whatever the form already checked. Mirrors the
@@ -18,12 +18,12 @@ const lines = (maxItems: number, maxLength: number) =>
   z.array(text(maxLength)).max(maxItems).default([]).transform((list) => list.filter(Boolean));
 const count = (min: number, max: number) => z.number().int("Whole number").min(min, `At least ${min}`).max(max, `At most ${max}`);
 
-// Uploaded photos are served by this app; others must be https.
+// Uploaded photos are served by this app; others must be web URLs.
 const photoUrl = z
   .string()
   .trim()
   .max(2000)
-  .refine((url) => /^https:\/\/\S+$/.test(url) || /^\/api\/uploads\/[a-z0-9_]+\.(jpg|png|webp|gif)$/.test(url), "Use an https:// image URL or upload a photo");
+  .refine((url) => /^https?:\/\/\S+$/.test(url) || /^\/api\/uploads\/[a-z0-9_]+\.(jpg|png|webp|gif)$/.test(url), "Use an image URL starting with https:// or upload a photo");
 
 export const stayInputSchema = z
   .object({
@@ -138,4 +138,6 @@ export function stayFields(input: StayInput, db: Db): Omit<StayRecord, "id" | "s
   };
 }
 
-export const newStayId = () => newId("stay");
+// Web Crypto, so the browser demo (src/lib/demo/server.ts) can use this file too.
+export const newStayId = () =>
+  `stay_${Array.from(globalThis.crypto.getRandomValues(new Uint8Array(6)), (b) => b.toString(16).padStart(2, "0")).join("")}`;

@@ -1,5 +1,6 @@
-// Web: the browser's own file picker, one image at a time.
-export const canPickImage = true;
+// Web: the browser's own file picker, one image at a time. The browser-only
+// demo has no server to upload to, so it adds photos by URL only.
+export const canPickImage = process.env.EXPO_PUBLIC_DEMO !== "1";
 
 export function pickImage(): Promise<Blob | null> {
   return new Promise((resolve) => {

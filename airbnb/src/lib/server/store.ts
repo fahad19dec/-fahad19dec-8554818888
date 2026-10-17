@@ -52,4 +52,3 @@ export function updateDb<T>(change: (db: Db) => T | Promise<T>): Promise<T> {
   return run;
 }
 
-export const newId = (prefix: string) => `${prefix}_${randomBytes(6).toString("hex")}`;

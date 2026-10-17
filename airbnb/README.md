@@ -52,6 +52,14 @@ with your `ADMIN_PASSWORD`.
 | `npx expo lint` | Lint |
 | `npx expo export -p web && npx expo serve` | Production web build and server |
 
+## Browser demo
+
+`node scripts/build-demo.mjs` builds a version that runs entirely in the
+browser into `demo-site/` (one `index.html` plus `photos/`). It answers the
+app's API inside the page (`src/lib/demo/server.ts`) with the same search and
+validation code, keeps admin changes in that browser's storage, and can be
+hosted as static files anywhere. The demo admin password is `roam-demo`.
+
 ## How it works
 
 ```

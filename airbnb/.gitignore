@@ -47,3 +47,7 @@ example
 # Local listings database (created from data/seed.json on first run)
 /data/db.json
 /data/uploads/
+
+# Browser demo build (scripts/build-demo.mjs)
+/dist-demo/
+/demo-site/
