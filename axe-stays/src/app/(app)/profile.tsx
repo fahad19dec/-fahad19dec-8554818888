@@ -32,7 +32,7 @@ export default function Profile() {
       <StatusBar style="dark" />
 
       <View className="flex-row items-center justify-between">
-        <View className="ml-1">
+        <View className="ml-1 shrink">
           <Wordmark size="header" />
         </View>
         <IconButton

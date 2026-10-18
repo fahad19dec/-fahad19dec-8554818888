@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { useWindowDimensions, View } from "react-native";
 
 import { brand } from "@/brand";
 import { Text } from "@/components/ui";
@@ -6,18 +6,25 @@ import { Text } from "@/components/ui";
 import { LogoMark } from "./logo-mark";
 
 const sizes = {
-  lg: { text: "display", mark: 60 },
-  header: { text: "jumbo", mark: 54 },
+  lg: { text: "headline", mark: 50 },
+  header: { text: "headline", mark: 50 },
   md: { text: "heading", mark: 34 },
 } as const;
 
-// The brand's axe mark and its lowercase name, both from brand.config.js.
+// Below this width the full name doesn't fit beside a header button at the large sizes.
+const NARROW = 360;
+
+// The brand's axe mark and its wordmark, both from brand.config.js.
 export function Wordmark({ size = "lg" }: { size?: keyof typeof sizes }) {
-  const s = sizes[size];
+  const narrow = useWindowDimensions().width < NARROW;
+  const s = sizes[narrow ? "md" : size];
   return (
-    <View className="flex-row items-center gap-2" accessible accessibilityRole="header" accessibilityLabel={brand.name}>
+    <View className="shrink flex-row items-center gap-2" accessible accessibilityRole="header" accessibilityLabel={brand.name}>
       <LogoMark size={s.mark} />
-      <Text variant={s.text}>{brand.wordmark}</Text>
+      {/* Shrinks rather than pushing the header's buttons off narrow screens. */}
+      <Text variant={s.text} numberOfLines={1} className="shrink">
+        {brand.wordmark}
+      </Text>
     </View>
   );
 }

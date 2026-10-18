@@ -46,7 +46,7 @@ export default function Home() {
       <StatusBar style="dark" />
 
       <View className="flex-row items-start justify-between">
-        <View className="pt-4">
+        <View className="shrink pt-4">
           <Wordmark />
         </View>
         <IconButton icon="person" variant="muted" size="md" accessibilityLabel="Profile" onPress={() => router.navigate("/profile")} />

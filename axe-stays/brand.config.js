@@ -11,8 +11,8 @@
 
 module.exports = {
   name: "Axe Stays",
-  /** Lowercase, shown as the wordmark beside the logo. */
-  wordmark: "axe stays",
+  /** Shown as the wordmark beside the logo. */
+  wordmark: "Axe Stays",
   tagline: "Stays worth the trip",
   /** Used for package names, storage keys and the demo password. */
   slug: "axe-stays",
