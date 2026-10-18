@@ -5,7 +5,7 @@
 //
 // scripts/build-demo.mjs puts BRAND, SEED and the compiled shared code
 // (pricing, report reasons, demo store) in front of this file.
-/* global BRAND, SEED, quote, guestRefund, formatCents, todayIso, REPORT_REASONS,
+/* global BRAND, SEED, guestRefund, formatCents, todayIso, REPORT_REASONS,
    DEMO_ADMIN_EMAIL, demoStoreKey, loadStore, saveStore, ensureUser, applyStayEdits, addSampleActivity */
 
 const KEY = demoStoreKey(BRAND.slug);
