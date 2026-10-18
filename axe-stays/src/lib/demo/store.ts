@@ -49,8 +49,10 @@ export type DemoReport = {
 };
 
 /** What the admin changed on a seed stay. */
+export type ListingStatus = "pending" | "approved" | "rejected";
+
 export type StayEdit = Partial<Pick<StayRecord, "title" | "summary" | "pricePerNight" | "cleaningFee" | "maxGuests">> & {
-  status?: "approved" | "rejected";
+  status?: ListingStatus;
   note?: string | null;
   updatedAt?: string;
 };
@@ -60,6 +62,8 @@ export type DemoStore = {
   bookings: DemoBooking[];
   reports: DemoReport[];
   stays: Record<string, StayEdit>;
+  /** Listings the admin created (their photos are data: URLs or seed photos/ paths). */
+  created?: StayRecord[];
   audit: { at: string; actor: string; action: string; target: string }[];
   sampled?: boolean;
 };
@@ -96,8 +100,11 @@ export function ensureUser(store: DemoStore, email: string): DemoUser {
   });
 }
 
-/** Seed stays with the admin's edits applied, each with its status. */
-export function applyStayEdits<T extends StayRecord>(stays: T[], store: DemoStore): (T & { status: "approved" | "rejected" })[] {
+/** Seed stays plus the ones the admin created. */
+export const allStays = (seedStays: StayRecord[], store: DemoStore): StayRecord[] => [...seedStays, ...(store.created ?? [])];
+
+/** Stays with the admin's edits applied, each with its status. */
+export function applyStayEdits<T extends StayRecord>(stays: T[], store: DemoStore): (T & { status: ListingStatus })[] {
   return stays.map((stay) => {
     const { status = "approved", note: _note, updatedAt, ...fields } = store.stays[stay.id] ?? {};
     return { ...stay, ...fields, updatedAt: updatedAt ?? stay.updatedAt, status };

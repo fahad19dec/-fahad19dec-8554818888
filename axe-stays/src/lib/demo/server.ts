@@ -10,7 +10,7 @@ import { detailsView, homeView, policyView, searchView, sizedImage } from "@/lib
 
 import seed from "../../../data/seed.json";
 
-import { addSampleActivity, applyStayEdits, demoStoreKey, ensureUser, loadStore, saveStore, type DemoBooking, type DemoStore } from "./store";
+import { addSampleActivity, allStays, applyStayEdits, demoStoreKey, ensureUser, loadStore, saveStore, type DemoBooking, type DemoStore } from "./store";
 
 // The browser demo (EXPO_PUBLIC_DEMO=1): the guest app's API routes, answered
 // in the page with the same search, views, pricing and refund code the server
@@ -54,11 +54,19 @@ function readStore(): DemoStore {
 }
 const writeStore = (store: DemoStore) => saveStore(STORE_KEY, store);
 
-/** What guests see: approved stays, with the admin's edits. */
+/** Every stay with the admin's edits, including the ones the admin created. */
+function everyStay() {
+  const store = readStore();
+  const created = (store.created ?? []).map((s) => ({
+    ...s,
+    photos: s.photos.map((p) => ({ ...p, url: p.url.startsWith("photos/") ? base() + p.url : p.url })),
+  }));
+  return applyStayEdits(allStays(seedCatalog().stays, { ...store, created }), store);
+}
+
+/** What guests see: approved stays only. */
 function readCatalog(): Catalog {
-  const data = seedCatalog();
-  const stays = applyStayEdits(data.stays, readStore()).filter((s) => s.status === "approved");
-  return { ...data, stays };
+  return { ...seedCatalog(), stays: everyStay().filter((s) => s.status === "approved") };
 }
 
 const json = (body: unknown, status = 200) => Response.json(body, { status });
@@ -94,7 +102,7 @@ const booked = (stayId: string) =>
 
 function summary(b: DemoBooking) {
   // Trips keep showing a stay the admin later rejected.
-  const stay = applyStayEdits(seedCatalog().stays, readStore()).find((s) => s.id === b.stayId)!;
+  const stay = everyStay().find((s) => s.id === b.stayId)!;
   return {
     ...b,
     stay: {

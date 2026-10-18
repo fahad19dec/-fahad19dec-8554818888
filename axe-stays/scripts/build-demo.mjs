@@ -78,6 +78,12 @@ const shared = ["src/lib/booking/pricing.ts", "src/lib/report-reasons.ts", "src/
       .replace(/^export /gm, ""),
   )
   .join("\n");
+// The amenity labels the app shows, for the listing form's checkboxes.
+const amenityLabels = ts
+  .transpileModule(readFileSync(path.join(root, "src/lib/search/parse.ts"), "utf8").match(/export const amenityLabels[\s\S]*?\n};/)[0], {
+    compilerOptions: { target: ts.ScriptTarget.ES2022 },
+  })
+  .outputText.replace(/^export /gm, "");
 const adminSeed = JSON.parse(readFileSync(path.join(root, "data/seed.json"), "utf8"));
 const photoFile = (url) => (url.startsWith("https://cdn.sanity.io/images/") ? `photos/${url.split("/").pop().replace(/\.\w+$/, ".jpg")}` : url);
 const SEED = {
@@ -88,6 +94,7 @@ const SEED = {
 const adminScript = `const BRAND = ${JSON.stringify(brand)};
 const SEED = ${JSON.stringify(SEED)};
 ${shared}
+${amenityLabels}
 ${readFileSync(path.join(root, "scripts/demo-admin/admin.js"), "utf8")}`.replace(/<\/script/gi, "<\\/script");
 const tokens = Object.entries(brand.colors).map(([k, v]) => `--brand-${k}: ${v};`).join(" ");
 const adminPage = `<!doctype html>

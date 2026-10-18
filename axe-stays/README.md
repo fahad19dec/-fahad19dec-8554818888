@@ -99,10 +99,10 @@ doc). Set the Clerk keys in both. For iOS/Android release builds, set
 into `demo-site/`. It answers the API in the page (`src/lib/demo/server.ts`) with
 the same search, pricing and refund code; sign-in takes any email. It also builds
 `demo-site/admin.html` (from `scripts/demo-admin/`), a browser-only stand-in for the
-admin dashboard (sign in as `admin@axestays.dev`) that approves, rejects and edits
-listings, bans users, cancels bookings and resolves reports. Both pages keep their
-data in the same localStorage (`src/lib/demo/store.ts`), so admin changes show up
-in the demo app. Creating listings and photo uploads need the real dashboard.
+admin dashboard (sign in as `admin@axestays.dev`) that creates listings (with
+photo upload), approves, rejects and edits them, shows earnings per listing, bans
+users, cancels bookings and resolves reports. Both pages keep their data in the
+same localStorage (`src/lib/demo/store.ts`), so admin changes show up in the demo app.
 
 ## Limits
 

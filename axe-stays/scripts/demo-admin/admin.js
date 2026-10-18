@@ -6,7 +6,7 @@
 // scripts/build-demo.mjs puts BRAND, SEED and the compiled shared code
 // (pricing, report reasons, demo store) in front of this file.
 /* global BRAND, SEED, guestRefund, formatCents, todayIso, REPORT_REASONS,
-   DEMO_ADMIN_EMAIL, demoStoreKey, loadStore, saveStore, ensureUser, applyStayEdits, addSampleActivity */
+   DEMO_ADMIN_EMAIL, demoStoreKey, loadStore, saveStore, ensureUser, allStays, applyStayEdits, addSampleActivity, amenityLabels */
 
 const KEY = demoStoreKey(BRAND.slug);
 const SESSION_KEY = `${BRAND.slug}.demo.admin`;
@@ -57,13 +57,14 @@ function change(action, target, work, message) {
   render();
 }
 
-const stays = (data) => applyStayEdits(SEED.stays, data);
+const stays = (data) => applyStayEdits(allStays(SEED.stays, data), data);
 const stayById = (data, id) => stays(data).find((s) => s.id === id);
 
 // ---- Shell ----------------------------------------------------------------------
 
 const NAV = [
   ["overview", "Overview", "M3 3v18h18M7 15v2M11 11v6M15 7v10M19 12v5"],
+  ["earnings", "Earnings", "M12 2v20M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"],
   ["listings", "Listings", "M3 11 12 4l9 7v9H3zM9 20v-6h6v6"],
   ["bookings", "Bookings", "M4 6h16v14H4zM4 10h16M8 3v4M16 3v4"],
   ["users", "Users", "M16 20v-1a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v1M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M22 20v-1a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"],
@@ -88,13 +89,14 @@ function render() {
 
   const route = (location.hash.slice(2) || "overview").split("?")[0];
   const page = VIEWS[route] ? route : "overview";
+  const navPage = page === "new" ? "listings" : page;
   const openReports = data.reports.filter((r) => r.status === "open").length;
   root.innerHTML = `
     <div class="shell">
       <aside class="side">
         <div class="brand">${logo()}<div><strong>${esc(BRAND.wordmark)}</strong><span>Admin</span></div></div>
         <nav>${NAV.map(
-          ([id, label, d]) => `<a href="#/${id}" class="${id === page ? "active" : ""}">${icon(d)}<span>${label}</span>${
+          ([id, label, d]) => `<a href="#/${id}" class="${id === navPage ? "active" : ""}">${icon(d)}<span>${label}</span>${
             id === "reports" && openReports ? `<b class="count">${openReports}</b>` : ""
           }</a>`,
         ).join("")}</nav>
@@ -149,9 +151,10 @@ function series(days, items, dateOf, valueOf = () => 1) {
   return out;
 }
 
-function chart(title, points, money) {
+function chart(title, points, money, wide = false) {
   const max = Math.max(1, ...points.map((p) => p.value));
-  const w = 300, h = 120, gap = 2, bw = w / points.length - gap;
+  const [w, h] = wide ? [900, 160] : [300, 120];
+  const gap = 2, bw = w / points.length - gap;
   const label = (v) => (money ? formatCents(v) : String(v));
   const total = points.reduce((sum, p) => sum + p.value, 0);
   const bars = points
@@ -162,8 +165,8 @@ function chart(title, points, money) {
     .join("");
   const ticks = [0, 0.5, 1].map((f) => `<line x1="0" x2="${w}" y1="${h - f * h}" y2="${h - f * h}"/>`).join("");
   return `<section class="card chart">
-    <h2>${title}</h2><p class="muted">${label(total)} in 30 days</p>
-    <svg viewBox="0 -8 ${w} ${h + 26}" role="img" aria-label="${title}, ${label(total)} in 30 days">
+    <h2>${title}</h2><p class="muted">${label(total)} in ${points.length} days</p>
+    <svg viewBox="0 -8 ${w} ${h + 26}" role="img" aria-label="${title}, ${label(total)} in ${points.length} days">
       <g class="grid">${ticks}</g>${bars}
       <text x="0" y="${h + 16}">${fmtDate(points[0].day).replace(/, \d+$/, "")}</text>
       <text x="${w}" y="${h + 16}" text-anchor="end">Today</text>
@@ -189,7 +192,7 @@ function overviewView(data) {
   const openReports = data.reports.filter((r) => r.status === "open").length;
   const tile = (label, value, note) => `<div class="card tile"><span>${label}</span><strong>${value}</strong><small>${note}</small></div>`;
   return `${header("Overview", "Last 30 days. Payments are simulated, so money figures are what guests would have paid.")}
-    ${openReports ? `<a class="attention" href="#/reports">${icon(NAV[4][2])} ${openReports} open report${openReports > 1 ? "s" : ""} →</a>` : ""}
+    ${openReports ? `<a class="attention" href="#/reports">${icon(NAV.find(([id]) => id === "reports")[2])} ${openReports} open report${openReports > 1 ? "s" : ""} →</a>` : ""}
     <div class="tiles">
       ${tile("Revenue", formatCents(revenue), "Service fees kept, after refunds")}
       ${tile("Booking value", formatCents(gmv), `${formatCents(refunds)} refunded`)}
@@ -209,7 +212,7 @@ function overviewView(data) {
 function listingsView(data) {
   const all = stays(data);
   const filter = query() || "approved";
-  const counts = { approved: 0, rejected: 0 };
+  const counts = { pending: 0, approved: 0, rejected: 0 };
   for (const s of all) counts[s.status]++;
   const shown = all
     .filter((s) => filter === "all" || s.status === filter)
@@ -223,17 +226,177 @@ function listingsView(data) {
       }</div></div></td>
       <td>${esc(s.type)}</td>
       <td class="num">$${s.pricePerNight}</td>
-      <td>${badge(s.status === "approved" ? "Approved" : "Rejected", s.status === "approved" ? "good" : "bad")}</td>
+      <td>${badge(...STATUS[s.status])}</td>
       <td class="actions">
         <button class="btn sm" data-act="edit" data-id="${s.id}">Edit</button>
-        ${s.status === "approved" ? `<button class="btn sm danger" data-act="reject" data-id="${s.id}">Reject</button>` : `<button class="btn sm primary" data-act="approve" data-id="${s.id}">Approve</button>`}
+        ${s.status !== "approved" ? `<button class="btn sm primary" data-act="approve" data-id="${s.id}">Approve</button>` : ""}
+        ${s.status !== "rejected" ? `<button class="btn sm danger" data-act="reject" data-id="${s.id}">Reject</button>` : ""}
       </td></tr>`,
     )
     .join("");
-  return `${header("Listings", "Approved listings show to guests. Rejecting hides one from the app right away.")}
-    ${tabs("listings", filter, [["approved", `Approved (${counts.approved})`], ["rejected", `Rejected (${counts.rejected})`], ["all", `All (${all.length})`]])}
-    <div class="card table-wrap">${rows ? `<table><thead><tr><th>Listing</th><th>Type</th><th class="num">Per night</th><th>Status</th><th class="actions">Actions</th></tr></thead><tbody>${rows}</tbody></table>` : empty("No listings here.")}</div>
-    <p class="muted small">New listings are created in the full dashboard (<code>admin/</code>), which needs a server. This demo edits the 30 sample listings.</p>`;
+  return `${header("Listings", "Approved listings show to guests. Rejecting hides one from the app right away.", `<a class="btn primary" href="#/new">+ New listing</a>`)}
+    ${tabs("listings", filter, [["pending", `Awaiting review (${counts.pending})`], ["approved", `Approved (${counts.approved})`], ["rejected", `Rejected (${counts.rejected})`], ["all", `All (${all.length})`]])}
+    <div class="card table-wrap">${rows ? `<table><thead><tr><th>Listing</th><th>Type</th><th class="num">Per night</th><th>Status</th><th class="actions">Actions</th></tr></thead><tbody>${rows}</tbody></table>` : empty("No listings here.")}</div>`;
+}
+
+const STATUS = { pending: ["Awaiting review", "warn"], approved: ["Approved", "good"], rejected: ["Rejected", "bad"] };
+const TYPES = { cabin: "Cabin", beach: "Beach house", city: "City apartment", villa: "Villa" };
+
+// ---- New listing ----------------------------------------------------------------
+
+let newPhotos = [];
+
+function newListingView() {
+  newPhotos = [];
+  const opt = (value, label, selected) => `<option value="${esc(value)}" ${selected ? "selected" : ""}>${esc(label)}</option>`;
+  return `${header("New listing", "Fill in the basics. Approved listings appear in the guest app’s home and search right away.", `<a class="btn" href="#/listings">Cancel</a>`)}
+    <form class="card form" data-form="listing" novalidate>
+      <h2>Basics</h2>
+      <label class="field"><span>Title *</span><input name="title" maxlength="80" required placeholder="e.g. Lakeside A-Frame with Sauna"></label>
+      <div class="row">
+        <label class="field"><span>Type</span><select name="type">${Object.entries(TYPES).map(([v, l]) => opt(v, l, v === "cabin")).join("")}</select></label>
+        <label class="field"><span>Host</span><select name="hostSlug">${SEED.hosts.map((h) => opt(h.slug, h.name)).join("")}</select></label>
+        <label class="field"><span>Cancellation</span><select name="cancellationPolicySlug">${["flexible-cancellation", "moderate-cancellation", "strict-cancellation"].map((v) => opt(v, policyName[v] ?? v, v === "moderate-cancellation")).join("")}</select></label>
+      </div>
+      <label class="field"><span>Summary</span><textarea name="summary" rows="2" maxlength="300" placeholder="One or two sentences guests see first"></textarea></label>
+      <label class="field"><span>Description</span><textarea name="description" rows="4" maxlength="3000"></textarea></label>
+
+      <h2>Location</h2>
+      <div class="row">
+        <label class="field"><span>City *</span><input name="city" required maxlength="60"></label>
+        <label class="field"><span>Region or state</span><input name="region" maxlength="60"></label>
+        <label class="field"><span>Country *</span><input name="country" required maxlength="60" value="USA"></label>
+      </div>
+
+      <h2>Price and size</h2>
+      <div class="row">
+        <label class="field"><span>Price per night ($) *</span><input name="pricePerNight" type="number" min="10" max="10000" required value="180"></label>
+        <label class="field"><span>Cleaning fee ($)</span><input name="cleaningFee" type="number" min="0" max="2000" value="60"></label>
+        <label class="field"><span>Minimum nights</span><input name="minNights" type="number" min="1" max="30" value="2"></label>
+      </div>
+      <div class="row four">
+        <label class="field"><span>Max guests *</span><input name="maxGuests" type="number" min="1" max="30" required value="4"></label>
+        <label class="field"><span>Bedrooms</span><input name="bedrooms" type="number" min="0" max="20" value="2"></label>
+        <label class="field"><span>Beds</span><input name="beds" type="number" min="1" max="30" value="2"></label>
+        <label class="field"><span>Bathrooms</span><input name="bathrooms" type="number" min="1" max="20" step="0.5" value="1"></label>
+      </div>
+
+      <h2>Amenities</h2>
+      <div class="checks">${Object.entries(amenityLabels).map(([k, l]) => `<label><input type="checkbox" name="amenities" value="${k}" ${["wifi", "kitchen"].includes(k) ? "checked" : ""}> ${esc(l)}</label>`).join("")}</div>
+
+      <h2>House rules</h2>
+      <div class="row">
+        <label class="field"><span>Check-in</span><input name="checkInTime" type="time" value="15:00"></label>
+        <label class="field"><span>Check-out</span><input name="checkOutTime" type="time" value="11:00"></label>
+      </div>
+      <div class="checks">
+        <label><input type="checkbox" name="petsAllowed"> Pets allowed</label>
+        <label><input type="checkbox" name="smokingAllowed"> Smoking allowed</label>
+        <label><input type="checkbox" name="partiesAllowed"> Parties allowed</label>
+      </div>
+
+      <h2>Photos</h2>
+      <p class="muted small">JPEG, PNG or WebP. They’re resized in your browser and saved with the demo. Without a photo, the listing uses a sample one.</p>
+      <div class="photos" id="photo-list"></div>
+      <label class="btn upload">Add photos<input type="file" accept="image/jpeg,image/png,image/webp" multiple data-act="photos" hidden></label>
+
+      <div class="form-foot">
+        <div class="checks"><label><input type="checkbox" name="publish" checked> Show to guests now (otherwise it waits in “Awaiting review”)</label></div>
+        <p class="error" role="alert"></p>
+        <button class="btn primary">Create listing</button>
+      </div>
+    </form>`;
+}
+
+function renderPhotos() {
+  const list = document.getElementById("photo-list");
+  if (!list) return;
+  list.innerHTML = newPhotos
+    .map((url, i) => `<figure><img src="${url}" alt="Photo ${i + 1}"><button type="button" class="btn sm" data-act="remove-photo" data-id="${i}" aria-label="Remove photo ${i + 1}">✕</button>${i === 0 ? "<figcaption>Cover</figcaption>" : ""}</figure>`)
+    .join("");
+}
+
+/** Resizes an image file to at most 1200px wide JPEG, as a data: URL. */
+function resize(file) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      const scale = Math.min(1, 1200 / img.width);
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.round(img.width * scale);
+      canvas.height = Math.round(img.height * scale);
+      canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(img.src);
+      resolve(canvas.toDataURL("image/jpeg", 0.8));
+    };
+    img.onerror = () => reject(new Error("That file isn’t an image we can read."));
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+function createListing(form) {
+  const f = form.elements;
+  const num = (name) => Number(f[name].value);
+  const errors = [];
+  const title = f.title.value.trim();
+  if (title.length < 3) errors.push("Title needs at least 3 characters.");
+  if (!f.city.value.trim()) errors.push("Add a city.");
+  if (!f.country.value.trim()) errors.push("Add a country.");
+  if (!(num("pricePerNight") >= 10 && num("pricePerNight") <= 10000)) errors.push("Price must be between $10 and $10,000.");
+  if (!(num("maxGuests") >= 1 && num("maxGuests") <= 30)) errors.push("Max guests must be between 1 and 30.");
+  if (errors.length) return (form.querySelector(".error").textContent = errors.join(" "));
+
+  const data = store();
+  const taken = new Set(stays(data).map((s) => s.slug));
+  const base = title.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60) || "stay";
+  let slug = base;
+  for (let n = 2; taken.has(slug); n++) slug = `${base}-${n}`;
+  const type = f.type.value;
+  const fallback = SEED.stays.find((s) => s.type === type)?.photos[0];
+  const now = new Date().toISOString();
+  const stay = {
+    id: `stay_demo_${Date.now().toString(36)}`,
+    slug,
+    title,
+    type,
+    hostSlug: f.hostSlug.value,
+    rating: 0,
+    reviewCount: 0,
+    city: f.city.value.trim(),
+    region: f.region.value.trim() || undefined,
+    country: f.country.value.trim(),
+    maxGuests: Math.round(num("maxGuests")),
+    bedrooms: Math.round(num("bedrooms") || 0),
+    beds: Math.max(1, Math.round(num("beds") || 1)),
+    bathrooms: Math.max(1, num("bathrooms") || 1),
+    amenities: [...f.amenities].filter((c) => c.checked).map((c) => c.value),
+    pricePerNight: Math.round(num("pricePerNight")),
+    cleaningFee: Math.round(num("cleaningFee") || 0),
+    minNights: Math.max(1, Math.round(num("minNights") || 1)),
+    houseRules: {
+      checkInTime: f.checkInTime.value || "15:00",
+      checkOutTime: f.checkOutTime.value || "11:00",
+      petsAllowed: f.petsAllowed.checked,
+      smokingAllowed: f.smokingAllowed.checked,
+      partiesAllowed: f.partiesAllowed.checked,
+    },
+    cancellationPolicySlug: f.cancellationPolicySlug.value,
+    summary: f.summary.value.trim() || undefined,
+    description: f.description.value.trim() || undefined,
+    highlights: [],
+    facts: [],
+    vibes: [],
+    photos: newPhotos.length ? newPhotos.map((url, i) => ({ url, alt: `${title}, photo ${i + 1}` })) : [{ url: fallback.url, alt: `${title} (sample photo)` }],
+    createdAt: now,
+    updatedAt: now,
+  };
+  const publish = f.publish.checked;
+  change("listing.create", stay.id, (d) => {
+    d.created = [...(d.created ?? []), stay];
+    d.stays[stay.id] = { status: publish ? "approved" : "pending", updatedAt: now };
+  }, publish ? `“${title}” is live in the guest app.` : `“${title}” is waiting for review.`);
+  if (store().created?.some((s) => s.id === stay.id)) location.hash = `#/listings?${publish ? "approved" : "pending"}`;
+  else if (newPhotos.length) toast("The browser’s storage is full. Try fewer or smaller photos.", true);
 }
 
 function editListing(id) {
@@ -271,6 +434,56 @@ function setStatus(id, status, note) {
   change(`listing.${status === "approved" ? "approve" : "reject"}`, id, (data) => {
     data.stays[id] = { ...data.stays[id], status, note: note || null, updatedAt: new Date().toISOString() };
   }, status === "approved" ? "Approved. Guests can see it now." : "Rejected. It’s hidden from guests.");
+}
+
+// ---- Earnings -------------------------------------------------------------------
+
+function earningsView(data) {
+  const range = query() || "30";
+  const since = range === "all" ? "" : new Date(Date.now() - Number(range) * 86_400_000).toISOString();
+  const today = todayIso();
+  const inRange = data.bookings.filter((b) => b.createdAt >= since);
+  const fee = (b) => (b.status === "confirmed" ? b.serviceFeeCents : Math.max(0, b.serviceFeeCents - Math.max(0, b.refundCents - (b.totalCents - b.serviceFeeCents))));
+  const net = (b) => b.totalCents - b.refundCents;
+  const sum = (list, f) => list.reduce((s, b) => s + f(b), 0);
+  const upcoming = data.bookings.filter((b) => b.status === "confirmed" && b.checkIn >= today);
+
+  const perStay = new Map();
+  for (const b of inRange) {
+    const row = perStay.get(b.stayId) ?? { bookings: 0, nights: 0, net: 0, fees: 0, refunds: 0 };
+    row.bookings += 1;
+    if (b.status === "confirmed") row.nights += b.nights;
+    row.net += net(b);
+    row.fees += fee(b);
+    row.refunds += b.refundCents;
+    perStay.set(b.stayId, row);
+  }
+  const rows = [...perStay.entries()]
+    .sort((a, b) => b[1].net - a[1].net)
+    .map(([id, r]) => {
+      const s = stayById(data, id);
+      return `<tr><td><strong>${esc(s?.title ?? id)}</strong><small>${esc(s?.city ?? "")}</small></td>
+        <td class="num">${r.bookings}</td><td class="num">${r.nights}</td>
+        <td class="num">${r.refunds ? formatCents(r.refunds) : "–"}</td>
+        <td class="num"><strong>${formatCents(r.net)}</strong></td><td class="num">${formatCents(r.fees)}</td></tr>`;
+    })
+    .join("");
+  const tile = (label, value, note) => `<div class="card tile"><span>${label}</span><strong>${value}</strong><small>${note}</small></div>`;
+  const label = range === "all" ? "all time" : `the last ${range} days`;
+  return `${header("Earnings", `Money from bookings made in ${label}. Payments are simulated, so these are the amounts guests would have paid.`)}
+    ${tabs("earnings", range, [["7", "7 days"], ["30", "30 days"], ["90", "90 days"], ["all", "All time"]])}
+    <div class="tiles">
+      ${tile("You earned", formatCents(sum(inRange, net)), "Guest payments kept after refunds")}
+      ${tile("Service fees", formatCents(sum(inRange, fee)), "The 12% fee inside that amount")}
+      ${tile("Refunded", formatCents(sum(inRange, (b) => b.refundCents)), `${inRange.filter((b) => b.status === "cancelled").length} cancelled bookings`)}
+      ${tile("Coming up", formatCents(sum(upcoming, (b) => b.totalCents)), `${upcoming.length} paid stays not checked in yet`)}
+    </div>
+    ${range === "all" ? "" : `<div class="charts one">${chart("Earned per day", series(Math.min(Number(range), 90), data.bookings, (b) => b.createdAt, net), true, true)}</div>`}
+    <section class="card table-wrap"><h2 class="pad">By listing</h2>${
+      rows
+        ? `<table><thead><tr><th>Listing</th><th class="num">Bookings</th><th class="num">Nights</th><th class="num">Refunded</th><th class="num">Earned</th><th class="num">Service fees</th></tr></thead><tbody>${rows}</tbody></table>`
+        : empty("No bookings in this period yet.")
+    }</section>`;
 }
 
 // ---- Users ----------------------------------------------------------------------
@@ -451,7 +664,7 @@ function activityList(items) {
 
 const activityView = (data) => `${header("Activity", "Every admin change, newest first.")}<section class="card">${activityList(data.audit)}</section>`;
 
-const VIEWS = { overview: overviewView, listings: listingsView, bookings: bookingsView, users: usersView, reports: reportsView, activity: activityView };
+const VIEWS = { overview: overviewView, earnings: earningsView, listings: listingsView, new: newListingView, bookings: bookingsView, users: usersView, reports: reportsView, activity: activityView };
 
 // ---- Dialog and toast -----------------------------------------------------------
 
@@ -495,6 +708,10 @@ document.addEventListener("click", (event) => {
     render();
   }
   if (act === "edit") editListing(id);
+  if (act === "remove-photo") {
+    newPhotos.splice(Number(id), 1);
+    renderPhotos();
+  }
   if (act === "approve") setStatus(id, "approved");
   if (act === "reject")
     dialog(
@@ -513,12 +730,26 @@ document.addEventListener("click", (event) => {
   if (act === "resolve-reject") closeReport(id, "resolved", true);
 });
 
-document.addEventListener("change", (event) => {
+document.addEventListener("change", async (event) => {
   const target = event.target.closest("[data-act=role]");
   if (target) setRole(target.dataset.id, target.value);
+  if (event.target.dataset.act === "photos") {
+    const files = [...event.target.files].filter((f) => /^image\/(jpeg|png|webp)$/.test(f.type)).slice(0, 8 - newPhotos.length);
+    try {
+      for (const file of files) newPhotos.push(await resize(file));
+    } catch (error) {
+      toast(error.message, true);
+    }
+    event.target.value = "";
+    renderPhotos();
+  }
 });
 
 document.addEventListener("submit", (event) => {
+  if (event.target.dataset.form === "listing") {
+    event.preventDefault();
+    return createListing(event.target);
+  }
   if (event.target.dataset.form !== "login") return;
   event.preventDefault();
   const email = event.target.email.value.trim().toLowerCase();
