@@ -1,6 +1,7 @@
+import { useFocusEffect } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
 
-import { api, onStaysChanged, query } from "@/lib/api";
+import { api, onStaysChanged, query, STALE_MS } from "@/lib/api";
 import { filtersToParams, type StayFilters } from "@/lib/search/filters";
 import type { SearchStay } from "@/lib/stays";
 
@@ -9,6 +10,7 @@ export type SearchResult = { key: string; total: number; stays: SearchStay[] };
 
 // Results already fetched this session, per filters. Dropped when the admin changes a stay.
 const cache = new Map<string, SearchResult>();
+const fetchedAt = new Map<string, number>();
 onStaysChanged(() => cache.clear());
 
 export const searchKey = (filters: StayFilters) => query(filtersToParams(filters));
@@ -17,6 +19,7 @@ async function fetchResults(key: string, signal?: AbortSignal): Promise<SearchRe
   const body = await api<Omit<SearchResult, "key">>(`/api/stays${key}`, { signal });
   const next = { key, ...body };
   cache.set(key, next);
+  fetchedAt.set(key, Date.now());
   return next;
 }
 
@@ -98,6 +101,16 @@ export function useSearchStays(filters: StayFilters | undefined) {
   }, [key]);
 
   const clearRefreshError = useCallback(() => setRefreshFailed(null), []);
+
+  // Back on screen with stale results: fetch quietly, keeping them showing.
+  useFocusEffect(
+    useCallback(() => {
+      if (key === undefined || !cache.has(key) || Date.now() - (fetchedAt.get(key) ?? 0) < STALE_MS) return;
+      fetchResults(key)
+        .then(setLoaded)
+        .catch(() => {});
+    }, [key]),
+  );
 
   return {
     result: current ?? (error ? undefined : shown),

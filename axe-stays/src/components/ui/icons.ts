@@ -71,10 +71,8 @@ export const icons = {
   suitcase: { ios: "suitcase", android: "luggage", web: "luggage" }, // trips row
   bell: { ios: "bell", android: "notifications", web: "notifications" },
   help: { ios: "questionmark.circle", android: "help", web: "help" },
-  edit: { ios: "pencil", android: "edit", web: "edit" }, // admin: edit a listing
-  trash: { ios: "trash", android: "delete", web: "delete" }, // admin: delete a listing or photo
-  photo: { ios: "photo", android: "image", web: "image" }, // admin: add a photo
-  logout: { ios: "rectangle.portrait.and.arrow.right", android: "logout", web: "logout" }, // admin sign out
+  flag: { ios: "flag", android: "flag", web: "flag" }, // report a listing
+  logout: { ios: "rectangle.portrait.and.arrow.right", android: "logout", web: "logout" }, // sign out
 } as const satisfies Record<string, Exclude<SymbolViewProps["name"], string>>;
 
 export type IconName = keyof typeof icons;

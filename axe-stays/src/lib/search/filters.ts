@@ -1,4 +1,4 @@
-import type { Amenity, CancellationTier, PropertyType } from "@/lib/stays";
+import type { Amenity, CancellationTier, PropertyType } from "../stays";
 
 import { amenityLabels, parseQuery, typeLabels } from "./parse";
 

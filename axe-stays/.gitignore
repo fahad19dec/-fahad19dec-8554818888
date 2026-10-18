@@ -54,3 +54,4 @@ example
 
 # Generated from brand.config.js on every Metro start
 /src/theme/brand.generated.css
+/data/axe-stays.sqlite*

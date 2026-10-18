@@ -1,13 +1,15 @@
+import { useFocusEffect } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
 
 import type { Category } from "@/components/home/category-chips";
-import { api, onStaysChanged, query } from "@/lib/api";
+import { api, onStaysChanged, query, STALE_MS } from "@/lib/api";
 import type { HomeStay } from "@/lib/stays";
 
 // Lists already fetched this session, per category, so switching back to a
 // chip is instant.
-// Dropped when the admin changes a stay.
+// Dropped when stays change in this app; refetched on focus once stale.
 const cache = new Map<Category, HomeStay[]>();
+const fetchedAt = new Map<Category, number>();
 onStaysChanged(() => cache.clear());
 
 // Home shows the top-rated 30, or one type when a category chip is selected.
@@ -15,6 +17,7 @@ async function loadStays(category: Category, signal?: AbortSignal) {
   const params = query({ view: "home", limit: 30, sort: "rating", types: category === "all" ? undefined : category });
   const { stays } = await api<{ stays: HomeStay[] }>(`/api/stays${params}`, { signal });
   cache.set(category, stays);
+  fetchedAt.set(category, Date.now());
   return stays;
 }
 
@@ -72,6 +75,16 @@ export function useHomeStays(category: Category) {
   }, [category]);
 
   const clearRefreshError = useCallback(() => setRefreshFailed(null), []);
+
+  // Back on screen with a stale list: fetch quietly, keeping the list showing.
+  useFocusEffect(
+    useCallback(() => {
+      if (!cache.has(category) || Date.now() - (fetchedAt.get(category) ?? 0) < STALE_MS) return;
+      loadStays(category)
+        .then((stays) => setLoaded({ category, stays }))
+        .catch(() => {});
+    }, [category]),
+  );
 
   return {
     stays: current ?? (error ? undefined : shown),

@@ -1,7 +1,7 @@
-import { withBrand } from "@/brand";
-import type { HomeStay, PlatformPolicy, SearchStay, StayDetails, StayRecord } from "@/lib/stays";
+import { withBrand } from "../../brand";
+import type { HomeStay, PlatformPolicy, SearchStay, StayDetails, StayRecord } from "../stays";
 
-import type { Db } from "./store";
+import type { Catalog as Db } from "../db/catalog";
 
 // Server only. What each screen reads from a stored stay. Sanity CDN photos
 // (the seed's) are sized here. Uploaded photos are stored as "/api/uploads/…"
@@ -71,6 +71,7 @@ export function detailsView(s: StayRecord, db: Db, origin: string): StayDetails 
     pricePerNight: s.pricePerNight,
     cleaningFee: s.cleaningFee ?? null,
     minNights: s.minNights ?? null,
+    weeklyDiscountPercent: s.weeklyDiscountPercent ?? null,
     maxGuests: s.maxGuests,
     amenities: s.amenities,
     photos: s.photos.map((p) => ({ url: sizedImage(p.url, 1200, origin), alt: p.alt })),

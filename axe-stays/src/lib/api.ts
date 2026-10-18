@@ -61,7 +61,10 @@ export const query = (params: Record<string, string | number | undefined>) => {
   return text ? `?${text}` : "";
 };
 
-// Listeners told when the admin changes a stay, so screens drop cached lists.
+/** Cached lists older than this refetch when their screen comes back into view, so admin changes show up. */
+export const STALE_MS = 15_000;
+
+// Listeners told when this app changes stays (a booking), so screens drop cached lists.
 const listeners = new Set<() => void>();
 export const onStaysChanged = (listener: () => void) => {
   listeners.add(listener);

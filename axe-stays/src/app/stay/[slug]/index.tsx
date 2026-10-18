@@ -15,7 +15,7 @@ import { PolicyCard } from "@/components/stay/policy-card";
 import { PriceBar } from "@/components/stay/price-bar";
 import { RatingBox } from "@/components/stay/rating-box";
 import { StaySkeleton } from "@/components/stay/stay-skeleton";
-import { Alert, EmptyState, Icon, Text } from "@/components/ui";
+import { Alert, EmptyState, Icon, PressableScale, Text } from "@/components/ui";
 import { useStay } from "@/hooks/use-stay";
 import { useFavorite } from "@/lib/favorites";
 import { stayTags } from "@/lib/search/query";
@@ -169,6 +169,18 @@ export default function StayScreen() {
               <HostSection host={stay.host} />
             </>
           )}
+
+          <View className="mt-2.5 h-px bg-border" />
+          <PressableScale
+            accessibilityRole="button"
+            onPress={() => router.push({ pathname: "/stay/[slug]/report", params: { slug } })}
+            className="mt-4 flex-row items-center gap-2 self-start py-2"
+          >
+            <Icon name="flag" size={18} tone="muted" />
+            <Text variant="link" tone="muted">
+              Report this listing
+            </Text>
+          </PressableScale>
         </View>
       </ScrollView>
 

@@ -1,8 +1,8 @@
-import { filterCount, type StayFilters } from "@/lib/search/filters";
-import { placeValues, typeLabels } from "@/lib/search/parse";
-import type { StayRecord } from "@/lib/stays";
+import { filterCount, type StayFilters } from "../search/filters";
+import { placeValues, typeLabels } from "../search/parse";
+import type { StayRecord } from "../stays";
 
-import type { Db } from "./store";
+import type { Catalog as Db } from "../db/catalog";
 
 // Server only. Search in code: every filter is an exact check on a typed
 // field. Keywords rank: "Best match" orders by how many keywords and vibes a

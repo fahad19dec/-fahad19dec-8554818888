@@ -1,10 +1,10 @@
 import { z } from "zod";
 
-import { AMENITIES, CANCELLATION_TIERS, PROPERTY_TYPES, VIBES } from "@/lib/search/filters";
-import type { HostRecord, StayRecord } from "@/lib/stays";
+import { AMENITIES, CANCELLATION_TIERS, PROPERTY_TYPES, VIBES } from "../search/filters";
+import type { HostRecord, StayRecord } from "../stays";
 
 import { HttpError } from "./http";
-import type { Db } from "./store";
+import type { Catalog as Db } from "../db/catalog";
 
 // Server only. What the admin form sends to create or update a stay. Every
 // field is checked here, whatever the form already checked. Mirrors the

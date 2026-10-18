@@ -2,31 +2,93 @@ import { Image as RNImage } from "expo-image";
 import { StatusBar } from "expo-status-bar";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { styled } from "nativewind";
+import { useState } from "react";
 import { ScrollView, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import { brand } from "@/brand";
+import { DateRangeCalendar } from "@/components/booking/date-range-calendar";
 import { LoadError } from "@/components/load-error";
 import { PolicyCard } from "@/components/stay/policy-card";
-import { Badge, Button, EmptyState, Icon, IconButton, Skeleton, Text } from "@/components/ui";
+import { Alert, Button, EmptyState, Icon, IconButton, Skeleton, Stepper, Text } from "@/components/ui";
 import { useStay } from "@/hooks/use-stay";
-import { formatPrice, priceLines } from "@/lib/stay-details";
-import { placeLabel, type StayDetails } from "@/lib/stays";
-import { brand } from "@/brand";
+import { ApiError, staysChanged } from "@/lib/api";
+import { formatCents, quote, quoteProblems, SERVICE_FEE_RATE, type PricedStay, type Quote, type QuoteInput } from "@/lib/booking/pricing";
+import { useAuthedApi, useSession } from "@/lib/session";
+import { placeLabel, ratingLabel, type StayDetails } from "@/lib/stays";
 
 const Image = styled(RNImage, { className: "style" });
 
 // Room under the content for the pinned bar (button 64 + note + padding).
 const CONFIRM_BAR_SPACE = 116;
 
-// "Book this stay" lands here: what the booking will cover, from the stay's own
-// fields. Dates, guests and payment don't exist yet, so Confirm stays disabled.
+/** The fields pricing reads, with the API's nulls as "not set". */
+const priced = (stay: StayDetails): PricedStay => ({
+  pricePerNight: stay.pricePerNight,
+  cleaningFee: stay.cleaningFee ?? undefined,
+  minNights: stay.minNights ?? undefined,
+  weeklyDiscountPercent: stay.weeklyDiscountPercent ?? undefined,
+  maxGuests: stay.maxGuests ?? 1,
+  houseRules: stay.houseRules,
+});
+
+const shortDate = (date: string) =>
+  new Date(`${date}T00:00:00Z`).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
+
+// "Book this stay": dates, guests and pets, the price as the server will
+// charge it (src/lib/booking/pricing.ts), then a simulated payment. Signed-out
+// guests are sent to sign in first and come back here.
 export default function BookScreen() {
   const { slug } = useLocalSearchParams<{ slug: string }>();
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const { stay, error, retry } = useStay(slug);
+  const { stay, error, retry, refresh } = useStay(slug);
+  const { isSignedIn, account } = useSession();
+  const request = useAuthedApi();
+
+  const [dates, setDates] = useState<{ checkIn?: string; checkOut?: string }>({});
+  const [guests, setGuests] = useState(1);
+  const [pets, setPets] = useState(0);
+  const [submitting, setSubmitting] = useState(false);
+  const [serverError, setServerError] = useState<{ message: string; fields?: Record<string, string> } | null>(null);
 
   const back = () => (router.canGoBack() ? router.back() : router.replace({ pathname: "/stay/[slug]", params: { slug } }));
+
+  const input: QuoteInput | null =
+    dates.checkIn && dates.checkOut ? { checkIn: dates.checkIn, checkOut: dates.checkOut, guests, pets } : null;
+  const problems = stay && input ? quoteProblems(priced(stay), input) : null;
+  const price = stay && input && !problems ? quote(priced(stay), input) : null;
+  const banned = account?.status === "banned";
+
+  const confirm = async () => {
+    if (!stay || !input || !price) return;
+    if (!isSignedIn) return router.push("/sign-in");
+    setSubmitting(true);
+    setServerError(null);
+    try {
+      const booking = await request<{ id: string }>("/api/bookings", { method: "POST", json: { slug, ...input } });
+      staysChanged();
+      router.replace({ pathname: "/trips/[id]", params: { id: booking.id, booked: "1" } });
+    } catch (e) {
+      const message =
+        e instanceof ApiError && e.code === "dates_unavailable"
+          ? "Someone just booked some of those nights. Pick other dates."
+          : e instanceof ApiError && e.code === "account_suspended"
+            ? "Your account is suspended, so you can’t book."
+            : e instanceof ApiError && e.code === "invalid_booking"
+              ? "Check the dates and guests."
+              : e instanceof ApiError && e.status === 0
+                ? "Can’t reach the server. Check your connection."
+                : "Couldn’t book this stay. Try again.";
+      setServerError({ message, fields: e instanceof ApiError ? e.fields : undefined });
+      if (e instanceof ApiError && e.code === "dates_unavailable") {
+        setDates({});
+        refresh();
+      }
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   let body;
   if (stay === null) {
@@ -49,17 +111,51 @@ export default function BookScreen() {
   } else if (!stay) {
     body = <BookSkeleton />;
   } else {
+    const problem = serverError?.fields ? Object.values(serverError.fields)[0] : problems ? Object.values(problems)[0] : null;
+    const ready = !!price && !banned;
     body = (
       <>
         <ScrollView
           contentContainerClassName="px-5 pt-5"
           contentContainerStyle={{ paddingBottom: CONFIRM_BAR_SPACE + insets.bottom }}
+          keyboardShouldPersistTaps="handled"
         >
           <StaySummary stay={stay} />
+          {banned && <Alert tone="danger" message="Your account is suspended, so you can’t book. Contact support." className="mt-5" />}
+          {serverError && <Alert tone="danger" message={serverError.message} onDismiss={() => setServerError(null)} className="mt-5" />}
           <Divider />
-          <TripDetails stay={stay} />
+          <Text variant="title" accessibilityRole="header">
+            Dates
+          </Text>
+          <Text variant="caption" tone="muted" className="mt-1">
+            {dates.checkIn && dates.checkOut
+              ? `${shortDate(dates.checkIn)} – ${shortDate(dates.checkOut)}`
+              : dates.checkIn
+                ? `Check-in ${shortDate(dates.checkIn)}. Now pick check-out.`
+                : `Pick check-in, then check-out.${stay.minNights && stay.minNights > 1 ? ` At least ${stay.minNights} nights.` : ""}`}
+          </Text>
+          <View className="mt-4">
+            <DateRangeCalendar checkIn={dates.checkIn} checkOut={dates.checkOut} booked={stay.booked ?? []} onChange={setDates} />
+          </View>
           <Divider />
-          <PriceDetails stay={stay} />
+          <Text variant="title" accessibilityRole="header">
+            Who’s coming
+          </Text>
+          <View className="mt-4 gap-4">
+            <CountRow label="Guests" hint={`Up to ${stay.maxGuests ?? 1}`} value={guests} min={1} max={stay.maxGuests ?? 1} onChange={setGuests} />
+            {stay.houseRules.petsAllowed && (
+              <CountRow
+                label="Pets"
+                hint={stay.houseRules.petFee ? `$${stay.houseRules.petFee} pet fee per stay` : "No pet fee"}
+                value={pets}
+                min={0}
+                max={stay.houseRules.maxPets ?? 5}
+                onChange={setPets}
+              />
+            )}
+          </View>
+          <Divider />
+          <PriceDetails stay={stay} price={price} />
           {stay.cancellationPolicy && (
             <>
               <Divider />
@@ -84,9 +180,15 @@ export default function BookScreen() {
           className="absolute inset-x-0 bottom-0 gap-2 border-t border-border bg-surface px-5 pt-4"
           style={{ paddingBottom: Math.max(insets.bottom, 16) }}
         >
-          <Button title="Confirm and pay" size="lg" disabled />
-          <Text variant="caption" tone="muted" className="text-center">
-            Booking opens soon in {brand.name}.
+          <Button
+            title={!isSignedIn ? "Sign in to book" : price ? `Confirm and pay ${formatCents(price.totalCents)}` : "Confirm and pay"}
+            size="lg"
+            loading={submitting}
+            disabled={isSignedIn ? !ready : !price}
+            onPress={confirm}
+          />
+          <Text variant="caption" tone={problem ? "danger" : "muted"} className="text-center">
+            {problem ?? "Demo payment: no card is charged."}
           </Text>
         </View>
       </>
@@ -103,6 +205,34 @@ export default function BookScreen() {
         </Text>
       </View>
       {body}
+    </View>
+  );
+}
+
+function CountRow({
+  label,
+  hint,
+  value,
+  min,
+  max,
+  onChange,
+}: {
+  label: string;
+  hint: string;
+  value: number;
+  min: number;
+  max: number;
+  onChange: (value: number) => void;
+}) {
+  return (
+    <View className="flex-row items-center justify-between gap-4">
+      <View className="flex-1">
+        <Text variant="subtitle">{label}</Text>
+        <Text variant="caption" tone="subtle">
+          {hint}
+        </Text>
+      </View>
+      <Stepper value={value} min={min} max={max} accessibilityLabel={label} onChange={onChange} />
     </View>
   );
 }
@@ -135,10 +265,12 @@ function StaySummary({ stay }: { stay: StayDetails }) {
         <View className="flex-row items-center gap-1">
           <Icon name="star" size={16} tone="primary" />
           <Text variant="label">
-            {stay.rating.toFixed(1)}{" "}
-            <Text variant="label" tone="subtle">
-              ({stay.reviewCount})
-            </Text>
+            {ratingLabel(stay.rating)}
+            {stay.reviewCount > 0 && (
+              <Text variant="label" tone="subtle">
+                {" "}({stay.reviewCount})
+              </Text>
+            )}
           </Text>
         </View>
       </View>
@@ -146,36 +278,26 @@ function StaySummary({ stay }: { stay: StayDetails }) {
   );
 }
 
-function TripDetails({ stay }: { stay: StayDetails }) {
-  return (
-    <>
-      <Text variant="title" accessibilityRole="header">
-        Your trip
-      </Text>
-      <View className="mt-4 gap-4">
-        <TripRow label="Dates" value="Add dates" />
-        <TripRow label="Guests" value={stay.maxGuests ? `Up to ${stay.maxGuests} guests` : "Add guests"} />
-      </View>
-    </>
-  );
-}
-
-function TripRow({ label, value }: { label: string; value: string }) {
-  return (
-    <View accessible accessibilityLabel={`${label}: ${value}. Coming soon`} className="flex-row items-center gap-4">
-      <View className="flex-1">
-        <Text variant="subtitle">{label}</Text>
-        <Text variant="caption" tone="subtle">
-          {value}
+function PriceDetails({ stay, price }: { stay: StayDetails; price: Quote | null }) {
+  if (!price) {
+    return (
+      <>
+        <Text variant="title" accessibilityRole="header">
+          Price details
         </Text>
-      </View>
-      <Badge label="Coming soon" />
-    </View>
-  );
-}
-
-function PriceDetails({ stay }: { stay: StayDetails }) {
-  const { lines, total } = priceLines(stay);
+        <Text variant="body" tone="muted" className="mt-2">
+          ${stay.pricePerNight} a night, plus cleaning and a {Math.round(SERVICE_FEE_RATE * 100)}% service fee. Pick dates to see the total.
+        </Text>
+      </>
+    );
+  }
+  const lines = [
+    { key: "nights", label: `$${stay.pricePerNight} × ${price.nights === 1 ? "1 night" : `${price.nights} nights`}`, cents: price.nightlyTotalCents },
+    price.discountCents ? { key: "discount", label: "Weekly discount", cents: -price.discountCents } : null,
+    price.cleaningCents ? { key: "cleaning", label: "Cleaning fee", cents: price.cleaningCents } : null,
+    price.petFeeCents ? { key: "pets", label: "Pet fee", cents: price.petFeeCents } : null,
+    { key: "service", label: `${brand.name} service fee`, cents: price.serviceFeeCents },
+  ].filter((line): line is { key: string; label: string; cents: number } => !!line);
   return (
     <>
       <Text variant="title" accessibilityRole="header">
@@ -185,13 +307,15 @@ function PriceDetails({ stay }: { stay: StayDetails }) {
         {lines.map((line) => (
           <View key={line.key} className="flex-row justify-between gap-4">
             <Text>{line.label}</Text>
-            <Text>{formatPrice(line.amount)}</Text>
+            <Text tone={line.cents < 0 ? "success" : "ink"}>
+              {line.cents < 0 ? `−${formatCents(-line.cents)}` : formatCents(line.cents)}
+            </Text>
           </View>
         ))}
         <View className="h-px bg-border" />
         <View className="flex-row justify-between gap-4">
-          <Text variant="subtitle">Total</Text>
-          <Text variant="subtitle">{formatPrice(total)}</Text>
+          <Text variant="subtitle">Total (USD)</Text>
+          <Text variant="subtitle">{formatCents(price.totalCents)}</Text>
         </View>
       </View>
     </>

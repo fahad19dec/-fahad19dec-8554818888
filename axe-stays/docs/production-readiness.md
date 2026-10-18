@@ -1,167 +1,148 @@
 # Axe Stays: what's missing for production
 
-Audit of the app as of the Axe Stays rebrand. It runs end to end with no outside
-services, which is good for a demo and not enough for real guests, hosts or money.
-Each item says what the app does today, why that's a problem, and what to replace it with.
+Audit of the guest app and the admin dashboard (`../admin`) as of the move to a
+shared SQLite database, Clerk accounts and simulated bookings. Both run end to end,
+but parts are still stand-ins. Each item says what the code does today, why that's
+a problem, and what to replace it with.
 
 Severity: **Blocker** means you can't launch with it; **High** means fix before real users; **Later** means fine for a first release.
+
+## Done since the first audit
+
+- **Accounts and roles:** Clerk sign-up and sign-in in the guest app and the admin, with `guest` / `host` / `admin` roles and bans stored in the database and checked on every request. The shared `ADMIN_PASSWORD` is gone.
+- **Backend role checks:** every admin change is checked three times (dashboard gate, server action, and `assertAdmin` in the data layer) and written to an audit log.
+- **Bookings:** a calendar with booked nights blocked, one server-side price function (nights, weekly discount, cleaning, pet fee, 12% service fee), overlap checks in a transaction, trips, and cancellation with refunds by tier.
+- **Admin dashboard:** users (view, ban, role), listings (approve, reject, edit, create, photo upload), bookings (view, cancel with full or policy refund), reports, analytics and an activity log.
+- **Database:** SQLite with migrations, replacing the JSON file.
 
 ## 1. Mocked or placeholder features
 
 | Area | What it does today | Severity | Replace with |
 | --- | --- | --- | --- |
-| Booking | "Book this stay" opens a summary. Dates and guests say "Coming soon", and **Confirm and pay** is permanently disabled (`src/app/stay/[slug]/book.tsx`). The total is `price × minNights + cleaningFee`. | Blocker | Date picker, availability, a booking record, payment (section 3). |
-| Pricing | The sample policies promise a **12% service fee**, taxes, pet fees and refunds by cancellation tier. None of that is calculated anywhere. | Blocker (legal) | One server-side price function used for quotes, checkout and refunds; policy text that matches it. |
-| Trips | The tab is a placeholder; Profile always shows "0 trips". | High | The guest's bookings. |
+| Payment | Simulated: "Confirm and pay" records a booking with a `sim_` reference; refunds are numbers in the database. No card is collected or charged. | Blocker | Stripe (section 3). |
+| Taxes | The policies mention taxes; none are calculated. | Blocker (legal) | Stripe Tax or a tax service in the price function. |
+| Time zones | Check-in times are read as UTC for refund windows, because stays have no time zone. | High | A time zone per stay. |
 | Saved stays | Hearts live in memory and are gone on restart (`src/lib/favorites.ts`). | High | Saved per account in the database. |
-| Guest profile | Always "Axe Stays guest" with a letter avatar, and the rating always shows "New". | High | The signed-in user's name, photo and data. |
 | Payments, Notifications, Help | "Coming soon" screens (`src/app/account/[topic].tsx`). | High | Real screens, or remove the rows for launch. |
 | Ratings and reviews | `rating` and `reviewCount` are typed in by the admin. No real reviews exist. | High (trust) | Reviews written by guests after a completed stay; ratings computed from them. |
-| Ask about this stay | Keyword matching (`src/lib/ask.ts`). It answers check-in, pets, cancellation, payment, damage and refunds only, and quotes text without generating any. | Later | Good as is; add topics, or a model-based matcher behind the same "quote, never invent" rule. |
-| Hosts | 12 fictional sample hosts. Hosts can only be created from the listing form, never edited or removed, and hosts can't sign in. | High | Host accounts that own their listings. |
-| Policies | 8 sample policies from the tutorial seed, not editable in the app. | Blocker (legal) | Your own terms, reviewed by a lawyer, editable by staff. |
-| Listing content | 30 sample stays from the original tutorial. Their photos are copies of images hosted on the tutorial author's Sanity CDN (`cdn.sanity.io/images/0z83ssmn/...`). | Blocker | Your own listings and photos. Don't ship content you don't hold rights to, or depend on someone else's CDN. |
-| Browser demo | `EXPO_PUBLIC_DEMO=1` runs the API inside the page, with the public password `axe-stays-demo` and data in localStorage. | n/a | Keep for demos only; never deploy it as the real app. |
+| Emails | No booking confirmations, cancellation notices, ban notices or report replies. | High | An email provider (Resend, Postmark) with templates. |
+| Hosts | 12 fictional sample hosts. Only admins create listings (by choice); hosts can't sign in to manage theirs. | Later | Host accounts that own their listings, if you open the marketplace. |
+| Policies | 8 sample policies from the tutorial seed, not editable in the admin. | Blocker (legal) | Your own terms, reviewed by a lawyer, editable by staff. |
+| Listing content | 30 sample stays from the original tutorial, with photos on the tutorial author's Sanity CDN (`cdn.sanity.io/images/0z83ssmn/...`). | Blocker | Your own listings and photos. |
+| Sample activity | Outside production the seed adds sample guests, bookings and reports so the dashboard has data. | n/a | Off when `NODE_ENV=production` or `SEED_SAMPLE_ACTIVITY=0`. |
+| Ask about this stay | Keyword matching (`src/lib/ask.ts`), quoting text without generating any. | Later | Good as is; add topics if needed. |
+| Browser demo | `EXPO_PUBLIC_DEMO=1` runs the API inside the page, with any-email sign-in and data in localStorage. | n/a | Keep for demos only; never deploy it as the real app. |
 
 ## 2. Auth
 
 | What it does today | Problem |
 | --- | --- |
-| No guest accounts at all. Anyone can browse; nobody can sign in. | You can't book, save or review without an identity. |
-| One shared admin password (`ADMIN_PASSWORD`) for everyone who manages listings. | No individual accounts, no audit trail, no way to remove one person's access. |
-| The login returns an HMAC token valid for 7 days (`src/lib/server/admin-auth.ts`). It can't be revoked except by changing the password, which signs everyone out. | A leaked token works for a week. |
-| On web the token sits in `localStorage`. | Any XSS bug could read it. |
-| Login is slowed by 600 ms after a wrong password, but nothing limits attempts. | Passwords can be guessed by brute force. |
-| No roles beyond "admin". | Hosts, support staff and admins need different permissions. |
+| Without Clerk keys, both apps fall back to dev sign-in (`AUTH_MODE=dev`): any email, no password. It's refused when `NODE_ENV=production`. | Fine locally. Make sure production has the keys and never sets `AUTH_MODE=dev`. |
+| The Clerk paths are written against the SDKs' docs but haven't been run against a real Clerk instance here. | Test sign-up, sign-in, email codes and sign-out on staging before launch. |
+| Admins are bootstrapped with `ADMIN_EMAILS`, then managed in the dashboard. | Remove the variable once the first admins exist, so a new account with a listed email isn't promoted. |
+| A ban blocks the user's next request in our API, but their Clerk session stays alive. | Also lock the user in Clerk (Backend API `banUser`) so they can't sign in at all. |
+| No rate limiting on writes (bookings, reports). | Spam and scripted abuse. |
+| No MFA requirement for admins. | One stolen password controls the platform. |
 
-**Replace with:** a managed auth provider. The original project used **Clerk**, and its Expo SDK is a good fit; **Supabase Auth** also works if you choose Supabase for the database. Use email and social sign-in, with roles `guest`, `host` and `admin` stored on the user. Every API route checks the session and role. Admin routes check ownership, so a host only edits their own listings. Add rate limiting on sign-in and on writes.
+**Fix:** set the Clerk keys in both apps, require MFA for admin accounts in Clerk, mirror bans to Clerk from `banUserAction`, and add rate limits (Upstash or the host's) on sign-in and writes.
 
 ## 3. Payments
 
-Nothing exists: no Stripe, no checkout, no payouts, no refunds.
-
-**Replace with:**
-- **Stripe** PaymentIntents (or Checkout), using the Stripe React Native SDK in the app and Payment Element on web.
-- **Stripe Connect** (Express accounts) so hosts get paid out, with the service fee taken as the application fee.
-- **Webhooks** (`payment_intent.succeeded`, refunds, disputes) as the source of truth for booking status, never the app's own redirect.
-- **Refunds** computed by the cancellation tier (flexible, moderate or strict) and the price function from section 1.
-- **Records:** store every charge and refund against the booking.
+**Replace the simulation with:**
+- **Stripe** PaymentIntents, using the Stripe React Native SDK in the app and Payment Element on web. `createBooking` becomes "hold the dates, create a PaymentIntent", and the booking confirms when it succeeds.
+- **Webhooks** (`payment_intent.succeeded`, `charge.refunded`, disputes) as the source of truth for booking status.
+- **Refunds:** the admin and guest cancel paths already compute the amount; call Stripe's refund API with it and store the refund ID.
+- **Stripe Connect** (Express accounts) only if hosts get paid out, with the service fee as the application fee.
+- A held-dates expiry so abandoned checkouts free the calendar.
 
 ## 4. Image uploads
 
 | What it does today | Problem |
 | --- | --- |
-| Upload saves the raw file to the server's disk (`data/uploads/`) and serves it from `/api/uploads/:name`. | Lost on redeploy unless the disk persists. Doesn't work with more than one server. No CDN. |
-| Web only. On iOS and Android admins can only paste a URL (`src/lib/pick-image.ts`). | Hosts on phones can't add photos. |
-| No resizing. An 8 MB phone photo is served as is to every guest. | Slow pages and high data use. |
+| The admin saves uploads to `DATA_DIR/uploads/` and the guest app serves them from `/api/uploads/:name`. | Lost on redeploy unless the disk persists. Doesn't work across servers. No CDN. |
+| No resizing. An 8 MB photo is served as is. | Slow pages and high data use. |
 | Files are never deleted when a photo or listing is removed. | Storage grows forever. |
-| The type is checked from the file's bytes (good), but nothing scans content or strips EXIF location data. | Privacy leak: photos can reveal a host's home GPS location. |
+| The type is checked from the file's bytes, but EXIF location data isn't stripped. | Photos can reveal a home's GPS location. |
 
-**Replace with:** object storage (S3, Cloudflare R2 or Supabase Storage). The app asks the API for a **signed upload URL** and uploads straight to storage. Images are served through an image CDN with resizing (Cloudflare Images, imgix, or the storage provider's transforms), and EXIF is stripped on upload. On native, pick photos with **expo-image-picker**. Delete files from storage when a photo is removed.
+**Replace with:** object storage (S3, Cloudflare R2) with signed uploads, an image CDN with resizing, EXIF stripped on upload, and deletion when a photo is removed.
 
 ## 5. Data and backend
 
 | What it does today | Problem |
 | --- | --- |
-| Listings are one JSON file (`data/db.json`), read in full on every request; writes are queued in one process (`src/lib/server/store.ts`). | Fine for one server and a few hundred stays. Breaks with two servers, and there are no backups or migrations. |
-| Search scans every stay in memory and returns at most 100 (`src/lib/server/stay-search.ts`). | Slows with thousands of stays; no pagination. |
-| No availability or calendar data. | You can't filter by dates, which is the most important filter for stays. |
-| `location` (lat/lng) is stored but unused. | No map or distance search. |
-| Prices are whole US dollars; USD is hard-coded in labels and copy. | No other currencies. |
+| One SQLite file shared by the two apps (WAL mode). | Both servers must run on the same machine or volume. No replicas, and no backups unless you add them. |
+| Listings are stored as JSON in `stays.data`; search loads approved stays and filters in memory (at most 100 results). | Fine for thousands of stays; slows beyond that, and there's no pagination. |
+| Bookings, users and reports are real tables with indexes. | Good. |
+| No date filter in search. | The most important filter for stays. |
+| USD only. | No other currencies. |
 
-**Replace with:** **Postgres** (Supabase or Neon) with Drizzle or Prisma for the schema and migrations. Tables: users, hosts, stays, photos, availability, bookings, payments, reviews, favorites and policies. Move filtering into SQL with indexes, and add PostGIS for map and distance search. Paginate with a cursor. Take daily backups with point-in-time recovery.
+**Next step:** keep SQLite with nightly backups (Litestream to S3) for a single-server launch. When you need more than one server, move to **Postgres** (Neon, Supabase): the data layer in `src/lib/db/` is the only code that touches the database, so only it changes. Then move stay filtering into SQL and add a date filter.
 
 ## 6. Environment variables
 
-**Today**
+**Today** (see both `.env.example` files)
 
 | Name | Where | Used for |
 | --- | --- | --- |
-| `ADMIN_PASSWORD` | server | Admin sign-in. Only checked when someone tries to log in, so a missing value isn't noticed at deploy time. |
-| `DATA_DIR` | server, optional | Location of `db.json` and uploads. |
-| `EXPO_PUBLIC_API_URL` | app, optional | API origin for native release builds. If it's missing, a release build can't reach the API at all. |
+| `EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY` / `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | guest app / admin | Clerk in the client. |
+| `CLERK_SECRET_KEY` | both servers | Verifying sessions, loading profiles. |
+| `ADMIN_EMAILS` | both servers | First admins. |
+| `AUTH_MODE`, `EXPO_PUBLIC_AUTH_MODE` | dev only | Dev sign-in without Clerk. |
+| `DATA_DIR` | both servers | The shared database and uploads. Must be the same folder. |
+| `SEED_SAMPLE_ACTIVITY` | server | `0` skips the sample users, bookings and reports. |
+| `GUEST_APP_URL` | admin | "View in app" links. |
+| `EXPO_PUBLIC_API_URL` | app | API origin for native release builds. |
 | `EXPO_PUBLIC_DEMO` | build | Browser demo mode. |
 
-**Needed for production:** `DATABASE_URL`, the auth keys (for Clerk: `EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY`), `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY`, the storage bucket and keys, `SENTRY_DSN` and `EXPO_PUBLIC_SENTRY_DSN`, and email-provider keys.
+**Still needed:** Stripe keys and webhook secret, storage bucket keys, `SENTRY_DSN`s, and email-provider keys.
 
-**Fix:** validate every server variable with zod when the server starts and refuse to boot if one is missing. Keep `EXPO_PUBLIC_*` limited to values that are safe in the app bundle. Store secrets in the host's secret manager and in EAS secrets, never in git.
+**Fix:** validate the server variables with zod at startup and refuse to boot without them (today a missing Clerk key is reported as `auth_not_configured` on the first protected request). Keep secrets in the host's secret manager and EAS secrets, never in git.
 
 ## 7. Error handling and monitoring
 
 | What it does today | Problem |
 | --- | --- |
-| There's no app-wide error screen: no `ErrorBoundary` export in `src/app/_layout.tsx`. | One render error blanks the app. |
-| API calls have no timeout or retry (`src/lib/api.ts`). | A hung server leaves spinners forever. |
-| The server logs `console.error` with the error's name only (`src/lib/server/http.ts`). | No stack traces, request IDs or alerts. |
-| No crash reporting or analytics (PostHog was removed with the original's services). | You won't know when things break or how people use the app. |
-| Screens do handle loading, empty and error states, and form errors show per field. | Good. Keep this pattern. |
+| The guest app has no root `ErrorBoundary`. The admin has an `error.tsx` for the dashboard. | One render error blanks the guest app. |
+| Guest API calls have no timeout or retry (`src/lib/api.ts`). | A hung server leaves spinners forever. |
+| Known errors return stable codes (`dates_unavailable`, `account_suspended`…) shown as plain messages; unknown ones are logged with `console.error`. | No stack traces in a log service, no request IDs or alerts. |
+| No crash reporting or analytics. | You won't know when things break. |
+| Screens handle loading, empty and error states, and forms show errors per field. | Good. Keep this pattern. |
 
-**Fix:**
-- An `ErrorBoundary` in the root layout with a "Try again" action.
-- Request timeouts (about 10 s), with one retry for safe GETs.
-- **Sentry** on app and server, with source maps uploaded by EAS.
-- Structured JSON logs with a request ID.
-- Uptime checks on `/api/meta`.
-- Alerts on failed payments and webhook errors.
+**Fix:** a root `ErrorBoundary`, request timeouts, Sentry on both apps and servers, structured logs with a request ID, uptime checks, and alerts on failed payments and webhooks.
 
 ## 8. Security
 
-- No request body size limit on JSON routes; the upload route has an 8 MB limit.
-- No security headers (CSP, HSTS) set by the server.
-- Nothing checks that requests come over HTTPS.
-- Admin rate limiting is a fixed delay, not a limit.
-- No privacy policy, terms or cookie notice, all of which the app stores require.
-
-**Fix:** a proper host (Vercel, Fly or Render, or EAS Hosting for Expo API routes) behind HTTPS, with security headers, rate limits (Upstash or the host's own), body size limits, a dependency audit in CI, and the legal pages.
+- Role and ban checks run on the server for every request and every admin action (done).
+- No security headers (CSP, HSTS) on either app.
+- The guest API has no request body size limit on JSON routes.
+- The admin is a separate app; put it on its own domain, and consider an IP allowlist or Clerk organization restriction.
+- No privacy policy, terms or cookie notice, which the app stores require.
 
 ## 9. Testing, CI and release
 
-- No automated tests in the repo. The browser tests used during development were scratch scripts.
-- No CI.
-- No `eas.json`, so nothing is set up for store builds. App IDs exist now: `com.axestays.app`, from `brand.config.js`.
-- No store listing assets (screenshots, descriptions, privacy labels).
+- No automated tests in the repo. The Playwright end-to-end checks (booking, cancel, reports, and the admin flows including replaying an admin action as a non-admin) were run as scratch scripts during development.
+- No CI and no `eas.json` for store builds.
 
-**Fix:**
-- Unit tests for the price function, search, `filtersFromSentence` and stay validation.
-- Playwright end-to-end tests for search, filters and admin, committed under `e2e/`.
-- GitHub Actions running lint, type check, tests, and a web export on every PR.
-- `eas.json` with development, preview and production profiles, plus EAS Update for over-the-air fixes.
+**Fix:** unit tests for pricing, refunds, search and the data layer's access checks; the Playwright flows committed under `e2e/`; GitHub Actions running lint, type checks, tests and builds for both apps; `eas.json` with development, preview and production profiles.
 
 ## Proposed plan
 
-Rough effort for one experienced developer. Each phase ends deployable.
+**Phase 1: Launch-ready basics (about 1 week)**
+1. Clerk keys on staging; test both apps' sign-in. Admin MFA; mirror bans to Clerk.
+2. Env validation at boot, Sentry, structured logs, a root `ErrorBoundary`, request timeouts.
+3. CI with the existing checks plus unit and Playwright tests.
+4. Hosting both apps on one machine with a persistent volume for `DATA_DIR`, HTTPS, security headers, and Litestream backups.
 
-**Phase 1: Foundation (about 1 week)**
-1. Postgres and an ORM. Move the JSON store behind the same API routes, so the app doesn't change. Add migrations and a seed.
-2. Env validation at boot, Sentry, structured logs, a root `ErrorBoundary`, and request timeouts.
-3. CI (lint, types, unit tests, web export) and the first Playwright tests.
-4. Hosting with HTTPS, security headers and backups. Deploy a staging environment.
+**Phase 2: Real money (1–2 weeks)**
+1. Stripe PaymentIntents and webhooks in place of the simulated payment; refunds through Stripe.
+2. Taxes, held-dates expiry, email confirmations and receipts.
+3. Policies rewritten to match the code, with legal review.
 
-**Phase 2: Accounts (about 1 week)**
-1. Clerk (or Supabase Auth) for guests, hosts and admins, with roles on the user.
-2. Replace `ADMIN_PASSWORD` with role checks, and hosts own their listings.
-3. Saved stays and the profile backed by the account. Rate limits on auth and writes.
+**Phase 3: Photos and content (3–4 days)**
+1. Object storage, image CDN, EXIF stripping.
+2. Your own listings and photos in place of the tutorial's.
 
-**Phase 3: Photos (2–3 days)**
-1. Object storage with signed uploads, an image CDN with resizing, and EXIF stripping.
-2. `expo-image-picker` on iOS and Android. Delete files when photos are removed.
-3. Replace the tutorial's sample photos and listings with your own.
-
-**Phase 4: Bookings and payments (2–3 weeks)**
-1. Availability calendar per stay, a date and guest picker, and a date filter in search.
-2. One price function (nights, cleaning, pet fee, service fee, weekly discount, taxes) shared by quote, checkout and refunds.
-3. Stripe PaymentIntents, Connect payouts to hosts, and webhooks driving booking status.
-4. Cancellation and refunds by tier, emails for confirmations and receipts, and the Trips tab.
-5. Rewrite the policies to match what the code does, with legal review.
-
-**Phase 5: Trust and launch (1–2 weeks)**
-1. Reviews from completed stays, with ratings computed from them.
-2. Push notifications (`expo-notifications`) for booking updates. Support contact.
-3. Accessibility pass, a load test, privacy policy and terms, and store listings.
-4. EAS production builds, TestFlight and Play internal testing, then release.
-
-**Decisions to make first**
-- **Auth:** Clerk (fastest, fits Expo, paid past the free tier) or Supabase Auth (cheaper if you also use Supabase for the database and storage).
-- **Backend host:** keep Expo API routes (EAS Hosting or any Node host) or move the API to a separate service.
-- **Payments model:** a marketplace that pays hosts (Stripe Connect), or you own every stay (plain Stripe).
-- **Markets:** which countries and currencies, since that drives taxes, legal terms and payouts.
+**Phase 4: Trust and growth (1–2 weeks)**
+1. Reviews from completed stays; saved stays per account; date filter in search.
+2. Push notifications, support contact, accessibility pass, store listings and EAS builds.
+3. Postgres when you need more than one server.

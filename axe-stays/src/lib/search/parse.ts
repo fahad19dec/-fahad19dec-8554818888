@@ -1,4 +1,4 @@
-import type { Amenity, PropertyType } from "@/lib/stays";
+import type { Amenity, PropertyType } from "../stays";
 
 // Turns one sentence into exact constraints (which become GROQ filters) and
 // soft terms (which only rank). Values are only ever parsed in code.

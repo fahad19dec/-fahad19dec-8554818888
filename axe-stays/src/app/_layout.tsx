@@ -5,6 +5,8 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 
+import { SessionProvider, useSession } from "@/lib/session";
+
 SplashScreen.preventAutoHideAsync();
 
 const sheet = {
@@ -14,8 +16,9 @@ const sheet = {
   sheetExpandsWhenScrolledToEdge: true,
 };
 
-// Browsing is open to every guest. The admin screens check their own sign-in
-// (src/lib/admin.ts), so the splash only waits for fonts.
+// Browsing is open to everyone; booking, trips and reports need an account.
+// Sign-in (Clerk, or dev sign-in locally) opens over the current screen, and
+// the guard closes it once signed in, back where the guest was.
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     "PlusJakartaSans-Regular": require("@/assets/fonts/PlusJakartaSans-Regular.ttf"),
@@ -23,7 +26,17 @@ export default function RootLayout() {
     "PlusJakartaSans-SemiBold": require("@/assets/fonts/PlusJakartaSans-SemiBold.ttf"),
     "PlusJakartaSans-Bold": require("@/assets/fonts/PlusJakartaSans-Bold.ttf"),
   });
-  const ready = loaded || !!error;
+  return (
+    <SessionProvider>
+      <RootNavigator fontsReady={loaded || !!error} />
+    </SessionProvider>
+  );
+}
+
+// The splash stays up until fonts and the saved session have loaded.
+function RootNavigator({ fontsReady }: { fontsReady: boolean }) {
+  const { isLoaded, isSignedIn } = useSession();
+  const ready = fontsReady && isLoaded;
 
   useEffect(() => {
     if (ready) SplashScreen.hide();
@@ -39,11 +52,14 @@ export default function RootLayout() {
       <Stack.Screen name="stay/[slug]/index" />
       <Stack.Screen name="stay/[slug]/ask" />
       <Stack.Screen name="stay/[slug]/book" />
+      <Stack.Screen name="trips/[id]" />
       <Stack.Screen name="account/[topic]" />
-      <Stack.Screen name="admin/index" />
-      <Stack.Screen name="admin/stays/[id]" />
       <Stack.Screen name="policies" options={sheet} />
       <Stack.Screen name="stay/[slug]/policies" options={sheet} />
+      <Stack.Screen name="stay/[slug]/report" options={sheet} />
+      <Stack.Protected guard={!isSignedIn}>
+        <Stack.Screen name="(auth)" options={{ presentation: "modal" }} />
+      </Stack.Protected>
     </Stack>
   );
 }

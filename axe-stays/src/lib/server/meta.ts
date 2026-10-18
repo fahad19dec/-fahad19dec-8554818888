@@ -1,5 +1,5 @@
 import { knownPlaces } from "./stay-search";
-import type { Db } from "./store";
+import type { Catalog as Db } from "../db/catalog";
 
 // What the filter panel offers (GET /api/meta). `places` are every place name
 // stays have (lowercase, for reading a typed sentence); `cities` and

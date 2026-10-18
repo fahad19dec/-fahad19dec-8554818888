@@ -1,12 +1,14 @@
+import { useFocusEffect } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
 
-import { api, ApiError, onStaysChanged } from "@/lib/api";
+import { api, ApiError, onStaysChanged, STALE_MS } from "@/lib/api";
 import type { StayDetails } from "@/lib/stays";
 
 // Stays already fetched this session, so Ask, Book, the Policies sheet (and
 // reopening a stay) show at once. `null` means the slug matched no stay.
-// Dropped when the admin changes a stay.
+// Dropped when stays change in this app; refetched on focus once stale.
 const cache = new Map<string, StayDetails | null>();
+const fetchedAt = new Map<string, number>();
 onStaysChanged(() => cache.clear());
 
 // The server sorts the platform's policies and sizes the photos.
@@ -16,6 +18,7 @@ async function loadStay(slug: string, signal?: AbortSignal) {
     throw error;
   });
   cache.set(slug, stay);
+  fetchedAt.set(slug, Date.now());
   return stay;
 }
 
@@ -68,6 +71,16 @@ export function useStay(slug: string) {
   }, [slug]);
 
   const clearRefreshError = useCallback(() => setRefreshFailed(null), []);
+
+  // Back on screen with stale details: fetch quietly (an admin may have edited or removed it).
+  useFocusEffect(
+    useCallback(() => {
+      if (!cache.has(slug) || Date.now() - (fetchedAt.get(slug) ?? 0) < STALE_MS) return;
+      loadStay(slug)
+        .then((stay) => setLoaded({ slug, stay }))
+        .catch(() => {});
+    }, [slug]),
+  );
 
   return {
     stay: loaded?.slug === slug ? loaded.stay : cache.get(slug),

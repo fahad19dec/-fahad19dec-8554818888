@@ -115,6 +115,9 @@ export type StayDetails = {
   cancellationPolicy: Policy | null;
   /** The platform's policies that apply to every stay. */
   policies: Policy[];
+  weeklyDiscountPercent?: number | null;
+  /** Nights already booked, as [checkIn, checkOut) ranges. */
+  booked?: { checkIn: string; checkOut: string }[];
 };
 
 // ---- Stored records (data/seed.json, data/db.json)
