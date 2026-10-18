@@ -4,6 +4,10 @@ The admin dashboard for [Axe Stays](../axe-stays): a Next.js 16 app with
 shadcn/ui. It reads and writes the **same SQLite database** as the guest app,
 so every change shows up in the app on the guest's next request.
 
+![Overview](docs/screenshots/1-overview.png)
+
+More screenshots: [listings](docs/screenshots/2-listings.png), [users](docs/screenshots/3-users.png), [bookings](docs/screenshots/4-bookings.png), [reports](docs/screenshots/5-reports.png), [login](docs/screenshots/0-login.png).
+
 ## What admins can do
 
 - **Overview:** signups, bookings, booking value and revenue for the last 30
