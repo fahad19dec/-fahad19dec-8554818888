@@ -10,37 +10,22 @@ import { detailsView, homeView, policyView, searchView, sizedImage } from "@/lib
 
 import seed from "../../../data/seed.json";
 
+import { addSampleActivity, applyStayEdits, demoStoreKey, ensureUser, loadStore, saveStore, type DemoBooking, type DemoStore } from "./store";
+
 // The browser demo (EXPO_PUBLIC_DEMO=1): the guest app's API routes, answered
 // in the page with the same search, views, pricing and refund code the server
-// uses. Sign-in takes any email; bookings and reports are kept in this
-// browser's localStorage (memory if it's blocked). The admin dashboard is a
-// separate server app and isn't part of the demo. Photos ship next to the
-// page under photos/.
+// uses. Sign-in takes any email. Accounts, bookings, reports and the admin's
+// listing changes live in this browser's localStorage (./store.ts), shared
+// with the demo admin page (admin.html), so its approvals, edits, bans and
+// cancellations apply here on the next request. Photos ship next to the page
+// under photos/.
 
-const STORE_KEY = `${brand.slug}.demo.v2`;
+const STORE_KEY = demoStoreKey(brand.slug);
 
 declare global {
   // Set by the demo page before the app loads: the URL its files live under.
   var __ROAM_BASE__: string | undefined;
 }
-
-type DemoBooking = ReturnType<typeof quote> & {
-  id: string;
-  stayId: string;
-  email: string;
-  checkIn: string;
-  checkOut: string;
-  guests: number;
-  pets: number;
-  status: "confirmed" | "cancelled";
-  refundCents: number;
-  cancelledBy: "guest" | null;
-  cancelReason: null;
-  paymentRef: string;
-  createdAt: string;
-  cancelledAt: string | null;
-};
-type Store = { bookings: DemoBooking[]; reports: { email: string; stayId: string }[]; users: Record<string, string> };
 
 const base = () => globalThis.__ROAM_BASE__ ?? "/";
 
@@ -50,29 +35,30 @@ const localPhoto = (url: string | undefined) => {
   return file ? `${base()}photos/${file.replace(/\.\w+$/, ".jpg")}` : url;
 };
 
-let catalog: Catalog | undefined;
-function readCatalog(): Catalog {
-  if (catalog) return catalog;
+let seeded: Catalog | undefined;
+function seedCatalog(): Catalog {
+  if (seeded) return seeded;
   const data = structuredClone(seed) as unknown as Catalog;
   for (const stay of data.stays) stay.photos = stay.photos.map((p) => ({ ...p, url: localPhoto(p.url)! }));
   for (const host of data.hosts) host.photoUrl = localPhoto(host.photoUrl ?? undefined);
-  return (catalog = data);
+  return (seeded = data);
 }
 
-let memory: Store | undefined;
-function readStore(): Store {
-  if (memory) return memory;
-  try {
-    const saved = window.localStorage.getItem(STORE_KEY);
-    if (saved) return (memory = JSON.parse(saved) as Store);
-  } catch {}
-  return (memory = { bookings: [], reports: [], users: {} });
+function readStore(): DemoStore {
+  const store = loadStore(STORE_KEY);
+  if (!store.sampled) {
+    addSampleActivity(store, seedCatalog().stays);
+    saveStore(STORE_KEY, store);
+  }
+  return store;
 }
-function writeStore(store: Store) {
-  memory = store;
-  try {
-    window.localStorage.setItem(STORE_KEY, JSON.stringify(store));
-  } catch {}
+const writeStore = (store: DemoStore) => saveStore(STORE_KEY, store);
+
+/** What guests see: approved stays, with the admin's edits. */
+function readCatalog(): Catalog {
+  const data = seedCatalog();
+  const stays = applyStayEdits(data.stays, readStore()).filter((s) => s.status === "approved");
+  return { ...data, stays };
 }
 
 const json = (body: unknown, status = 200) => Response.json(body, { status });
@@ -85,28 +71,21 @@ const parseBody = (init: RequestInit) => {
   }
 };
 
-/** The demo account behind "dev:<email>", created on first sign-in. */
-function requireEmail(init: RequestInit): string {
+/** The demo account behind "dev:<email>", created on first sign-in. Banned accounts are refused unless `allowBanned`. */
+function requireEmail(init: RequestInit, allowBanned = false): string {
   const token = new Headers(init.headers).get("authorization")?.match(/^Bearer dev:(.+)$/)?.[1]?.trim().toLowerCase();
   if (!token || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(token)) throw new HttpError(401, "unauthorized");
   const store = readStore();
-  if (!store.users[token]) {
-    store.users[token] = new Date().toISOString();
-    writeStore(store);
-  }
+  const user = store.users[token] ?? ensureUser(store, token);
+  writeStore(store);
+  if (user.status === "banned" && !allowBanned) throw new HttpError(403, "account_suspended");
   return token;
 }
 
-const account = (email: string) => ({
-  id: `demo_${email}`,
-  email,
-  name: email.split("@")[0],
-  imageUrl: null,
-  role: "guest",
-  status: "active",
-  banReason: null,
-  createdAt: readStore().users[email],
-});
+const account = (email: string) => {
+  const user = readStore().users[email];
+  return { id: `demo_${email}`, imageUrl: null, ...user };
+};
 
 const booked = (stayId: string) =>
   readStore()
@@ -114,7 +93,8 @@ const booked = (stayId: string) =>
     .map(({ checkIn, checkOut }) => ({ checkIn, checkOut }));
 
 function summary(b: DemoBooking) {
-  const stay = readCatalog().stays.find((s) => s.id === b.stayId)!;
+  // Trips keep showing a stay the admin later rejected.
+  const stay = applyStayEdits(seedCatalog().stays, readStore()).find((s) => s.id === b.stayId)!;
   return {
     ...b,
     stay: {
@@ -151,7 +131,7 @@ function route(path: string, init: RequestInit): Response {
   if (method === "GET" && parts[0] === "meta") return json(buildMeta(data));
   if (method === "GET" && parts[0] === "policies") return json(data.policies.map(policyView));
 
-  if (method === "GET" && parts[0] === "me") return json(account(requireEmail(init)));
+  if (method === "GET" && parts[0] === "me") return json(account(requireEmail(init, true)));
 
   if (parts[0] === "bookings" && parts.length === 1) {
     const email = requireEmail(init);
@@ -215,10 +195,15 @@ function route(path: string, init: RequestInit): Response {
     if (!stay) throw new HttpError(404, "not_found");
     if (!(body.reason in REPORT_REASONS)) throw new HttpError(400, "invalid_report");
     const store = readStore();
-    if (store.reports.some((r) => r.email === email && r.stayId === stay.id)) throw new HttpError(409, "already_reported");
-    store.reports.push({ email, stayId: stay.id });
+    if (store.reports.some((r) => r.email === email && r.stayId === stay.id && r.status === "open")) {
+      throw new HttpError(409, "already_reported");
+    }
+    const id = `rpt_demo${Date.now().toString(16)}`;
+    const details = typeof body.details === "string" ? body.details.trim().slice(0, 1000) : "";
+    const at = new Date().toISOString();
+    store.reports.push({ id, email, stayId: stay.id, reason: body.reason, details, status: "open", resolution: null, createdAt: at, closedAt: null });
     writeStore(store);
-    return json({ id: `rpt_demo${Date.now().toString(16)}` }, 201);
+    return json({ id }, 201);
   }
   throw new HttpError(404, "not_found");
 }

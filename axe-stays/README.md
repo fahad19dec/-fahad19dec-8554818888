@@ -97,8 +97,12 @@ doc). Set the Clerk keys in both. For iOS/Android release builds, set
 
 `node scripts/build-demo.mjs` builds a version that runs entirely in the browser
 into `demo-site/`. It answers the API in the page (`src/lib/demo/server.ts`) with
-the same search, pricing and refund code; sign-in takes any email, and bookings
-and reports stay in that browser. The admin dashboard isn't part of the demo.
+the same search, pricing and refund code; sign-in takes any email. It also builds
+`demo-site/admin.html` (from `scripts/demo-admin/`), a browser-only stand-in for the
+admin dashboard (sign in as `admin@axestays.dev`) that approves, rejects and edits
+listings, bans users, cancels bookings and resolves reports. Both pages keep their
+data in the same localStorage (`src/lib/demo/store.ts`), so admin changes show up
+in the demo app. Creating listings and photo uploads need the real dashboard.
 
 ## Limits
 
