@@ -5,9 +5,11 @@ import { Text } from "@/components/ui";
 
 import { LogoMark } from "./logo-mark";
 
+// "heading" leaves line height below the baseline; the tighter "headline"
+// clipped the descender of the "y" because the name is kept to one line.
 const sizes = {
-  lg: { text: "headline", mark: 50 },
-  header: { text: "headline", mark: 50 },
+  lg: { text: "heading", mark: 42 },
+  header: { text: "heading", mark: 42 },
   md: { text: "heading", mark: 34 },
 } as const;
 
